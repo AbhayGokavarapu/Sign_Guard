@@ -13,7 +13,7 @@ def render_results(result,prefix='analysis'):
     section_header('Analysis outcome')
     result_summary(result)
     if not result.fusion:return
-    tabs=st.tabs(['Findings','Digital signatures','Document revisions','Coverage'])
+    tabs=st.tabs(['Findings','Digital signatures','Document revisions','Static content','Independent rendering','Coverage'])
     with tabs[0]:
         if result.fusion.findings:
             for finding in result.fusion.findings:
@@ -49,6 +49,8 @@ def render_results(result,prefix='analysis'):
             rv=result.revision
             metric_row(('Revisions',len(rv.revisions),'Parsed PDF history'),('Visible change',f'{rv.changed_area_pct:.2f}%','Representative comparison page'))
             st.write(rv.summary)
+            with st.expander('Consecutive revision timeline'):
+                st.json(result.timeline)
             if rv.signed_rev_image and rv.current_image:
                 a,b=st.columns(2)
                 with a:show_image(rv.signed_rev_image,'Signed revision')
@@ -57,6 +59,14 @@ def render_results(result,prefix='analysis'):
                 with st.expander('Inspect the pixel difference'):show_image(rv.diff_image,'Changed pixels')
         else:st.info('Revision comparison is not available for this result.')
     with tabs[3]:
+        st.caption(result.active_content.get('note','Static inspection not available.'))
+        if result.active_content.get('entries'):st.dataframe(result.active_content['entries'],hide_index=True,width='stretch')
+        else:st.info('No listed action, embedded-file or external-link structures were found within the inspected objects.')
+    with tabs[4]:
+        if result.renderer_comparison:
+            st.json(result.renderer_comparison)
+        else:st.info('Enable the independent rendering check in analysis settings to compare MuPDF and Poppler.')
+    with tabs[5]:
         st.json(result.coverage,expanded=True)
         with st.expander('Analysis limitations'):
             for limitation in result.fusion.limitations:st.write('• '+limitation)
@@ -68,7 +78,7 @@ def render():
     page_header('Document analysis','Upload a PDF, verify its integrity, and review the evidence behind each finding.','ANALYSE')
     left,right=st.columns([2.3,1],gap='large')
     with left:
-        uploaded=st.file_uploader('Choose a PDF document',type=['pdf'],help='PDF only. Maximum 50 MB. Encrypted and excessive rendering workloads are rejected.')
+        uploaded=st.file_uploader('Choose a PDF document',type=['pdf'],key='document_upload_'+str(st.session_state.get('_upload_epoch',0)),help='PDF only. Maximum 50 MB. Encrypted and excessive rendering workloads are rejected.')
     with right:
         card('<div class="sg-eyebrow">BEFORE YOU UPLOAD</div><p>Use a document you are authorised to analyse. Public demo files are processed on the hosting server. Keep a copy of your exported report.</p>')
     kit_root=Path(config.BASE_DIR)/'samples'/'upload-kit'
@@ -102,6 +112,9 @@ def render():
     preview=st.session_state['preview_result'];parsed=preview.parsed
     if parsed is None or parsed.error:
         st.error(preview.processing_error or preview.validation.reason)
+        if st.button('Retry reading this document'):
+            st.session_state.pop('preview_result',None)
+            st.rerun()
         return
     st.markdown(f'<div class="sg-document-id"><span class="sg-feature-icon">{svg_icon("file")}</span><div><strong>{escape(uploaded.name)}</strong><small>{parsed.page_count} pages &nbsp;·&nbsp; {len(raw)/1024:.1f} KB &nbsp;·&nbsp; SHA-256 {digest[:20]}…</small></div></div>',unsafe_allow_html=True)
     with st.expander('Document preview and analysis settings',expanded=st.session_state.get('pipeline_result') is None):
@@ -113,15 +126,16 @@ def render():
             st.markdown('**Analysis settings**')
             quality=st.slider('ELA recompression quality',50,95,75,key='ela_quality')
             amplification=st.slider('Heatmap brightness',5,30,15,key='ela_amplification',help='Display only. Does not change measurements or verdicts.')
+            renderer_check=st.checkbox('Compare independent rendering engines',value=False,help='Compare MuPDF and Poppler on up to five pages. This can take longer; normal rendering differences are not proof of tampering.')
             st.caption('The full workflow verifies signatures and inspects all current pages. Candidate comparison limits are disclosed in coverage.')
             with st.expander('Document metadata'):st.json(parsed.metadata)
-    current=(quality,amplification)
+    current=(quality,amplification,renderer_check)
     if st.session_state.get('analysis_config')!=current:
         st.session_state.pop('pipeline_result',None)
         st.session_state['analysis_config']=current
     if st.button('Run document analysis →',type='primary',width='stretch'):
         with st.spinner('Verifying signatures and examining document evidence…'):
-            result=run_pipeline(raw,uploaded.name,ela_quality=quality,ela_amp=amplification)
+            result=run_pipeline(raw,uploaded.name,ela_quality=quality,ela_amp=amplification,renderer_check=renderer_check)
             st.session_state['pipeline_result']=result
         st.rerun()
     result=st.session_state.get('pipeline_result')

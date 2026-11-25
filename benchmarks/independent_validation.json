@@ -1,0 +1,627 @@
+{
+  "scope": "Independently authored test fixtures, including Adobe Reader signatures. Not a real-world forged-document corpus; not independent of the pyHanko verification library.",
+  "total": 8,
+  "upstream_checks_matched": 8,
+  "independent_human_adjudication": "PENDING; upstream assertions are documented, not a substitute for an external examiner.",
+  "records": [
+    {
+      "file": "datasets/external-pyhanko/minimal-two-fields-signed-twice.pdf",
+      "description": "Adobe Reader double signature",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/minimal-two-fields-signed-twice.pdf",
+      "sha256": "9aad3553e8ffdf0674eef661a9418089093cb98aa0fd1940bde87bf09a1a36af",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_double_sig_adobe_reader",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending.",
+      "verdict": "INCONCLUSIVE",
+      "signatures": [
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "ENTIRE_REVISION",
+          "trust": "SELF-SIGNED (untrusted)"
+        },
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "ENTIRE_FILE",
+          "trust": "SELF-SIGNED (untrusted)"
+        }
+      ],
+      "upstream_checks_match": true,
+      "processing_error": null,
+      "poppler": {
+        "validator": "Poppler pdfsig",
+        "certificate_validation": "disabled for cross-validator mathematical comparison",
+        "signatures": [
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          },
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          }
+        ],
+        "complete": true,
+        "exit_code": 0,
+        "summary": "Digital Signature Info of: /tmp/signguard-pdfsig-lqd3k9rr/document.pdf\nSignature #1:\n  - Signature Field Name: Sig1\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Jan 04 2021 19:11:51\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 29541], [48279 - 50827]\n  - Total document signed\n  - Signature Validation: Signature is Valid.\nSignature #2:\n  - Signature Field Name: Sig2\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Jan 04 2021 19:11:25\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 3485], [22223 - 26384]\n  - Not total document signed\n  - Signature Validation: Signature is Valid.\n",
+        "error": null
+      },
+      "renderer_comparison": {
+        "engines": [
+          "MuPDF",
+          "Poppler"
+        ],
+        "pages": [
+          {
+            "page": 0,
+            "changed_area_pct": 1.056,
+            "dimensions_match": true,
+            "disagreement": false
+          }
+        ],
+        "complete": true,
+        "disagreement": false,
+        "threshold_pct": 2.0,
+        "method": "96 DPI grayscale, 1px blur, residual >40; same-position pages; annotations hidden.",
+        "note": "Antialiasing can differ normally. Agreement does not establish authenticity or exclude all shadow attacks."
+      },
+      "coverage": {
+        "complete": false,
+        "mode": "full",
+        "pages_analysed": 1,
+        "page_count": 1,
+        "candidates_found": 0,
+        "candidates_analysed": 0,
+        "pairs_available": 0,
+        "pairs_analysed": 0,
+        "limitations": [
+          "Revision timeline is incomplete; see its budget/error details.",
+          "Page 1 revision analysis: Could not identify any PDF revision boundaries."
+        ],
+        "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
+      },
+      "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d"
+    },
+    {
+      "file": "datasets/external-pyhanko/minimal-signed-twice-second-created.pdf",
+      "description": "Adobe Reader creates second field",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/minimal-signed-twice-second-created.pdf",
+      "sha256": "e495f94833076bc28a09fd8e18e5febc90ab1a4674846cb1e87e476b6ecb4fc4",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_double_sig_adobe_reader",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending.",
+      "verdict": "INCONCLUSIVE",
+      "signatures": [
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "ENTIRE_REVISION",
+          "trust": "SELF-SIGNED (untrusted)"
+        },
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "ENTIRE_FILE",
+          "trust": "SELF-SIGNED (untrusted)"
+        }
+      ],
+      "upstream_checks_match": true,
+      "processing_error": null,
+      "poppler": {
+        "validator": "Poppler pdfsig",
+        "certificate_validation": "disabled for cross-validator mathematical comparison",
+        "signatures": [
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          },
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          }
+        ],
+        "complete": true,
+        "exit_code": 0,
+        "summary": "Digital Signature Info of: /tmp/signguard-pdfsig-hffxcast/document.pdf\nSignature #1:\n  - Signature Field Name: Sig1\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Jan 11 2021 18:20:21\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 3447], [22185 - 26343]\n  - Not total document signed\n  - Signature Validation: Signature is Valid.\nSignature #2:\n  - Signature Field Name: Signature3\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Jan 11 2021 18:21:19\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 31093], [49831 - 109918]\n  - Total document signed\n  - Signature Validation: Signature is Valid.\n",
+        "error": null
+      },
+      "renderer_comparison": {
+        "engines": [
+          "MuPDF",
+          "Poppler"
+        ],
+        "pages": [
+          {
+            "page": 0,
+            "changed_area_pct": 1.056,
+            "dimensions_match": true,
+            "disagreement": false
+          }
+        ],
+        "complete": true,
+        "disagreement": false,
+        "threshold_pct": 2.0,
+        "method": "96 DPI grayscale, 1px blur, residual >40; same-position pages; annotations hidden.",
+        "note": "Antialiasing can differ normally. Agreement does not establish authenticity or exclude all shadow attacks."
+      },
+      "coverage": {
+        "complete": false,
+        "mode": "full",
+        "pages_analysed": 1,
+        "page_count": 1,
+        "candidates_found": 1,
+        "candidates_analysed": 1,
+        "pairs_available": 0,
+        "pairs_analysed": 0,
+        "limitations": [
+          "Revision timeline is incomplete; see its budget/error details.",
+          "Page 1 revision analysis: Could not identify any PDF revision boundaries."
+        ],
+        "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
+      },
+      "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d"
+    },
+    {
+      "file": "datasets/external-pyhanko/minimal-signed-twice-both-created.pdf",
+      "description": "Adobe Reader creates both fields",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/minimal-signed-twice-both-created.pdf",
+      "sha256": "2ef1b801c4d168d0deb5904f5d272e64e2f080c9273e92d8803272fd9d1721c9",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_double_sig_adobe_reader",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending.",
+      "verdict": "INCONCLUSIVE",
+      "signatures": [
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "ENTIRE_REVISION",
+          "trust": "SELF-SIGNED (untrusted)"
+        },
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "ENTIRE_FILE",
+          "trust": "SELF-SIGNED (untrusted)"
+        }
+      ],
+      "upstream_checks_match": true,
+      "processing_error": null,
+      "poppler": {
+        "validator": "Poppler pdfsig",
+        "certificate_validation": "disabled for cross-validator mathematical comparison",
+        "signatures": [
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          },
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          }
+        ],
+        "complete": true,
+        "exit_code": 0,
+        "summary": "Digital Signature Info of: /tmp/signguard-pdfsig-0ohyrio6/document.pdf\nSignature #1:\n  - Signature Field Name: Signature2\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Jan 11 2021 18:45:14\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 59580], [78318 - 83059]\n  - Not total document signed\n  - Signature Validation: Signature is Valid.\nSignature #2:\n  - Signature Field Name: Signature3\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Jan 11 2021 18:45:37\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 86638], [105376 - 107981]\n  - Total document signed\n  - Signature Validation: Signature is Valid.\n",
+        "error": null
+      },
+      "renderer_comparison": {
+        "engines": [
+          "MuPDF",
+          "Poppler"
+        ],
+        "pages": [
+          {
+            "page": 0,
+            "changed_area_pct": 1.056,
+            "dimensions_match": true,
+            "disagreement": false
+          }
+        ],
+        "complete": true,
+        "disagreement": false,
+        "threshold_pct": 2.0,
+        "method": "96 DPI grayscale, 1px blur, residual >40; same-position pages; annotations hidden.",
+        "note": "Antialiasing can differ normally. Agreement does not establish authenticity or exclude all shadow attacks."
+      },
+      "coverage": {
+        "complete": false,
+        "mode": "full",
+        "pages_analysed": 1,
+        "page_count": 1,
+        "candidates_found": 0,
+        "candidates_analysed": 0,
+        "pairs_available": 0,
+        "pairs_analysed": 0,
+        "limitations": [
+          "Revision timeline is incomplete; see its budget/error details.",
+          "Page 1 revision analysis: Could not identify any PDF revision boundaries."
+        ],
+        "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
+      },
+      "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d"
+    },
+    {
+      "file": "datasets/external-pyhanko/sig-no-signed-attrs.pdf",
+      "description": "CMS without signed attributes",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/sig-no-signed-attrs.pdf",
+      "sha256": "527993e3cda64e79e04eab56a1f318ebe903b0ff051b15af41413cbb4ec5b1be",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_cms.py:test_verify_sig_without_signed_attrs",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending.",
+      "verdict": "INCONCLUSIVE",
+      "signatures": [
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "ENTIRE_FILE",
+          "trust": "EXPIRED OR NOT YET VALID"
+        }
+      ],
+      "upstream_checks_match": true,
+      "processing_error": null,
+      "poppler": {
+        "validator": "Poppler pdfsig",
+        "certificate_validation": "disabled for cross-validator mathematical comparison",
+        "signatures": [
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          }
+        ],
+        "complete": true,
+        "exit_code": 0,
+        "summary": "Digital Signature Info of: /tmp/signguard-pdfsig-fbbhlfu9/document.pdf\nSignature #1:\n  - Signature Field Name: Sig1\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=test@example.com,CN=Lord Testerino,OU=Testing Authority,O=Example Inc,C=BE\n  - Signing Time: Nov 01 2020 00:00:00\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 1158], [11906 - 12356]\n  - Total document signed\n  - Signature Validation: Signature is Valid.\n",
+        "error": null
+      },
+      "renderer_comparison": {
+        "engines": [
+          "MuPDF",
+          "Poppler"
+        ],
+        "pages": [
+          {
+            "page": 0,
+            "changed_area_pct": 1.056,
+            "dimensions_match": true,
+            "disagreement": false
+          }
+        ],
+        "complete": true,
+        "disagreement": false,
+        "threshold_pct": 2.0,
+        "method": "96 DPI grayscale, 1px blur, residual >40; same-position pages; annotations hidden.",
+        "note": "Antialiasing can differ normally. Agreement does not establish authenticity or exclude all shadow attacks."
+      },
+      "coverage": {
+        "complete": true,
+        "mode": "full",
+        "pages_analysed": 1,
+        "page_count": 1,
+        "candidates_found": 0,
+        "candidates_analysed": 0,
+        "pairs_available": 0,
+        "pairs_analysed": 0,
+        "limitations": [],
+        "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
+      },
+      "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d"
+    },
+    {
+      "file": "datasets/external-pyhanko/coverage-anomalies__tail-uncovered.pdf",
+      "description": "Unsigned trailing bytes",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/coverage-anomalies/tail-uncovered.pdf",
+      "sha256": "20561be3ee5648213713254694f73a794636da607719e1cb507b3c056d495775",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_anomalous_coverage",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true,
+        "coverage_level": "CONTIGUOUS_BLOCK_FROM_START"
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending.",
+      "verdict": "REVIEW REQUIRED",
+      "signatures": [
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "CONTIGUOUS_BLOCK_FROM_START",
+          "trust": "SELF-SIGNED (untrusted)"
+        }
+      ],
+      "upstream_checks_match": true,
+      "processing_error": null,
+      "poppler": {
+        "validator": "Poppler pdfsig",
+        "certificate_validation": "disabled for cross-validator mathematical comparison",
+        "signatures": [
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          }
+        ],
+        "complete": true,
+        "exit_code": 0,
+        "summary": "Digital Signature Info of: /tmp/signguard-pdfsig-zb9l685w/document.pdf\nSignature #1:\n  - Signature Field Name: Sig1\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Nov 27 2021 19:41:03\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 690], [6692 - 7092]\n  - Not total document signed\n  - Signature Validation: Signature is Valid.\n",
+        "error": null
+      },
+      "renderer_comparison": {
+        "engines": [
+          "MuPDF",
+          "Poppler"
+        ],
+        "pages": [
+          {
+            "page": 0,
+            "changed_area_pct": 1.056,
+            "dimensions_match": true,
+            "disagreement": false
+          }
+        ],
+        "complete": true,
+        "disagreement": false,
+        "threshold_pct": 2.0,
+        "method": "96 DPI grayscale, 1px blur, residual >40; same-position pages; annotations hidden.",
+        "note": "Antialiasing can differ normally. Agreement does not establish authenticity or exclude all shadow attacks."
+      },
+      "coverage": {
+        "complete": true,
+        "mode": "full",
+        "pages_analysed": 1,
+        "page_count": 1,
+        "candidates_found": 0,
+        "candidates_analysed": 0,
+        "pairs_available": 0,
+        "pairs_analysed": 0,
+        "limitations": [],
+        "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
+      },
+      "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d"
+    },
+    {
+      "file": "datasets/external-pyhanko/coverage-anomalies__signature-gap-too-big.pdf",
+      "description": "Oversized signature gap",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/coverage-anomalies/signature-gap-too-big.pdf",
+      "sha256": "73dc0c19842d8932340407fc745bdf5a4d3864eac246db46cd96c843695a3069",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_anomalous_coverage",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true,
+        "coverage_level": "UNCLEAR"
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending.",
+      "verdict": "REVIEW REQUIRED",
+      "signatures": [
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "UNCLEAR",
+          "trust": "SELF-SIGNED (untrusted)"
+        }
+      ],
+      "upstream_checks_match": true,
+      "processing_error": null,
+      "poppler": {
+        "validator": "Poppler pdfsig",
+        "certificate_validation": "disabled for cross-validator mathematical comparison",
+        "signatures": [
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          }
+        ],
+        "complete": true,
+        "exit_code": 0,
+        "summary": "Digital Signature Info of: /tmp/signguard-pdfsig-nsy3bokk/document.pdf\nSignature #1:\n  - Signature Field Name: Sig1\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Nov 27 2021 19:41:03\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 690], [6692 - 7092]\n  - Not total document signed\n  - Signature Validation: Signature is Valid.\n",
+        "error": null
+      },
+      "renderer_comparison": {
+        "engines": [
+          "MuPDF",
+          "Poppler"
+        ],
+        "pages": [
+          {
+            "page": 0,
+            "changed_area_pct": 1.056,
+            "dimensions_match": true,
+            "disagreement": false
+          }
+        ],
+        "complete": true,
+        "disagreement": false,
+        "threshold_pct": 2.0,
+        "method": "96 DPI grayscale, 1px blur, residual >40; same-position pages; annotations hidden.",
+        "note": "Antialiasing can differ normally. Agreement does not establish authenticity or exclude all shadow attacks."
+      },
+      "coverage": {
+        "complete": true,
+        "mode": "full",
+        "pages_analysed": 1,
+        "page_count": 1,
+        "candidates_found": 0,
+        "candidates_analysed": 0,
+        "pairs_available": 0,
+        "pairs_analysed": 0,
+        "limitations": [],
+        "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
+      },
+      "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d"
+    },
+    {
+      "file": "datasets/external-pyhanko/coverage-anomalies__one-byterange.pdf",
+      "description": "Nonstandard ByteRange count",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/coverage-anomalies/one-byterange.pdf",
+      "sha256": "9b5dadd12b9223abf7fabf724b834cf096422c92d981bac9dec233fceed06d56",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_anomalous_coverage",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true,
+        "coverage_level": "UNCLEAR"
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending.",
+      "verdict": "REVIEW REQUIRED",
+      "signatures": [
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "UNCLEAR",
+          "trust": "SELF-SIGNED (untrusted)"
+        }
+      ],
+      "upstream_checks_match": true,
+      "processing_error": null,
+      "poppler": {
+        "validator": "Poppler pdfsig",
+        "certificate_validation": "disabled for cross-validator mathematical comparison",
+        "signatures": [
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          }
+        ],
+        "complete": true,
+        "exit_code": 0,
+        "summary": "Digital Signature Info of: /tmp/signguard-pdfsig-5g44np9t/document.pdf\nSignature #1:\n  - Signature Field Name: Sig1\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Nov 27 2021 19:41:03\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signature Validation: Signature is Valid.\n",
+        "error": null
+      },
+      "renderer_comparison": {
+        "engines": [
+          "MuPDF",
+          "Poppler"
+        ],
+        "pages": [
+          {
+            "page": 0,
+            "changed_area_pct": 1.056,
+            "dimensions_match": true,
+            "disagreement": false
+          }
+        ],
+        "complete": true,
+        "disagreement": false,
+        "threshold_pct": 2.0,
+        "method": "96 DPI grayscale, 1px blur, residual >40; same-position pages; annotations hidden.",
+        "note": "Antialiasing can differ normally. Agreement does not establish authenticity or exclude all shadow attacks."
+      },
+      "coverage": {
+        "complete": true,
+        "mode": "full",
+        "pages_analysed": 1,
+        "page_count": 1,
+        "candidates_found": 0,
+        "candidates_analysed": 0,
+        "pairs_available": 0,
+        "pairs_analysed": 0,
+        "limitations": [],
+        "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
+      },
+      "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d"
+    },
+    {
+      "file": "datasets/external-pyhanko/coverage-anomalies__weird-byterange.pdf",
+      "description": "Nonstandard ByteRange ordering",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/coverage-anomalies/weird-byterange.pdf",
+      "sha256": "d1868dc15529973047309b7cc477675cf3923b0f3906272073275d7ba77970ef",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_anomalous_coverage",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true,
+        "coverage_level": "UNCLEAR"
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending.",
+      "verdict": "REVIEW REQUIRED",
+      "signatures": [
+        {
+          "integrity": "PASS",
+          "math_valid": true,
+          "coverage": "UNCLEAR",
+          "trust": "SELF-SIGNED (untrusted)"
+        }
+      ],
+      "upstream_checks_match": true,
+      "processing_error": null,
+      "poppler": {
+        "validator": "Poppler pdfsig",
+        "certificate_validation": "disabled for cross-validator mathematical comparison",
+        "signatures": [
+          {
+            "valid": true,
+            "detail": "Signature is Valid."
+          }
+        ],
+        "complete": true,
+        "exit_code": 0,
+        "summary": "Digital Signature Info of: /tmp/signguard-pdfsig-qs_75ufx/document.pdf\nSignature #1:\n  - Signature Field Name: Sig1\n  - Signer Certificate Common Name: Lord Testerino\n  - Signer full Distinguished Name: E=testerino@example.com,CN=Lord Testerino,OU=Test,O=Test,L=Leuven,ST=Vlaams-Brabant,C=BE\n  - Signing Time: Nov 27 2021 19:41:03\n  - Signing Hash Algorithm: SHA-256\n  - Signature Type: adbe.pkcs7.detached\n  - Signed Ranges: [0 - 10], [20 - 50]\n  - Not total document signed\n  - Signature Validation: Signature is Valid.\n",
+        "error": null
+      },
+      "renderer_comparison": {
+        "engines": [
+          "MuPDF",
+          "Poppler"
+        ],
+        "pages": [
+          {
+            "page": 0,
+            "changed_area_pct": 1.056,
+            "dimensions_match": true,
+            "disagreement": false
+          }
+        ],
+        "complete": true,
+        "disagreement": false,
+        "threshold_pct": 2.0,
+        "method": "96 DPI grayscale, 1px blur, residual >40; same-position pages; annotations hidden.",
+        "note": "Antialiasing can differ normally. Agreement does not establish authenticity or exclude all shadow attacks."
+      },
+      "coverage": {
+        "complete": true,
+        "mode": "full",
+        "pages_analysed": 1,
+        "page_count": 1,
+        "candidates_found": 0,
+        "candidates_analysed": 0,
+        "pairs_available": 0,
+        "pairs_analysed": 0,
+        "limitations": [],
+        "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
+      },
+      "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d"
+    }
+  ]
+}

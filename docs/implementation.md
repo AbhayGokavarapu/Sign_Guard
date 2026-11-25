@@ -13,3 +13,5 @@
 - Analysis defaults to a subprocess with timeout. Linux enforces address-space and CPU limits; rendering budgets are checked before pixmap allocation. Windows lacks the Linux memory cap.
 
 Security regressions are asserted in `tests/test_security_outcomes.py`. The benchmark reports held-out alert metrics, per-category failures, three analysis modes, confirmed byte failures separately from review alerts, and one-to-one localisation IoU >= 0.5. Shared synthetic generators limit the independence of these experiments.
+
+Version 3.2: signature coverage is bound to parsed revision boundaries AND pyHanko coverage. Text differences preserve order/repetition. Candidate pairs are ranked by normalised appearance and geometry and balanced across page-pair groups. New worker operations share a cross-process queue. Reports include provenance, static-content inventory, consecutive history and optional renderer comparisons. Offline lifecycle evidence requires non-revocation information when provisioned. See INVESTIGATION_UPGRADE.md.

@@ -21,7 +21,7 @@ def render():
     with c:st.button('Restart walkthrough',on_click=_move,args=(0,))
     section_header(STEPS[step])
     if step==0:
-        uploaded=st.file_uploader('Choose a PDF for the walkthrough',type=['pdf'],key='presentation_upload')
+        uploaded=st.file_uploader('Choose a PDF for the walkthrough',type=['pdf'],key='presentation_upload_'+str(st.session_state.get('_upload_epoch',0)))
         if uploaded:
             digest=__import__('hashlib').sha256(uploaded.getvalue()).hexdigest()
             if st.session_state.get('pres_hash')!=digest:

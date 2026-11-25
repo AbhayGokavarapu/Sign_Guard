@@ -8,7 +8,7 @@
     "observed_verdict": "INCONCLUSIVE",
     "integrity": "NO TAMPERING DETECTED",
     "finding_codes": [],
-    "sha256": "b70a982a5a9110817310e04f062547ee870edd07e7cb5146d2e2f71d2db6aca6",
+    "sha256": "f51f24d088aeb8633e93302f5607baad6e21e34dfd1ce73aa7f1c8520c9bb11f",
     "verified": true
   },
   {
@@ -22,7 +22,7 @@
     "finding_codes": [
       "CRYPTO-001"
     ],
-    "sha256": "32ab4736bbeab50b9606d92fb5a39a7d4cfe1b0de2fc39e62fd287f45e19c764",
+    "sha256": "490a54493866f1a8032312e94fd77e8834807b588aeaeb1a9e441433e147829f",
     "verified": true
   },
   {
@@ -39,7 +39,7 @@
       "SHADOW-001",
       "SHADOW-002"
     ],
-    "sha256": "bde46676de1e0d684abd0c11e66576911a17965a56cbe8e07acaed733cca67ce",
+    "sha256": "edd751c0b49656311bef5c504f60b207ce63e03de31aecf5552df18676c9afde",
     "verified": true
   },
   {
@@ -53,7 +53,7 @@
     "finding_codes": [
       "ORB-001"
     ],
-    "sha256": "ec3beabded936194eeb7f50e2f0f13393503cff18b593c461249cfc777788753",
+    "sha256": "95226d6066855bc730008e2a02ba629002427969adc3130a4aa7e60719b0007e",
     "verified": true
   },
   {
@@ -65,7 +65,7 @@
     "observed_verdict": "INCONCLUSIVE",
     "integrity": "NOT APPLICABLE",
     "finding_codes": [],
-    "sha256": "07cf4e41f3c3b66e8642a017ac7edafb8434330b3311a7eb4a7c25f834870b14",
+    "sha256": "a551fa116db35bc38038c4b6ff6cbe5d3880424c9149df66b2670014e877bd9b",
     "verified": true
   },
   {
@@ -82,7 +82,7 @@
       "SHADOW-001",
       "SHADOW-002"
     ],
-    "sha256": "ee4103084bcff47089968b6b8a0531a861d3b13e3de9dd15e5af5696c70ff15a",
+    "sha256": "421287a8d639dc741502857813a3c500e16c8a1d6503b87a68451397e2b0eaef",
     "verified": true
   },
   {
@@ -94,7 +94,7 @@
     "observed_verdict": "INCONCLUSIVE",
     "integrity": "NOT APPLICABLE",
     "finding_codes": [],
-    "sha256": "6d59f78b28e8752f5d3f4bb03a98a33acee333f4382a731acf59ae1d888f650e",
+    "sha256": "1a69893cda7f1a9a188de01e5badade230ce78381d26fd994e3e1429a4358105",
     "verified": true
   }
 ]

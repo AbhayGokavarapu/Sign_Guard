@@ -18,7 +18,7 @@ def render():
         return
     data=json.loads(path.read_text())
     metric_row(('Alert precision',f'{data["precision"]:.0%}','How often an alert matches a positive control'),('Alert recall',f'{data["recall"]:.0%}','Positive controls that triggered an alert'),('Held-out controls',data['total'],'Synthetic evaluation files'),('F1 score',f'{data["f1"]:.0%}','Precision / recall balance'))
-    tabs=st.tabs(['Method comparison','Failure cases','Localisation & runtime','Per-document results'])
+    tabs=st.tabs(['Method comparison','Failure cases','Localisation & runtime','Per-document results','External checks'])
     with tabs[0]:
         section_header('What each layer adds')
         modes=data.get('ablations',{})
@@ -50,6 +50,32 @@ def render():
         if not frame.empty:
             frame['file']=frame['file'].map(lambda x:Path(x).name)
             st.dataframe(frame[['file','category','pred','elapsed','coverage_complete']],hide_index=True,width='stretch')
+    with tabs[4]:
+        external_path=root/'independent_validation.json'
+        if external_path.exists():
+            external=json.loads(external_path.read_text())
+            metric_row(('External files',external['total'],'Licensed upstream fixtures'),
+                       ('Upstream checks matched',external['upstream_checks_matched'],'Documented upstream assertions'),
+                       ('Human adjudication','Pending','Independent examiner still required'))
+            st.caption(external['scope'])
+            st.dataframe([{'File':Path(r['file']).name,
+                'SignGuard math':[s['math_valid'] for s in r['signatures']],
+                'Coverage':[s['coverage'] for s in r['signatures']],
+                'Poppler math':[s['valid'] for s in r['poppler'].get('signatures',[])],
+                'Upstream checks match':r['upstream_checks_match']} for r in external['records']],hide_index=True,width='stretch')
+            st.caption('Poppler is run without certificate/OCSP network validation. A mathematically valid signature can still have nonstandard coverage; inspect the coverage findings.')
+            st.download_button('Download external validation evidence',external_path.read_bytes(),'independent_validation.json','application/json')
+        audit_path=root/'dependency_audit.json'
+        if audit_path.exists():
+            with st.expander('Dependency audit and inventory'):
+                audit=json.loads(audit_path.read_text());dependencies=audit.get('dependencies',[])
+                st.write(f"{len(dependencies)} Python components; {sum(len(d.get('vulns',[])) for d in dependencies)} known vulnerabilities; {sum('skip_reason' in d for d in dependencies)} skipped.")
+                st.caption(audit.get('run_metadata',{}).get('checked_at',''))
+                st.caption('Time-specific known-vulnerability database results, not a security guarantee. OS/native packages are outside this Python inventory.')
+                st.download_button('Download dependency audit',audit_path.read_bytes(),'dependency_audit.json','application/json')
+                sbom=root/'python-sbom.json'
+                if sbom.exists():st.download_button('Download CycloneDX inventory',sbom.read_bytes(),'python-sbom.json','application/json')
+
     section_header('Reproduce and export')
     a,b=st.columns(2)
     with a:st.download_button('Download evaluation JSON',path.read_bytes(),'evaluation_results.json','application/json',width='stretch')

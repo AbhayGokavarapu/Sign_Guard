@@ -22,6 +22,8 @@
 
 ## Not established
 
-Real-world detection performance; independently sourced forged-document corpus; comprehensive pre-planned shadow exploits; trusted timestamps; certificate revocation; exploit-proof sandboxing; Windows OS memory limit; dependency vulnerability audit; visual authorship or signer identity from self-signed certificates.
+Real-world detection performance; independently sourced forged-document corpus; comprehensive pre-planned shadow exploits; complete long-term archival validation; automatic online certificate retrieval; exploit-proof sandboxing; Windows OS memory limit; complete OS/native-library vulnerability coverage; visual authorship or signer identity from self-signed certificates.
 
 These are limitations, not completed or verified requirements. See FINAL_VERIFICATION.md for executed results.
+
+Version 3.2 adds ordered comparison, bounded/ranked pair selection, precise signature coverage, consecutive timelines, original/suspect comparison, static inspection, review history, evidence packages, optional independent rendering, offline lifecycle validation, session clearing and a shared processing queue. The executed known-vulnerability audit checked all 69 installed Python components with no skipped packages. See INVESTIGATION_UPGRADE.md and FINAL_VERIFICATION.md.

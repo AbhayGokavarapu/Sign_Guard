@@ -60,7 +60,7 @@ COLOR_WARNING = "#B45309"
 COLOR_ERROR   = "#B91C1C"
 
 # ── Audit log ─────────────────────────────────────────────────────────────
-AUDIT_LOG_PATH = os.path.join(LOGS_DIR, "audit_chain.json")
+AUDIT_LOG_PATH = os.environ.get("SIGNGUARD_AUDIT_LOG", os.path.join(LOGS_DIR, "audit_chain.json"))
 
 MAX_TOTAL_RENDER_PIXELS = 80_000_000
 WORKER_MEMORY_MB = int(os.environ.get("SIGNGUARD_WORKER_MEMORY_MB", "2048"))
@@ -70,3 +70,12 @@ MAX_ANALYSIS_CANDIDATES = 60
 TRUST_ROOTS_FILE = os.environ.get("SIGNGUARD_TRUST_ROOTS", "")
 
 PUBLIC_DEMO = os.environ.get("SIGNGUARD_PUBLIC_DEMO", "0") == "1"
+
+# Shared-host resource scheduling and bounded optional checks.
+MAX_CONCURRENT_JOBS = int(os.environ.get('SIGNGUARD_MAX_CONCURRENT_JOBS', '2'))
+QUEUE_WAIT_S = float(os.environ.get('SIGNGUARD_QUEUE_WAIT_S', '2'))
+MAX_STATIC_OBJECTS = 20000
+MAX_TIMELINE_PAGE_COMPARISONS = 60
+MAX_RENDERER_PAGES = 5
+RENDERER_DIFFERENCE_THRESHOLD = 2.0
+REVOCATION_DIR = os.environ.get('SIGNGUARD_REVOCATION_DIR', '')

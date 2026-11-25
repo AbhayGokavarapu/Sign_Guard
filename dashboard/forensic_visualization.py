@@ -65,5 +65,10 @@ def render():
         else:empty_state('No revision comparison is available.')
     with tabs[4]:
         st.markdown('**Analysis coverage**');st.json(result.coverage)
+        with st.expander('Reproducibility and software configuration'):st.json(result.provenance)
+        with st.expander('Static PDF inventory'):st.json(result.active_content)
+        with st.expander('Consecutive revision history'):st.json(result.timeline)
+        if result.renderer_comparison:
+            with st.expander('Independent rendering measurements'):st.json(result.renderer_comparison)
         with st.expander('Per-page measurements'):st.json(result.page_results)
         with st.expander('Compared candidate pairs'):st.json(result.pair_results)

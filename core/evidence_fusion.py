@@ -181,6 +181,19 @@ def fuse(
                     measurements=f"modpolicy={r.modpolicy_status}",
                 ))
 
+            if r.revocation_status == 'REVOKED':
+                findings.append(Finding('CERT-001',Severity.HIGH,'Signing certificate is revoked',
+                    "Offline revocation evidence identifies a revoked certificate in the signing path. Byte integrity and certificate status are separate.",
+                    'Certificate lifecycle',measurements=r.revocation_status))
+            if r.timestamp_status == 'INVALID TIMESTAMP':
+                findings.append(Finding('TIME-001',Severity.HIGH,'Timestamp verification failed',
+                    'The RFC3161 timestamp did not pass cryptographic checks. Do not rely on its claimed time.',
+                    'Certificate lifecycle'))
+            if r.integrity_status != 'UNKNOWN' and (r.coverage_level not in ('ENTIRE_FILE','ENTIRE_REVISION') or
+                    (r.byte_range and not r.byte_range.structurally_valid)):
+                findings.append(Finding('CRYPTO-006',Severity.HIGH,'Nonstandard signature coverage',
+                    'The signature does not establish coverage of a complete parsed revision. A matching digest alone is insufficient.',
+                    'Cryptographic Verification',measurements=r.coverage_level))
             # Certificate trust note
             from core.crypto_verifier import TrustStatus
             if r.trust_status in (TrustStatus.SELF_SIGNED, TrustStatus.UNKNOWN_ISSUER, TrustStatus.EXPIRED):

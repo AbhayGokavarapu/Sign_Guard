@@ -159,6 +159,8 @@ def build_pdf_report(result: PipelineResult) -> bytes:
             if sig.byte_range:
                 rows.append(["ByteRange valid", str(sig.byte_range.structurally_valid)])
                 rows.append(["Covers full file", str(sig.byte_range.covers_full_file)])
+                rows.append(["Covers parsed signed revision", str(sig.byte_range.covers_signed_rev)])
+                rows.append(["pyHanko coverage", sig.coverage_level])
             if sig.cert_info:
                 rows += [
                     ["Cert subject",    sig.cert_info.subject[:60]],
@@ -241,6 +243,29 @@ def build_pdf_report(result: PipelineResult) -> bytes:
         for lim in result.fusion.limitations:
             story.append(Paragraph(f"• {escape(lim)}", body))
         story.append(Spacer(1, 0.3*cm))
+
+    if result.active_content:
+        story.append(Paragraph("Static PDF Content", h2))
+        story.append(Paragraph(escape(result.active_content.get('note','')), body))
+        for entry in result.active_content.get('entries',[])[:30]:
+            story.append(Paragraph(escape(f"Object {entry['object']}: {entry['category']} - {entry['description']}"), body))
+        if len(result.active_content.get('entries',[]))>30:
+            story.append(Paragraph("Additional inventory entries are retained in the JSON evidence.", label))
+    if result.timeline:
+        story.append(Paragraph("Consecutive Revision Timeline", h2))
+        story.append(Paragraph(escape(f"Complete: {result.timeline.get('complete')}; page comparisons: {result.timeline.get('pages_compared',0)}"), body))
+        for transition in result.timeline.get('transitions',[]):
+            changed=[str(p['page']+1)+': '+p['change'] for p in transition['pages'] if p['change']!='unchanged']
+            story.append(Paragraph(escape(f"Revision {transition['from_revision']+1} to {transition['to_revision']+1}: "+(', '.join(changed) or 'no page content change detected')), body))
+    if result.renderer_comparison:
+        story.append(Paragraph("Independent Rendering", h2))
+        story.append(Paragraph(escape(str(result.renderer_comparison)), body))
+    if result.provenance:
+        story.append(Paragraph("Reproducibility", h2))
+        story.append(Paragraph(escape(f"Application {result.provenance.get('application_version')}; Python {result.provenance.get('python')}; commit {result.provenance.get('git_commit')}"), body))
+        story.append(Paragraph(escape("Engine source SHA-256: "+result.provenance.get('engine_source_sha256','')), body))
+        story.append(Paragraph(escape("Settings: "+str(result.provenance.get('settings',{}))), body))
+        story.append(Paragraph("Full dependency versions, decision thresholds and evidence hashes are in the JSON report and evidence package.", label))
 
     # Footer
     story.append(HRFlowable(width="100%", thickness=0.5, color=BORDER, spaceBefore=10))

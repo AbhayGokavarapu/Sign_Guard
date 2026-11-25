@@ -80,7 +80,7 @@ def get_test_cert() -> Tuple[bytes, bytes]:
 def sign_pdf(pdf_bytes: bytes,
              cert_pem:  bytes,
              key_pem:   bytes,
-             field_name: str = "Signature1") -> Tuple[Optional[bytes], str]:
+             field_name: str = "Signature1", timestamper=None) -> Tuple[Optional[bytes], str]:
     """
     Sign a PDF using pyHanko.
     Returns (signed_bytes, status_message).
@@ -128,7 +128,7 @@ def sign_pdf(pdf_bytes: bytes,
                 w2   = incremental_writer.IncrementalPdfFileWriter(fin)
                 meta = signers.PdfSignatureMetadata(field_name=field_name)
                 with open(step2_out, "wb") as fout:
-                    signers.sign_pdf(w2, meta, signer=signer_obj, output=fout)
+                    signers.sign_pdf(w2, meta, signer=signer_obj, timestamper=timestamper, output=fout)
 
             with open(step2_out, "rb") as f:
                 signed = f.read()

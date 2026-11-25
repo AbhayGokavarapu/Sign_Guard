@@ -1,0 +1,129 @@
+{
+  "files": [
+    {
+      "file": "datasets/external-pyhanko/minimal-two-fields-signed-twice.pdf",
+      "description": "Adobe Reader double signature",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/minimal-two-fields-signed-twice.pdf",
+      "sha256": "9aad3553e8ffdf0674eef661a9418089093cb98aa0fd1940bde87bf09a1a36af",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_double_sig_adobe_reader",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending."
+    },
+    {
+      "file": "datasets/external-pyhanko/minimal-signed-twice-second-created.pdf",
+      "description": "Adobe Reader creates second field",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/minimal-signed-twice-second-created.pdf",
+      "sha256": "e495f94833076bc28a09fd8e18e5febc90ab1a4674846cb1e87e476b6ecb4fc4",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_double_sig_adobe_reader",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending."
+    },
+    {
+      "file": "datasets/external-pyhanko/minimal-signed-twice-both-created.pdf",
+      "description": "Adobe Reader creates both fields",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/minimal-signed-twice-both-created.pdf",
+      "sha256": "2ef1b801c4d168d0deb5904f5d272e64e2f080c9273e92d8803272fd9d1721c9",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_double_sig_adobe_reader",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending."
+    },
+    {
+      "file": "datasets/external-pyhanko/sig-no-signed-attrs.pdf",
+      "description": "CMS without signed attributes",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/sig-no-signed-attrs.pdf",
+      "sha256": "527993e3cda64e79e04eab56a1f318ebe903b0ff051b15af41413cbb4ec5b1be",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_cms.py:test_verify_sig_without_signed_attrs",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending."
+    },
+    {
+      "file": "datasets/external-pyhanko/coverage-anomalies__tail-uncovered.pdf",
+      "description": "Unsigned trailing bytes",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/coverage-anomalies/tail-uncovered.pdf",
+      "sha256": "20561be3ee5648213713254694f73a794636da607719e1cb507b3c056d495775",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_anomalous_coverage",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true,
+        "coverage_level": "CONTIGUOUS_BLOCK_FROM_START"
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending."
+    },
+    {
+      "file": "datasets/external-pyhanko/coverage-anomalies__signature-gap-too-big.pdf",
+      "description": "Oversized signature gap",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/coverage-anomalies/signature-gap-too-big.pdf",
+      "sha256": "73dc0c19842d8932340407fc745bdf5a4d3864eac246db46cd96c843695a3069",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_anomalous_coverage",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true,
+        "coverage_level": "UNCLEAR"
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending."
+    },
+    {
+      "file": "datasets/external-pyhanko/coverage-anomalies__one-byterange.pdf",
+      "description": "Nonstandard ByteRange count",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/coverage-anomalies/one-byterange.pdf",
+      "sha256": "9b5dadd12b9223abf7fabf724b834cf096422c92d981bac9dec233fceed06d56",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_anomalous_coverage",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true,
+        "coverage_level": "UNCLEAR"
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending."
+    },
+    {
+      "file": "datasets/external-pyhanko/coverage-anomalies__weird-byterange.pdf",
+      "description": "Nonstandard ByteRange ordering",
+      "source_repository": "https://github.com/MatthiasValvekens/pyHanko",
+      "source_commit": "397bf24b5f6abfe03bb6e74db35a88868cb554da",
+      "upstream_path": "internal/common-test-utils/src/pyhanko_testing_commons/test_data/data/pdf/coverage-anomalies/weird-byterange.pdf",
+      "sha256": "d1868dc15529973047309b7cc477675cf3923b0f3906272073275d7ba77970ef",
+      "license": "MIT; LICENSE.upstream.txt",
+      "upstream_test_reference": "test_diff_analysis.py:test_anomalous_coverage",
+      "expected_checks": {
+        "integrity": "PASS",
+        "math_valid": true,
+        "coverage_level": "UNCLEAR"
+      },
+      "ground_truth_basis": "Upstream unit-test assertions inspected; independent human adjudication still pending."
+    }
+  ],
+  "scope": "Independently authored test fixtures, including Adobe Reader signatures. Not a real-world forged-document corpus; not independent of the pyHanko verification library."
+}

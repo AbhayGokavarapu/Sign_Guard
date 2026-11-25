@@ -5,3 +5,7 @@ __pycache__/
 venv/
 work/
 *.lock
+.env
+.streamlit/secrets.toml
+*.key
+*.pem

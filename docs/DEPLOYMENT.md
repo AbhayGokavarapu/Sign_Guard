@@ -13,7 +13,7 @@ Cloud deploys from GitHub; edits made only in a Codex workspace do not appear un
 
 The public entry point disables shared audit logging/history and the expensive benchmark regeneration button. It displays a server-side processing notice. Uploaded PDFs stay in the session/application memory while analysed; download reports before leaving. Do not upload sensitive PDFs to this public research demo. Hosted storage is ephemeral and must not be represented as permanent audit custody.
 
-The worker uses a 2048 MiB virtual address-space limit for this entry point, plus the existing rendering/timeout limits. Virtual address space includes library mappings and is not physical memory. Available physical memory and platform quotas may still reject large PDFs. Resource controls are not a complete exploit sandbox. Certificate revocation and trusted timestamps remain unsupported.
+The worker uses a 2048 MiB virtual address-space limit for this entry point, plus the existing rendering/timeout limits. Virtual address space includes library mappings and is not physical memory. Available physical memory and platform quotas may still reject large PDFs. Resource controls are not a complete exploit sandbox. Offline certificate lifecycle evidence and explicit TSA roots are optional operator configuration; no network certificate fetching is enabled.
 
 For local development, use `launch.bat` or `sh launch.sh` for http://localhost:8502. To use the Python command directly:
 
@@ -22,3 +22,5 @@ python -m streamlit run app.py --server.address 127.0.0.1 --server.port 8502
 ```
 
 The shared config intentionally does not force a port/address: Community Cloud supplies its own network settings. Dependencies are in `requirements.txt`; Python 3.12 is selected in the deployment UI.
+
+The deployment now uses `packages.txt` to install Poppler for independent renderer/validator checks. Capacity defaults to two concurrent jobs; adjust it to the host memory. Optional root/evidence/signing-key configuration is documented in INVESTIGATION_UPGRADE.md. Never commit private keys or secrets.

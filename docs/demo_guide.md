@@ -1,6 +1,6 @@
 # SignGuard v3 faculty demonstration
 
-Use Python 3.12 and the pinned dependencies. Start with `python -m streamlit run app.py`; open http://localhost:8502. Run the tests before presenting. Avoid claiming that every PDF or every attack is supported.
+Use Python 3.12 and the pinned dependencies. Start with `python -m streamlit run app.py --server.port 8502`; open http://localhost:8502. Run the tests before presenting. Avoid claiming that every PDF or every attack is supported.
 
 ## Suggested sequence (20 minutes)
 
@@ -28,7 +28,7 @@ For benign controls, show the automated tests: a second signature remains policy
 
 ## Explaining the results
 
-Show separate integrity and overall verdict fields. Never call an intact, untrusted signature a verified person's identity. Certificate revocation and trusted timestamps are explicitly not checked. ELA mean, standard deviation and high-energy percentage come from raw residuals; amplification affects only the visualisation.
+Show separate integrity and overall verdict fields. Never call an intact, untrusted signature a verified person's identity. Show the actual certificate revocation and timestamp fields. With default demo configuration they remain unchecked/untrusted; explicitly provisioned offline evidence and TSA roots enable validation. ELA mean, standard deviation and high-energy percentage come from raw residuals; amplification affects only the visualisation.
 
 Every current page is visited. Reports record all per-page candidate boxes and checked candidate pairs; dashboard images are representative intermediate views. Limits can omit candidates or pairs, and coverage must disclose that.
 
@@ -47,7 +47,7 @@ Localisation IoU results cover only annotated signature pages; they exclude broa
 - **Can it catch every shadow attack?** No. One renderer and visible/text comparison have explicit blind spots.
 - **Does similarity prove a stolen signature?** No. Legitimate logos and repeated graphics can match too.
 - **Can ELA prove a pasted image?** No. Our held-out pasted-image controls are missed; ELA is supporting evidence only.
-- **Are timestamps/revocation verified?** No. The reports explicitly say they are not validated.
+- **Are timestamps/revocation verified?** Offline signed CRL/OCSP evidence and RFC3161 timestamps can be checked against explicit roots. The default demo has no trusted identity or automatic network retrieval; inspect the reported states.
 - **Is the audit log immutable?** No. It is tamper-evident relative to an independently retained checkpoint and a protected host.
 - **Is this production-ready?** No. Resource controls and outcome tests improve the prototype; real-world validation and stronger isolation remain necessary.
 
@@ -60,3 +60,7 @@ python benchmarks/run_evaluation.py
 ```
 
 The benchmark can take several minutes. Use saved measured outputs during the presentation. Never quote historical 100% alert recall as the current result.
+
+## Investigation extensions
+
+Show Document comparison using the supplied original/modified pair, then Case review to add a reason without changing the machine verdict. In Reports & audit, prepare an evidence ZIP and retain its manifest hash independently. Show the revision timeline and optional MuPDF/Poppler measurements. Use Clear session after exporting. See INVESTIGATION_UPGRADE.md for certificate evidence and operator key configuration.

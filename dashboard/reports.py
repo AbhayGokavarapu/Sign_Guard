@@ -3,7 +3,7 @@ import json
 import pandas as pd
 import streamlit as st
 import config
-from dashboard.components import (page_header, card, section_header, feature_card, report_downloads, empty_state, navigation_button)
+from dashboard.components import (page_header, card, section_header, feature_card, report_downloads, empty_state, navigation_button, evidence_package_controls)
 from core.audit_logger import verify_chain,get_records,export_checkpoint
 
 
@@ -18,11 +18,22 @@ def render():
         with a:feature_card('PDF','Forensic report','A readable summary of verification states, findings and limitations.','file')
         with b:feature_card('JSON','Structured evidence','Document identity, measurements, per-page results and checked candidate pairs.','layers')
         report_downloads(result,'reports')
+        evidence_package_controls(result,'reports_package')
         from reporting.json_report import build_report
         with st.expander('Preview structured evidence'):st.json(build_report(result))
     else:
         empty_state('Analyse a document to generate downloadable evidence and a forensic report.')
         navigation_button('Start a document analysis →','Document analysis','reports_start',True)
+    with st.expander('Verify an exported evidence package'):
+        st.caption('Verification reads checksums without extracting or executing package files. An independently retained manifest hash provides stronger assurance.')
+        uploaded=st.file_uploader('Evidence ZIP',type=['zip'],key='verify_zip_'+str(st.session_state.get('_upload_epoch',0)))
+        reference=st.text_input('Independent manifest SHA-256 (optional)',max_chars=64)
+        if uploaded and st.button('Verify package integrity'):
+            from core.worker import execute_task
+            outcome=execute_task('verify_bundle',{'raw':uploaded.getvalue(),'expected_manifest_sha256':reference or None})
+            st.json(outcome)
+            (st.success if outcome.get('valid') else st.error)('Package is consistent.' if outcome.get('valid') else 'Package verification failed.')
+
     section_header('Audit custody')
     if config.PUBLIC_DEMO:
         st.info('Shared audit history is disabled for the public demo. Download your reports before leaving; hosted storage is temporary.')

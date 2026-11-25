@@ -21,10 +21,12 @@ The PDF crosses from the Streamlit process into a disposable Python worker. The 
 
 ## Assumptions and exclusions
 
-An intact signature establishes integrity of the signed bytes, not the truth of the document or authority of its signer. A stolen private key can produce valid signatures; SignGuard cannot identify that event. Revocation and trusted timestamps are not validated; the reported signing time is a signer claim. No certificate network fetching is performed. Without a configured trust-root file, no issuer is implicitly trusted.
+An intact signature establishes integrity of the signed bytes, not the truth of the document or authority of its signer. A stolen private key can produce valid signatures; SignGuard cannot identify that event. Offline CRL/OCSP evidence and RFC3161 timestamps can now be validated against explicitly provisioned roots. Without sufficient trusted evidence their states remain unknown or unchecked; the signer-reported signing date remains a claim. No certificate network fetching is performed. Without a configured trust-root file, no issuer is implicitly trusted.
 
 Post-signing content replacement is a valid incremental-update attack demonstration. It is not a comprehensive reproduction of pre-planned hide/replace/hide-and-replace shadow exploits or cross-viewer parser differentials. The detector uses one renderer. Identical-render attacks and hidden semantic changes may evade it.
 
 Visual similarity cannot distinguish a stolen signature from legitimate repeated artwork. ELA measures recompression residuals of rendered content and cannot establish forgery. Localisation is heuristic; scores are not probabilities. Limits and incomplete coverage are included in the result. Every current page is visited; candidate and pair budgets may leave visual comparisons incomplete.
 
 The local machine, application code, explicitly configured root file, and independently stored audit checkpoint are assumed protected. A host administrator can replace code, logs and checkpoints. File locking prevents cooperating concurrent writers from losing records; it does not defend against arbitrary privileged writers.
+
+Version 3.2 adds static PDF-action inventory, optional second-renderer comparison, bounded shared-host admission, original/suspect comparison and independently verifiable evidence packages. See INVESTIGATION_UPGRADE.md for the new trust boundaries. Reviewer names are self-asserted and machine findings are preserved.

@@ -106,3 +106,24 @@ def report_downloads(result,prefix='report'):
     a,b=st.columns(2)
     with a: st.download_button('Download PDF report',build_pdf_report(result),'signguard_report.pdf','application/pdf',key=prefix+'_pdf',width='stretch',type='primary')
     with b: st.download_button('Download JSON evidence',to_json(result).encode(),'signguard_report.json','application/json',key=prefix+'_json',width='stretch')
+
+
+def evidence_package_controls(result,prefix='package'):
+    from dashboard.case_review import reviews_for
+    from reporting.evidence_bundle import build_bundle
+    section_header('Verifiable evidence package')
+    st.caption('Package the report, provenance, representative evidence images and human assessments. Retain the manifest hash independently to detect a complete rewrite.')
+    include=st.checkbox('Include the original uploaded PDF in the package',value=False,key=prefix+'_source',help='Off by default. Including the PDF places its complete contents in the ZIP.')
+    import hashlib,json
+    reviews=reviews_for(result)
+    token=(result.parsed.sha256 if result.parsed else '')+str(include)+hashlib.sha256(json.dumps(reviews,sort_keys=True).encode()).hexdigest()
+    if st.button('Prepare evidence package',key=prefix+'_prepare'):
+        try:
+            bundle,reference=build_bundle(result=result,reviews=reviews,include_source=include)
+            st.session_state[prefix+'_bundle']=(bundle,reference,token)
+        except Exception as exc:st.error('Package could not be built: '+str(exc))
+    stored=st.session_state.get(prefix+'_bundle')
+    if stored and result.parsed and stored[2]==token:
+        st.download_button('Download evidence ZIP',stored[0],'signguard-evidence.zip','application/zip',key=prefix+'_download',width='stretch')
+        st.code(stored[1],language=None)
+        st.caption('Manifest SHA-256 — retain this through an independent channel. Checksums alone do not certify authenticity.')

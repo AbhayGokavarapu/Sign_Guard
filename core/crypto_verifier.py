@@ -111,6 +111,8 @@ class SigVerificationResult:
     modification_level: str = "UNKNOWN"
     revocation_status: str = "NOT CHECKED (offline)"
     timestamp_status: str = "NOT VALIDATED"
+    timestamp_details: dict = field(default_factory=dict)
+    coverage_level: str = "UNKNOWN"
 
     # Legacy compat helpers (used by dashboard/reporting)
     @property
@@ -123,7 +125,7 @@ class SigVerificationResult:
     def cert_trusted(self) -> Optional[bool]:
         if self.trust_status == TrustStatus.TRUSTED:        return True
         if self.trust_status in (TrustStatus.SELF_SIGNED,
-                                 TrustStatus.UNKNOWN_ISSUER, TrustStatus.EXPIRED): return False
+                                 TrustStatus.UNKNOWN_ISSUER, TrustStatus.EXPIRED, "REVOKED"): return False
         return None
 
     @property
@@ -154,7 +156,7 @@ class CryptoReport:
 
 # ── Public API ─────────────────────────────────────────────────────────────
 
-def verify(raw: bytes, trust_roots=None, skip_diff=False) -> CryptoReport:
+def verify(raw: bytes, trust_roots=None, skip_diff=False, crls=None, ocsps=None) -> CryptoReport:
     """
     Main entry point.  Returns a CryptoReport with per-signature results.
     Uses pyHanko when available; otherwise returns explicit UNSUPPORTED results.
@@ -167,7 +169,7 @@ def verify(raw: bytes, trust_roots=None, skip_diff=False) -> CryptoReport:
     try:
         from pyhanko.sign.validation import validate_pdf_signature
         from pyhanko.pdf_utils.reader import PdfFileReader
-        results = _verify_with_pyhanko(raw, trust_roots=trust_roots, skip_diff=skip_diff)
+        results = _verify_with_pyhanko(raw, trust_roots=trust_roots, skip_diff=skip_diff, crls=crls, ocsps=ocsps)
         pyhanko_used = True
     except ImportError:
         results = _verify_no_pyhanko(raw)
@@ -178,7 +180,9 @@ def verify(raw: bytes, trust_roots=None, skip_diff=False) -> CryptoReport:
             "No cryptographic signatures found in this document.", pyhanko_used)
 
     all_valid = all(r.integrity_status == IntegrityStatus.PASS and
-                    r.math_valid is True
+                    r.math_valid is True and r.byte_range is not None and
+                    r.byte_range.structurally_valid and r.byte_range.covers_signed_rev and
+                    r.coverage_level in ("ENTIRE_FILE", "ENTIRE_REVISION")
                     for r in results)
     summary   = _build_summary(results)
     discovered = len(results)
@@ -244,7 +248,19 @@ def validate_byte_range(raw: bytes, br: List[int]) -> ByteRangeInfo:
 
     # 7. Covers a valid signed revision even if not the whole file
     end = off2 + len2
-    covers_signed_rev = raw[:end].rstrip().endswith(b"%%EOF")
+    covers_signed_rev = False
+    try:
+        from core.revision_analyzer import _discover_revisions_pymupdf
+        revisions, _ = _discover_revisions_pymupdf(raw)
+        boundary_matches = any(rev.is_signed and rev.end_offset == end for rev in revisions)
+        from pyhanko.pdf_utils.reader import PdfFileReader
+        reader=PdfFileReader(io.BytesIO(raw),strict=False)
+        covers_signed_rev=boundary_matches and any(
+            list(map(int,sig.sig_object['/ByteRange']))==br and
+            sig.evaluate_signature_coverage().name in ('ENTIRE_FILE','ENTIRE_REVISION')
+            for sig in reader.embedded_signatures)
+    except Exception:
+        pass
     gap = raw[gap_start:gap_end].strip()
     if not (gap.startswith(b"<") and gap.endswith(b">")):
         return ByteRangeInfo(br, False, False, False, ["Contents gap is not a PDF hex string."])
@@ -265,7 +281,7 @@ def validate_byte_range(raw: bytes, br: List[int]) -> ByteRangeInfo:
 
 # ── pyHanko verification path ─────────────────────────────────────────────
 
-def _verify_with_pyhanko(raw: bytes, trust_roots=None, skip_diff=False) -> List[SigVerificationResult]:
+def _verify_with_pyhanko(raw: bytes, trust_roots=None, skip_diff=False, crls=None, ocsps=None) -> List[SigVerificationResult]:
     from pyhanko.sign.validation import validate_pdf_signature
     from pyhanko.pdf_utils.reader import PdfFileReader
 
@@ -287,11 +303,25 @@ def _verify_with_pyhanko(raw: bytes, trust_roots=None, skip_diff=False) -> List[
         return []
 
     from pyhanko_certvalidator import ValidationContext
-    context = ValidationContext(trust_roots=list(trust_roots or []), allow_fetching=False)
+    from core.certificate_lifecycle import load_evidence, revocation_result, timestamp_result
+    configured_crls,configured_ocsps=load_evidence()
+    crls=list(crls or [])+configured_crls;ocsps=list(ocsps or [])+configured_ocsps
+    evidence_supplied=bool(crls or ocsps)
+    context = ValidationContext(trust_roots=list(trust_roots or []),
+        other_certs=[c for c in (trust_roots or []) if hasattr(c,"subject")], allow_fetching=False,
+        crls=crls,ocsps=ocsps,revocation_mode='require' if evidence_supplied else 'soft-fail')
     out: List[SigVerificationResult] = []
     for idx, sig in enumerate(embedded_sigs[:config.MAX_SIGNATURES]):   # max 10 sigs
         try:
-            status = validate_pdf_signature(sig, signer_validation_context=context, skip_diff=skip_diff)
+            document_timestamp=str(sig.sig_object.get('/Type',''))=='/DocTimeStamp'
+            if document_timestamp:
+                from pyhanko.sign.validation import validate_pdf_timestamp
+                status=validate_pdf_timestamp(sig,validation_context=context,skip_diff=skip_diff)
+            else:
+                status = validate_pdf_signature(sig, signer_validation_context=context,
+                    ts_validation_context=context,skip_diff=skip_diff)
+            revocation=revocation_result(status,evidence_supplied)
+            timestamp_label,timestamp_details=timestamp_result(status,document_timestamp)
         except Exception as exc:
             out.append(SigVerificationResult(
                 idx, getattr(sig, "field_name", f"sig_{idx}"),
@@ -339,7 +369,9 @@ def _verify_with_pyhanko(raw: bytes, trust_roots=None, skip_diff=False) -> List[
                                      nb, na, self_signed, test_cert, key_alg)
 
                 now = datetime.now(timezone.utc)
-                if not (cert.not_valid_before_utc <= now <= cert.not_valid_after_utc):
+                if revocation=="REVOKED":
+                    trust_status = "REVOKED"
+                elif not (cert.not_valid_before_utc <= now <= cert.not_valid_after_utc):
                     trust_status = TrustStatus.EXPIRED
                 elif trusted_raw is True:
                     trust_status = TrustStatus.TRUSTED
@@ -426,6 +458,10 @@ def _verify_with_pyhanko(raw: bytes, trust_roots=None, skip_diff=False) -> List[
             signing_time=signing_time,
             signed_attrs_ok=signed_attrs_ok,
             details=details,
+            revocation_status=revocation,
+            timestamp_status=timestamp_label,
+            timestamp_details=timestamp_details,
+            coverage_level=getattr(getattr(status,"coverage",None),"name","UNKNOWN"),
             modification_level=getattr(getattr(status, "modification_level", None), "name", "UNKNOWN"),
         ))
 

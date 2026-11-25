@@ -1,10 +1,8 @@
-........................................................................ [ 85%]
-............                                                             [100%]
-84 passed in 61.90s (0:01:01)
+SignGuard 3.2 verification — 25 November 2026
 
-Quick validation:
+final_v32_quick.log
 .............................                                            [100%]
-29 passed in 40.29s
+29 passed in 39.17s
 
 {'scenario': 'A', 'passed': True, 'verdict': 'INCONCLUSIVE', 'findings': []}
 {'scenario': 'B', 'passed': True, 'verdict': 'TAMPERING DETECTED', 'findings': ['CRYPTO-001']}
@@ -13,25 +11,51 @@ Quick validation:
 {'scenario': 'E', 'passed': True, 'verdict': 'INCONCLUSIVE', 'findings': []}
 {'scenario': 'F', 'passed': True, 'verdict': 'INCONCLUSIVE', 'findings': []}
 
-Dashboard pages:
-2026-11-25 16:08:11.994 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
-PASS 🏠  Overview
-PASS 📄  Document Analysis
-PASS ⚗️  Attack Simulation Lab
-PASS 🔬  Algorithm Visualizations
-PASS 📊  Evaluation
-PASS 📋  Reports & Audit
-PASS 🎓  Presentation Mode
 
-Attack Lab UI flows:
-2026-11-25 16:09:26.743 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
-PASS A INCONCLUSIVE
-PASS B TAMPERING DETECTED
-PASS C REVIEW REQUIRED
-PASS D REVIEW REQUIRED
-PASS E INCONCLUSIVE
-PASS F INCONCLUSIVE
+final_v32_upload_kit.log
+01_signed_original.pdf INCONCLUSIVE []
+02_tampered_signed_bytes.pdf TAMPERING DETECTED ['CRYPTO-001']
+03_changed_after_signing.pdf REVIEW REQUIRED ['CRYPTO-003', 'CRYPTO-004', 'SHADOW-001', 'SHADOW-002']
+04_duplicated_signature_images.pdf REVIEW REQUIRED ['ORB-001']
+05_unsigned_document.pdf INCONCLUSIVE []
+06_change_on_last_page.pdf REVIEW REQUIRED ['CRYPTO-003', 'CRYPTO-004', 'SHADOW-001', 'SHADOW-002']
+07_signature_on_last_page.pdf INCONCLUSIVE []
+KIT VERIFIED: 7 PDFs; 54386 ZIP bytes
 
-Final signature-limit regression:
-.                                                                        [100%]
-1 passed in 4.82s
+
+final_v32_independent.log
+minimal-two-fields-signed-twice.pdf INCONCLUSIVE upstream checks: True
+minimal-signed-twice-second-created.pdf INCONCLUSIVE upstream checks: True
+minimal-signed-twice-both-created.pdf INCONCLUSIVE upstream checks: True
+sig-no-signed-attrs.pdf INCONCLUSIVE upstream checks: True
+coverage-anomalies__tail-uncovered.pdf REVIEW REQUIRED upstream checks: True
+coverage-anomalies__signature-gap-too-big.pdf REVIEW REQUIRED upstream checks: True
+coverage-anomalies__one-byterange.pdf REVIEW REQUIRED upstream checks: True
+coverage-anomalies__weird-byterange.pdf REVIEW REQUIRED upstream checks: True
+Saved benchmarks/independent_validation.json
+
+
+final_current_ui.log
+PASS page Overview
+PASS page Document analysis
+PASS page Document comparison
+PASS page Attack lab
+PASS page Evidence viewer
+PASS page Evaluation
+PASS page Reports & audit
+PASS page Case review
+PASS page Presentation
+PASS original-versus-suspect UI and comparison package
+PASS human review remains separate from machine verdict
+PASS evidence package built and verified with review history
+PASS changed source-inclusion option invalidates stale package
+PASS clear session removes retained documents, results and reviews
+
+v32_last_checks.log
+...                                                                      [100%]
+3 passed in 3.55s
+
+Final current regression suite
+........................................................................ [ 60%]
+...............................................                          [100%]
+119 passed in 93.54s (0:01:33)

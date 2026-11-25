@@ -1,4 +1,4 @@
-# SignGuard v3
+# SignGuard v3.2
 
 An explainable PDF signature and forensic analysis research project for Information Security.
 
@@ -27,7 +27,7 @@ The launchers bind to http://localhost:8502. A bare Streamlit command uses its d
 - Locked, fsynced, atomic hash-chain appends; corrupt logs fail visibly. Export a checkpoint and store it independently.
 - Reports with coverage, per-page candidate boxes, pair evidence, unsupported/incomplete status, and audit-write failures.
 
-The seven dashboard pages cover overview, document analysis, attack lab, algorithm evidence, evaluation, reports/audit and a five-step faculty presentation.
+The nine workspace pages cover overview, document analysis, original-versus-suspect comparison, attack lab, evidence, evaluation, reports/audit, human case review and a guided presentation.
 
 ## Verdicts
 
@@ -61,7 +61,7 @@ python run_tests_quick.py
 python benchmarks/run_evaluation.py
 ```
 
-The full suite passed 84 tests. The quick script passed 29 security tests and six scenario checks (35 total). It asserts security outcomes and regenerates scenario JSON/PDF/PNG evidence. The benchmark generates 52 synthetic controls: 13 development and 39 held-out, across 13 categories. It compares three modes, separates byte failures from review alerts, reports per-category outcomes and measures annotated localisation at IoU >= 0.5. See `docs/FINAL_VERIFICATION.md` for the latest executed checks.
+The full suite passed 119 tests. The quick script passed 29 security tests and six scenario checks (35 total). It asserts security outcomes and regenerates scenario JSON/PDF/PNG evidence. The benchmark generates 52 synthetic controls: 13 development and 39 held-out, across 13 categories. It compares three modes, separates byte failures from review alerts, reports per-category outcomes and measures annotated localisation at IoU >= 0.5. See `docs/FINAL_VERIFICATION.md` for the latest executed checks.
 
 ### Measured held-out results
 
@@ -79,7 +79,7 @@ Annotated localisation matched 12 of 12 signature boxes on nine held-out signatu
 
 `core/`: bounded parsing, verification, revision analysis, CV, fusion, worker and audit.
 `simulation/`: genuine signed controls, attack scenarios and annotated evaluation generation.
-`dashboard/`: seven Streamlit pages.
+`dashboard/`: nine Streamlit workspace pages.
 `reporting/`: JSON and ReportLab exports.
 `tests/`: regression and security outcome assertions.
 `benchmarks/`: executable benchmark and measured outputs.
@@ -87,11 +87,11 @@ Annotated localisation matched 12 of 12 signature boxes on nine held-out signatu
 
 ## Limits
 
-This is an educational research prototype. Certificate revocation and trusted timestamp validation are not implemented and are labelled as such. A signer-reported date is not a trusted timestamp. The test certificate never establishes a real person's identity.
+This is an educational research prototype. Offline CRL/OCSP evidence and RFC3161 timestamps can be validated against explicit operator-provided roots. Missing, stale or untrusted evidence remains unchecked/unknown; online certificate fetching is disabled. A signer-reported date is not a trusted timestamp. The test certificate never establishes a real person's identity.
 
-A single renderer cannot detect all PDF parser differentials or shadow attacks. ELA cannot reliably establish PDF manipulation. Repeated legitimate graphics can trigger duplication alerts. Localisation is heuristic. Candidate/pair budgets can leave analysis partial; check coverage. OS memory enforcement is Linux-specific; Windows retains timeout and rendering budgets.
+The optional second-renderer comparison does not detect all PDF parser differentials or shadow attacks. ELA cannot reliably establish PDF manipulation. Repeated legitimate graphics can trigger duplication alerts. Localisation is heuristic. Candidate/pair budgets can leave analysis partial; check coverage. OS memory enforcement is Linux-specific; Windows retains timeout and rendering budgets.
 
-The worker provides resource isolation, not a complete exploit sandbox. Real-document generalisation, an independent attack corpus and a dependency vulnerability audit remain unverified. The held-out set shares a synthetic generator with development controls. Do not use these results as an authenticity certificate or a production security guarantee.
+The worker provides resource isolation, not a complete exploit sandbox. Real-document generalisation, an independent attack corpus and comprehensive OS/native dependency vulnerability coverage remain unverified. The held-out set shares a synthetic generator with development controls. Do not use these results as an authenticity certificate or a production security guarantee.
 
 See `docs/THREAT_MODEL.md` and `docs/RESEARCH_COMPARISON.md` for assumptions and evaluation boundaries.
 
@@ -104,3 +104,11 @@ Use repository `AbhayGokavarapu/Sign_Guard`, branch `streamlit-deploy`, entry po
 Open Document analysis → Need a document? Download a verified sample. Download one PDF or the complete seven-file ZIP, then upload a numbered PDF through the input above. The kit is also in `samples/signguard-upload-kit.zip`. `START_HERE.txt` explains each case, and `verified_results.csv`/JSON records observed outcomes. Detailed local engine reports are in the kit's `verification/` folder.
 
 Regenerate and verify with `python -m simulation.build_upload_kit`. The generator asserts expected verdicts and key findings and checks that the original/tampered pair renders identically.
+
+## Investigation workspace (3.2)
+
+The current workspace also includes **Document comparison** and **Case review**. Compare an original with a suspect PDF, inspect consecutive revisions and static PDF actions, optionally compare MuPDF/Poppler rendering, and export a verifiable evidence ZIP with reproducibility metadata and separate human assessments. Clear session removes current session inputs/results; a bounded worker queue protects shared-host capacity.
+
+Operators can provision offline CRL/OCSP evidence, trusted TSA roots and an optional evidence-package signing key. No PDF-selected certificate URL is fetched. See `docs/INVESTIGATION_UPGRADE.md` for configuration, verifier commands and limits.
+
+External upstream fixtures, cross-validator outcomes, a CycloneDX dependency inventory and a known-vulnerability audit are included in `datasets/external-pyhanko/` and `benchmarks/`. These do not replace independent human adjudication or a real-world forged-document corpus.

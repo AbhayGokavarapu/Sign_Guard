@@ -1,12 +1,12 @@
 {
   "report_type": "SignGuard Forensic Report",
   "schema_version": "2.0",
-  "generated_at": "2026-11-25T16:41:24Z",
-  "analysis_ts": "2026-11-25T16:41:23Z",
+  "generated_at": "2026-11-25T17:21:00Z",
+  "analysis_ts": "2026-11-25T17:20:59Z",
   "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
   "document": {
     "filename": "03_changed_after_signing.pdf",
-    "sha256": "bde46676de1e0d684abd0c11e66576911a17965a56cbe8e07acaed733cca67ce",
+    "sha256": "edd751c0b49656311bef5c504f60b207ce63e03de31aecf5552df18676c9afde",
     "size_bytes": 9731,
     "page_count": 1,
     "metadata": {
@@ -15,8 +15,8 @@
       "subject": "SIGNGUARD-INTEGRITY-CONTROL",
       "creator": "anonymous",
       "producer": "ReportLab PDF Library - (opensource); pyHanko 0.38.2",
-      "creation_date": "D:20261125164117+00'00'",
-      "mod_date": "D:20261125164117Z",
+      "creation_date": "D:20261125172052+00'00'",
+      "mod_date": "D:20261125172053Z",
       "format": "",
       "pdf_version": ""
     },
@@ -33,7 +33,7 @@
   "cryptographic": {
     "total_sigs": 1,
     "total_discovered": 1,
-    "all_valid": true,
+    "all_valid": false,
     "pyhanko_used": true,
     "summary": "[Signature1] integrity=PASS | math=True | trust=SELF-SIGNED (untrusted) | modpolicy=VIOLATION",
     "signatures": [
@@ -46,11 +46,16 @@
         "identity_status": "UNVERIFIED (untrusted cert)",
         "completeness": "integrity | math | trust | modpolicy",
         "modification_level": "OTHER",
+        "coverage_level": "ENTIRE_REVISION",
         "revocation_status": "NOT CHECKED (offline)",
         "timestamp_status": "NOT VALIDATED",
+        "timestamp_details": {
+          "present": false,
+          "note": "No RFC3161 signature timestamp was validated; a claimed signing date is not a trusted timestamp."
+        },
         "digest_alg": "sha256",
         "sig_alg": "unknown",
-        "signing_time": "2026-11-25 16:41:17+00:00",
+        "signing_time": "2026-11-25 17:20:53+00:00",
         "signed_attrs_ok": true,
         "details": [
           "INTACT:UNTRUSTED,EXTENDED_WITH_OTHER,ILLEGAL_MODIFICATIONS",
@@ -66,7 +71,7 @@
           ],
           "structurally_valid": true,
           "covers_full_file": false,
-          "covers_signed_rev": true,
+          "covers_signed_rev": false,
           "notes": [
             "Signature contents gap: bytes 3095\u20138233 (5138 bytes).",
             "ByteRange ends at 8689, file is 9731 bytes \u2014 1042 trailing bytes not covered (incremental update likely).",
@@ -76,9 +81,9 @@
         "cert": {
           "subject": "SignGuard Demo Signer [TEST \u2014 NOT TRUSTED]",
           "issuer": "SignGuard Demo Signer [TEST \u2014 NOT TRUSTED]",
-          "serial": "171477686307882801511409803636177147174124918555",
-          "not_before": "2026-11-25 16:40:17+00:00",
-          "not_after": "2036-11-22 16:40:17+00:00",
+          "serial": "728247159035619189598720012466233366768091677197",
+          "not_before": "2026-11-25 17:19:52+00:00",
+          "not_after": "2036-11-22 17:19:52+00:00",
           "self_signed": true,
           "is_test_cert": true,
           "key_alg": "RSAPublicKey"
@@ -91,10 +96,10 @@
     "has_incremental": true,
     "shadow_suspect": true,
     "changed_area_pct": 0.013063135830685805,
-    "text_diff": "0 line(s) removed, 1 line(s) added between signed revision and current document.",
+    "text_diff": "0 line(s) removed, 1 line(s) added; ordered text comparison preserves repetition.",
     "metadata_changed": false,
     "discovery_method": "pyhanko_xref_chain",
-    "summary": "4 revision(s) discovered via pyhanko_xref_chain. 3 incremental update(s) present. Visual content changed 0.0% between signed revision and current \u2014 possible shadow attack; manual review required. 0 line(s) removed, 1 line(s) added between signed revision and current document.",
+    "summary": "4 revision(s) discovered via pyhanko_xref_chain. 3 incremental update(s) present. Visual content changed 0.0% between signed revision and current \u2014 possible shadow attack; manual review required. 0 line(s) removed, 1 line(s) added; ordered text comparison preserves repetition.",
     "revisions": [
       {
         "index": 0,
@@ -178,6 +183,7 @@
     "completeness": "Modules completed: Cryptographic, Revision, Localisation, ELA | Pages analysed: 1/1 | Mode: full",
     "findings": [
       {
+        "finding_id": "a66c1d3d8dfd6e048fee3f2f82f9382de642442c8c24dd2861f0e74b05f6469b",
         "code": "CRYPTO-003",
         "severity": "HIGH",
         "title": "Modification-policy violation",
@@ -188,6 +194,7 @@
         "limitation": ""
       },
       {
+        "finding_id": "07416f89a65d8a058ea25070e24fc28ab37fc57c018fc5d5747dfd1b32bec55e",
         "code": "CRYPTO-004",
         "severity": "LOW",
         "title": "Signature does not cover the complete current file",
@@ -198,6 +205,7 @@
         "limitation": "Incremental updates may be legitimate (e.g. annotations)."
       },
       {
+        "finding_id": "f3449e23be72dddbf8d9f4437372c9733fe88fe5d68178e9acd610a847e9df75",
         "code": "SHADOW-001",
         "severity": "HIGH",
         "title": "Post-signing visible content change",
@@ -208,10 +216,11 @@
         "limitation": "Shadow-attack detection uses rendered image comparison. Attacks with identical renders are not detectable. Legitimate annotations/signatures also create incremental updates."
       },
       {
+        "finding_id": "452ab94c982d59084ff63d38f86f45a4194a61ce0a82beb4e2115108a5ab8191",
         "code": "SHADOW-002",
         "severity": "MEDIUM",
         "title": "Text content changed between signed and current revision",
-        "description": "0 line(s) removed, 1 line(s) added between signed revision and current document.",
+        "description": "0 line(s) removed, 1 line(s) added; ordered text comparison preserves repetition.",
         "module": "Revision Analysis",
         "measurements": "",
         "page": 0,
@@ -238,11 +247,166 @@
     "Synthetic evaluation does not establish real-world generalisation performance."
   ],
   "processing": {
-    "total_seconds": 0.994,
+    "total_seconds": 1.437,
     "stage_times": {
-      "analysis_total": 0.994
+      "analysis_total": 1.437
     }
   },
+  "provenance": {
+    "application_version": "3.2",
+    "git_commit": "7331e02485a4d190df308dcc8547ee01e02b57d6",
+    "working_tree_modified": true,
+    "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "dependencies": {
+      "pyhanko": "0.38.2",
+      "pyhanko-certvalidator": "0.33.0",
+      "cryptography": "50.0.2",
+      "PyMuPDF": "2.1",
+      "opencv-python-headless": "5.1.0.95",
+      "numpy": "2.5.5",
+      "Pillow": "13.0.0",
+      "scipy": "1.18.1",
+      "reportlab": "5.1.1",
+      "streamlit": "1.67.0",
+      "filelock": "4.3.1"
+    },
+    "settings": {
+      "analysis_mode": "full",
+      "ela_quality": 75,
+      "ela_amplification": 15,
+      "ela_enabled": true,
+      "orb_enabled": true,
+      "renderer_comparison_requested": false
+    },
+    "thresholds_and_limits": {
+      "DIFF_THRESHOLD_PX": 30,
+      "ELA_DEFAULT_AMP": 15,
+      "ELA_DEFAULT_QUALITY": 75,
+      "ELA_HIGH_THRESHOLD": 25.0,
+      "ELA_QUALITIES": [
+        65,
+        75,
+        85,
+        95
+      ],
+      "MAX_ANALYSIS_CANDIDATES": 60,
+      "MAX_CANDIDATE_PAIRS": 20,
+      "MAX_CONCURRENT_JOBS": 2,
+      "MAX_FILE_SIZE_MB": 50,
+      "MAX_LOC_CANDIDATES": 15,
+      "MAX_PAGE_COUNT": 200,
+      "MAX_PAGE_HEIGHT_PX": 7000,
+      "MAX_PAGE_WIDTH_PX": 5000,
+      "MAX_RENDERER_PAGES": 5,
+      "MAX_REVISIONS": 20,
+      "MAX_SIGNATURES": 10,
+      "MAX_STATIC_OBJECTS": 20000,
+      "MAX_TIMELINE_PAGE_COMPARISONS": 60,
+      "MAX_TOTAL_RENDER_PIXELS": 80000000,
+      "ORB_N_FEATURES": 500,
+      "ORB_RATIO_THRESH": 0.75,
+      "PROCESSING_TIMEOUT_S": 120,
+      "QUEUE_WAIT_S": 2.0,
+      "RANSAC_INLIER_RATIO_MIN": 0.3,
+      "RANSAC_MIN_INLIERS": 10,
+      "RANSAC_REPROJ_THRESH": 5.0,
+      "RENDERER_DIFFERENCE_THRESHOLD": 2.0,
+      "RENDER_DPI": 144,
+      "SHADOW_CHANGE_PCT_MIN": 0.5,
+      "THUMBNAIL_DPI": 96,
+      "WORKER_MEMORY_MB": 2048
+    },
+    "trust_roots_sha256": null,
+    "revocation_evidence_sha256": [],
+    "certificate_fetching": "disabled; operator-provided offline evidence only",
+    "pair_selection": "appearance/geometry ranking with page-pair round-robin allocation"
+  },
+  "static_content": {
+    "entries": [],
+    "objects_inspected": 17,
+    "complete": true,
+    "review_required": false,
+    "note": "Presence is not proof of malware. Inventory includes parsed object dictionaries, including potentially unreferenced objects; no actions are executed."
+  },
+  "revision_timeline": {
+    "transitions": [
+      {
+        "from_revision": 0,
+        "to_revision": 1,
+        "new_signature": false,
+        "page_count_before": 1,
+        "page_count_after": 1,
+        "pages": [
+          {
+            "page": 0,
+            "change": "unchanged",
+            "text_changes": [],
+            "changed_area_pct": 0.0,
+            "dimensions_changed": false
+          }
+        ],
+        "metadata_changed": true
+      },
+      {
+        "from_revision": 1,
+        "to_revision": 2,
+        "new_signature": true,
+        "page_count_before": 1,
+        "page_count_after": 1,
+        "pages": [
+          {
+            "page": 0,
+            "change": "unchanged",
+            "text_changes": [],
+            "changed_area_pct": 0.0,
+            "dimensions_changed": false
+          }
+        ],
+        "metadata_changed": false
+      },
+      {
+        "from_revision": 2,
+        "to_revision": 3,
+        "new_signature": false,
+        "page_count_before": 1,
+        "page_count_after": 1,
+        "pages": [
+          {
+            "page": 0,
+            "change": "modified",
+            "text_changes": [
+              {
+                "operation": "insert",
+                "before_lines": [
+                  4,
+                  3
+                ],
+                "after_lines": [
+                  4,
+                  4
+                ],
+                "removed": [],
+                "added": [
+                  "Payment amount: $9,000"
+                ]
+              }
+            ],
+            "changed_area_pct": 0.014243065197350566,
+            "dimensions_changed": false
+          }
+        ],
+        "metadata_changed": false
+      }
+    ],
+    "complete": true,
+    "pages_compared": 3,
+    "revision_count": 4,
+    "discovery_method": "pyhanko_xref_chain",
+    "note": "Consecutive history comparison. A change later restored is still recorded. Added/removed pages are explicit; rendering differences do not prove malicious intent."
+  },
+  "renderer_comparison": {},
   "coverage": {
     "complete": true,
     "mode": "full",
@@ -252,7 +416,8 @@
     "candidates_analysed": 0,
     "pairs_available": 0,
     "pairs_analysed": 0,
-    "limitations": []
+    "limitations": [],
+    "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
   },
   "page_results": [
     {

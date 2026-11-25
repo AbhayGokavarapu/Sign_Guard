@@ -1,12 +1,12 @@
 {
   "report_type": "SignGuard Forensic Report",
   "schema_version": "2.0",
-  "generated_at": "2026-11-25T16:41:26Z",
-  "analysis_ts": "2026-11-25T16:41:25Z",
+  "generated_at": "2026-11-25T17:21:02Z",
+  "analysis_ts": "2026-11-25T17:21:02Z",
   "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
   "document": {
     "filename": "05_unsigned_document.pdf",
-    "sha256": "07cf4e41f3c3b66e8642a017ac7edafb8434330b3311a7eb4a7c25f834870b14",
+    "sha256": "a551fa116db35bc38038c4b6ff6cbe5d3880424c9149df66b2670014e877bd9b",
     "size_bytes": 2013,
     "page_count": 1,
     "metadata": {
@@ -15,8 +15,8 @@
       "subject": "unspecified",
       "creator": "anonymous",
       "producer": "ReportLab PDF Library - (opensource)",
-      "creation_date": "D:20261125164118+00'00'",
-      "mod_date": "D:20261125164118+00'00'",
+      "creation_date": "D:20261125172053+00'00'",
+      "mod_date": "D:20261125172053+00'00'",
       "format": "",
       "pdf_version": ""
     },
@@ -129,11 +129,98 @@
     "Synthetic evaluation does not establish real-world generalisation performance."
   ],
   "processing": {
-    "total_seconds": 0.419,
+    "total_seconds": 0.594,
     "stage_times": {
-      "analysis_total": 0.419
+      "analysis_total": 0.594
     }
   },
+  "provenance": {
+    "application_version": "3.2",
+    "git_commit": "7331e02485a4d190df308dcc8547ee01e02b57d6",
+    "working_tree_modified": true,
+    "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "dependencies": {
+      "pyhanko": "0.38.2",
+      "pyhanko-certvalidator": "0.33.0",
+      "cryptography": "50.0.2",
+      "PyMuPDF": "2.1",
+      "opencv-python-headless": "5.1.0.95",
+      "numpy": "2.5.5",
+      "Pillow": "13.0.0",
+      "scipy": "1.18.1",
+      "reportlab": "5.1.1",
+      "streamlit": "1.67.0",
+      "filelock": "4.3.1"
+    },
+    "settings": {
+      "analysis_mode": "full",
+      "ela_quality": 75,
+      "ela_amplification": 15,
+      "ela_enabled": true,
+      "orb_enabled": true,
+      "renderer_comparison_requested": false
+    },
+    "thresholds_and_limits": {
+      "DIFF_THRESHOLD_PX": 30,
+      "ELA_DEFAULT_AMP": 15,
+      "ELA_DEFAULT_QUALITY": 75,
+      "ELA_HIGH_THRESHOLD": 25.0,
+      "ELA_QUALITIES": [
+        65,
+        75,
+        85,
+        95
+      ],
+      "MAX_ANALYSIS_CANDIDATES": 60,
+      "MAX_CANDIDATE_PAIRS": 20,
+      "MAX_CONCURRENT_JOBS": 2,
+      "MAX_FILE_SIZE_MB": 50,
+      "MAX_LOC_CANDIDATES": 15,
+      "MAX_PAGE_COUNT": 200,
+      "MAX_PAGE_HEIGHT_PX": 7000,
+      "MAX_PAGE_WIDTH_PX": 5000,
+      "MAX_RENDERER_PAGES": 5,
+      "MAX_REVISIONS": 20,
+      "MAX_SIGNATURES": 10,
+      "MAX_STATIC_OBJECTS": 20000,
+      "MAX_TIMELINE_PAGE_COMPARISONS": 60,
+      "MAX_TOTAL_RENDER_PIXELS": 80000000,
+      "ORB_N_FEATURES": 500,
+      "ORB_RATIO_THRESH": 0.75,
+      "PROCESSING_TIMEOUT_S": 120,
+      "QUEUE_WAIT_S": 2.0,
+      "RANSAC_INLIER_RATIO_MIN": 0.3,
+      "RANSAC_MIN_INLIERS": 10,
+      "RANSAC_REPROJ_THRESH": 5.0,
+      "RENDERER_DIFFERENCE_THRESHOLD": 2.0,
+      "RENDER_DPI": 144,
+      "SHADOW_CHANGE_PCT_MIN": 0.5,
+      "THUMBNAIL_DPI": 96,
+      "WORKER_MEMORY_MB": 2048
+    },
+    "trust_roots_sha256": null,
+    "revocation_evidence_sha256": [],
+    "certificate_fetching": "disabled; operator-provided offline evidence only",
+    "pair_selection": "appearance/geometry ranking with page-pair round-robin allocation"
+  },
+  "static_content": {
+    "entries": [],
+    "objects_inspected": 8,
+    "complete": true,
+    "review_required": false,
+    "note": "Presence is not proof of malware. Inventory includes parsed object dictionaries, including potentially unreferenced objects; no actions are executed."
+  },
+  "revision_timeline": {
+    "transitions": [],
+    "complete": true,
+    "pages_compared": 0,
+    "revision_count": 1,
+    "discovery_method": "pyhanko_xref_chain",
+    "note": "Consecutive history comparison. A change later restored is still recorded. Added/removed pages are explicit; rendering differences do not prove malicious intent."
+  },
+  "renderer_comparison": {},
   "coverage": {
     "complete": true,
     "mode": "full",
@@ -143,7 +230,8 @@
     "candidates_analysed": 1,
     "pairs_available": 0,
     "pairs_analysed": 0,
-    "limitations": []
+    "limitations": [],
+    "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
   },
   "page_results": [
     {

@@ -105,7 +105,10 @@ def _render_at_dpi(raw: bytes, page_index: int = 0,
         doc  = fitz.open(stream=raw, filetype="pdf")
         if not doc or len(doc) == 0:
             return None
-        pi   = min(page_index, len(doc) - 1)
+        if page_index >= len(doc):
+            doc.close()
+            return None
+        pi = page_index
         page = doc[pi]
         from core.pdf_parser import render_bounded
         pix = render_bounded(page, dpi, annots=False)
@@ -238,16 +241,11 @@ def analyze(raw: bytes, page_index: int = 0) -> RevisionAnalysisResult:
         signed_text  = _extract_text_first_page(signed_bytes, page_index)
         current_text = _extract_text_first_page(raw, page_index)
         if signed_text != current_text:
-            # Simple line-level diff summary
-            s_lines = set(signed_text.splitlines())
-            c_lines = set(current_text.splitlines())
-            removed = s_lines - c_lines
-            added   = c_lines - s_lines
-            if removed or added:
-                text_diff_summary = (
-                    f"{len(removed)} line(s) removed, {len(added)} line(s) added "
-                    "between signed revision and current document."
-                )
+            from core.document_diff import ordered_text_diff
+            changes=ordered_text_diff(signed_text,current_text)
+            removed=sum(len(change['removed']) for change in changes)
+            added=sum(len(change['added']) for change in changes)
+            text_diff_summary=f"{removed} line(s) removed, {added} line(s) added; ordered text comparison preserves repetition."
 
         if text_diff_summary:
             shadow_suspect = True
@@ -304,3 +302,39 @@ def analyze(raw: bytes, page_index: int = 0) -> RevisionAnalysisResult:
         affected_pages=[page_index] if shadow_suspect else [],
         pages_compared=1 if signed_image else 0,
     )
+
+
+def revision_timeline(raw):
+    """Compare every consecutive parsed revision, including added/removed pages.
+
+    A bounded page-comparison budget is reported explicitly. No render is retained
+    beyond its current comparison; text changes are ordered, never converted to sets.
+    """
+    from core.document_diff import ordered_text_diff
+    revisions,method=_discover_revisions_pymupdf(raw)
+    if not revisions:return {'transitions':[], 'complete':False, 'error':method}
+    transitions=[];comparisons=0;complete=True
+    for before,after in zip(revisions,revisions[1:]):
+        with fitz.open(stream=raw[:before.end_offset],filetype='pdf') as a, fitz.open(stream=raw[:after.end_offset],filetype='pdf') as b:
+            transition={'from_revision':before.index,'to_revision':after.index,
+                'new_signature':after.is_signed,'page_count_before':len(a),'page_count_after':len(b),
+                'pages':[], 'metadata_changed':a.metadata!=b.metadata}
+            for page in range(max(len(a),len(b))):
+                if comparisons>=config.MAX_TIMELINE_PAGE_COMPARISONS:
+                    complete=False;break
+                comparisons+=1
+                if page>=len(a):transition['pages'].append({'page':page,'change':'added'});continue
+                if page>=len(b):transition['pages'].append({'page':page,'change':'removed'});continue
+                changes=ordered_text_diff(a[page].get_text(),b[page].get_text())
+                image_a=_render_at_dpi(raw[:before.end_offset],page,config.THUMBNAIL_DPI)
+                image_b=_render_at_dpi(raw[:after.end_offset],page,config.THUMBNAIL_DPI)
+                pct=None
+                if image_a and image_b:_,_,pct,_=_pixel_diff(image_a,image_b)
+                else:complete=False
+                transition['pages'].append({'page':page,'change':'modified' if changes or (pct or 0)>0 or a[page].rect!=b[page].rect else 'unchanged',
+                    'text_changes':changes,'changed_area_pct':pct,'dimensions_changed':a[page].rect!=b[page].rect})
+            transitions.append(transition)
+            if not complete and comparisons>=config.MAX_TIMELINE_PAGE_COMPARISONS:break
+    return {'transitions':transitions,'complete':complete,'pages_compared':comparisons,
+        'revision_count':len(revisions),'discovery_method':method,
+        'note':'Consecutive history comparison. A change later restored is still recorded. Added/removed pages are explicit; rendering differences do not prove malicious intent.'}

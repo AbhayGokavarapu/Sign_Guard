@@ -3,6 +3,7 @@ from __future__ import annotations
 import json, time
 from typing import Any
 from core.pipeline import PipelineResult
+from core.review import finding_id
 
 
 def _safe(obj: Any) -> Any:
@@ -92,8 +93,10 @@ def build_report(result: PipelineResult) -> dict:
                 "identity_status":    sig.identity_status,
                 "completeness":       sig.completeness,
                 "modification_level": sig.modification_level,
+                "coverage_level": sig.coverage_level,
                 "revocation_status": sig.revocation_status,
                 "timestamp_status": sig.timestamp_status,
+                "timestamp_details": _safe(sig.timestamp_details),
                 "digest_alg":         sig.digest_alg,
                 "sig_alg":            sig.sig_alg,
                 "signing_time":       sig.signing_time,
@@ -229,6 +232,7 @@ def build_report(result: PipelineResult) -> dict:
             "completeness":      fu.completeness,
             "findings": [
                 {
+                    "finding_id": finding_id(result.parsed.sha256 if result.parsed else "", f),
                     "code":        f.code,
                     "severity":    f.severity.value,
                     "title":       f.title,
@@ -244,6 +248,10 @@ def build_report(result: PipelineResult) -> dict:
         }
         r["limitations"] = fu.limitations
 
+    r["provenance"] = _safe(result.provenance)
+    r["static_content"] = _safe(result.active_content)
+    r["revision_timeline"] = _safe(result.timeline)
+    r["renderer_comparison"] = _safe(result.renderer_comparison)
     r["coverage"] = _safe(result.coverage)
     r["page_results"] = _safe(result.page_results)
     r["candidate_pairs"] = _safe(result.pair_results)

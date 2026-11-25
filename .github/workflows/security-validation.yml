@@ -1,0 +1,42 @@
+name: Security validation
+on:
+  push:
+    branches: [main, streamlit-deploy]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install independent PDF tools
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check dependency compatibility
+        run: python -m pip check
+      - name: Run security and regression tests
+        env:
+          SIGNGUARD_AUDIT_LOG: /tmp/signguard-ci-audit.json
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python -m pytest tests/ -q
+      - name: Audit known dependency vulnerabilities
+        run: |
+          python -m pip install pip-audit
+          python -m pip_audit --cache-dir "$RUNNER_TEMP/audit-cache" --format json --output benchmarks/dependency_audit.json
+      - name: Export dependency inventory
+        if: always()
+        run: python tools/generate_sbom.py benchmarks/python-sbom.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: python-dependency-inventory
+          path: |
+            benchmarks/python-sbom.json
+            benchmarks/dependency_audit.json

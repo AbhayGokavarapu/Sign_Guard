@@ -37,6 +37,10 @@ class PipelineResult:
     pair_results: list = field(default_factory=list)
     audit_error: Optional[str] = None
     processing_error: Optional[str] = None
+    provenance: dict = field(default_factory=dict)
+    active_content: dict = field(default_factory=dict)
+    timeline: dict = field(default_factory=dict)
+    renderer_comparison: dict = field(default_factory=dict)
 
 
 def _failure(reason, filename='document.pdf'):
@@ -54,13 +58,13 @@ def _failure(reason, filename='document.pdf'):
 
 def run(raw, filename='document.pdf', run_ela_flag=True, run_orb_flag=True,
         ela_quality=config.ELA_DEFAULT_QUALITY, ela_amp=config.ELA_DEFAULT_AMP,
-        isolated=True, record_audit=True, analysis_mode='full', timeout=None):
+        isolated=True, record_audit=True, analysis_mode='full', timeout=None, renderer_check=False):
     """Public entry point. UI/CLI default to a disposable resource-limited process."""
     validation = validate_pdf(raw, filename)
     if not validation.valid:
         return _failure(validation.reason, filename)
     options = dict(run_ela_flag=run_ela_flag, run_orb_flag=run_orb_flag,
-                   ela_quality=ela_quality, ela_amp=ela_amp, analysis_mode=analysis_mode)
+                   ela_quality=ela_quality, ela_amp=ela_amp, analysis_mode=analysis_mode, renderer_check=renderer_check)
     if isolated:
         from core.worker import execute
         result = execute(raw, filename, options, timeout)
@@ -79,7 +83,7 @@ def run(raw, filename='document.pdf', run_ela_flag=True, run_orb_flag=True,
 
 def _run(raw, filename, run_ela_flag=True, run_orb_flag=True,
          ela_quality=config.ELA_DEFAULT_QUALITY, ela_amp=config.ELA_DEFAULT_AMP,
-         analysis_mode='full'):
+         analysis_mode='full', renderer_check=False):
     if analysis_mode not in ('crypto_only', 'crypto_revision', 'full'):
         raise ValueError('Unknown analysis mode')
     start = time.perf_counter()
@@ -93,7 +97,17 @@ def _run(raw, filename, run_ela_flag=True, run_orb_flag=True,
     result = PipelineResult(ValidationResult(True, 'OK'), parsed=parsed,
                             classification=cls, crypto=crypto,
                             analysis_ts=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
+    from core.provenance import capture
+    result.provenance=capture({'analysis_mode':analysis_mode,'ela_quality':ela_quality,'ela_amplification':ela_amp,
+        'ela_enabled':run_ela_flag,'orb_enabled':run_orb_flag,'renderer_comparison_requested':renderer_check})
+    from core.active_content import inspect
+    result.active_content=inspect(raw)
+    if analysis_mode!='crypto_only':
+        from core.revision_analyzer import revision_timeline
+        result.timeline=revision_timeline(raw)
     incomplete = []
+    if not result.active_content.get('complete',False):incomplete.append('Static-content object inspection was truncated.')
+    if result.timeline and not result.timeline.get('complete',False):incomplete.append('Revision timeline is incomplete; see its budget/error details.')
     if crypto and crypto.total_discovered > crypto.total_sigs:
         incomplete.append(f'Only the first {config.MAX_SIGNATURES} signatures were verified.')
     all_candidates = []
@@ -143,10 +157,11 @@ def _run(raw, filename, run_ela_flag=True, run_orb_flag=True,
             result.ela = ela
     pair_count = len(all_candidates) * (len(all_candidates) - 1) // 2
     if run_orb_flag and analysis_mode == 'full':
-        for a, b in itertools.islice(itertools.combinations(all_candidates, 2), config.MAX_CANDIDATE_PAIRS):
+        from core.pair_selector import select_pairs
+        for a, b, selection_score in select_pairs(all_candidates, config.MAX_CANDIDATE_PAIRS):
             orb = orb_match(a.crop, b.crop)
             ransac = ransac_verify(orb)
-            result.pair_results.append({'pages': [a.page, b.page], 'boxes': [a.bbox, b.bbox],
+            result.pair_results.append({'selection_score':selection_score,'pages': [a.page, b.page], 'boxes': [a.bbox, b.bbox],
                 'inliers': ransac.inlier_count, 'ratio': ransac.inlier_ratio,
                 'geometric_match': ransac.geometric_ok, 'error': ransac.error or orb.error})
             if result.ransac is None or ransac.inlier_count > result.ransac.inlier_count:
@@ -175,6 +190,24 @@ def _run(raw, filename, run_ela_flag=True, run_orb_flag=True,
             if key not in seen:
                 findings.append(finding)
                 seen.add(key)
+    if result.active_content.get('review_required'):
+        from core.evidence_fusion import Finding, Severity
+        findings.append(Finding('PDF-ACTIVE-001',Severity.MEDIUM,'PDF actions need review',
+            'Scripts, automatic actions, launch actions or dynamic forms are present. No action was executed. Presence is not proof of malware.',
+            'Static PDF inspection',measurements=str(len(result.active_content['entries']))+' inventory entries'))
+        if base.verdict==Verdict.INCONCLUSIVE:
+            base.verdict=Verdict.REVIEW_REQUIRED
+            base.explanation='Static PDF actions require review; they do not establish that the file is malicious.'
+    if renderer_check:
+        from core.independent_checks import compare_renderers
+        result.renderer_comparison=compare_renderers(raw)
+        if not result.renderer_comparison.get('complete',False):incomplete.append('Independent rendering check was unavailable or partial.')
+        if result.renderer_comparison.get('disagreement'):
+            from core.evidence_fusion import Finding, Severity
+            findings.append(Finding('RENDER-001',Severity.MEDIUM,'Rendering engines disagree',
+                'MuPDF and Poppler produced different visible output. Review the measurements; normal antialiasing can also differ.',
+                'Independent rendering'))
+            if base.verdict==Verdict.INCONCLUSIVE:base.verdict=Verdict.REVIEW_REQUIRED
     base.findings = findings
     base.affected_pages = sorted({f.page for f in findings if f.page is not None} |
                                  {p for fu in fusions for p in fu.affected_pages if fu is not None})
@@ -188,7 +221,7 @@ def _run(raw, filename, run_ela_flag=True, run_orb_flag=True,
         'pages_analysed': parsed.page_count, 'page_count': parsed.page_count,
         'candidates_found': candidates_seen, 'candidates_analysed': len(all_candidates),
         'pairs_available': pair_count, 'pairs_analysed': len(result.pair_results),
-        'limitations': incomplete}
+        'limitations': incomplete, 'pair_selection':'Ranked appearance/geometry; balanced page-pair allocation'}
     result.elapsed_sec = round(time.perf_counter() - start, 3)
     result.stage_times["analysis_total"] = result.elapsed_sec
     return result

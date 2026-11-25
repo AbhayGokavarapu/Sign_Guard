@@ -1,12 +1,12 @@
 {
   "report_type": "SignGuard Forensic Report",
   "schema_version": "2.0",
-  "generated_at": "2026-11-25T16:41:20Z",
-  "analysis_ts": "2026-11-25T16:41:18Z",
+  "generated_at": "2026-11-25T17:20:55Z",
+  "analysis_ts": "2026-11-25T17:20:54Z",
   "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
   "document": {
     "filename": "01_signed_original.pdf",
-    "sha256": "b70a982a5a9110817310e04f062547ee870edd07e7cb5146d2e2f71d2db6aca6",
+    "sha256": "f51f24d088aeb8633e93302f5607baad6e21e34dfd1ce73aa7f1c8520c9bb11f",
     "size_bytes": 8689,
     "page_count": 1,
     "metadata": {
@@ -15,8 +15,8 @@
       "subject": "SIGNGUARD-INTEGRITY-CONTROL",
       "creator": "anonymous",
       "producer": "ReportLab PDF Library - (opensource); pyHanko 0.38.2",
-      "creation_date": "D:20261125164117+00'00'",
-      "mod_date": "D:20261125164117Z",
+      "creation_date": "D:20261125172052+00'00'",
+      "mod_date": "D:20261125172053Z",
       "format": "",
       "pdf_version": ""
     },
@@ -46,11 +46,16 @@
         "identity_status": "UNVERIFIED (untrusted cert)",
         "completeness": "integrity | math | trust | modpolicy",
         "modification_level": "NONE",
+        "coverage_level": "ENTIRE_FILE",
         "revocation_status": "NOT CHECKED (offline)",
         "timestamp_status": "NOT VALIDATED",
+        "timestamp_details": {
+          "present": false,
+          "note": "No RFC3161 signature timestamp was validated; a claimed signing date is not a trusted timestamp."
+        },
         "digest_alg": "sha256",
         "sig_alg": "unknown",
-        "signing_time": "2026-11-25 16:41:17+00:00",
+        "signing_time": "2026-11-25 17:20:53+00:00",
         "signed_attrs_ok": true,
         "details": [
           "INTACT:UNTRUSTED,UNTOUCHED",
@@ -74,9 +79,9 @@
         "cert": {
           "subject": "SignGuard Demo Signer [TEST \u2014 NOT TRUSTED]",
           "issuer": "SignGuard Demo Signer [TEST \u2014 NOT TRUSTED]",
-          "serial": "171477686307882801511409803636177147174124918555",
-          "not_before": "2026-11-25 16:40:17+00:00",
-          "not_after": "2036-11-22 16:40:17+00:00",
+          "serial": "728247159035619189598720012466233366768091677197",
+          "not_before": "2026-11-25 17:19:52+00:00",
+          "not_after": "2036-11-22 17:19:52+00:00",
           "self_signed": true,
           "is_test_cert": true,
           "key_alg": "RSAPublicKey"
@@ -188,11 +193,133 @@
     "Synthetic evaluation does not establish real-world generalisation performance."
   ],
   "processing": {
-    "total_seconds": 1.459,
+    "total_seconds": 1.402,
     "stage_times": {
-      "analysis_total": 1.459
+      "analysis_total": 1.402
     }
   },
+  "provenance": {
+    "application_version": "3.2",
+    "git_commit": "7331e02485a4d190df308dcc8547ee01e02b57d6",
+    "working_tree_modified": true,
+    "engine_source_sha256": "2c6b5f4db55695e6b5a06d8220fe448b9f0d6ab834883d121b021e836eba171d",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "dependencies": {
+      "pyhanko": "0.38.2",
+      "pyhanko-certvalidator": "0.33.0",
+      "cryptography": "50.0.2",
+      "PyMuPDF": "2.1",
+      "opencv-python-headless": "5.1.0.95",
+      "numpy": "2.5.5",
+      "Pillow": "13.0.0",
+      "scipy": "1.18.1",
+      "reportlab": "5.1.1",
+      "streamlit": "1.67.0",
+      "filelock": "4.3.1"
+    },
+    "settings": {
+      "analysis_mode": "full",
+      "ela_quality": 75,
+      "ela_amplification": 15,
+      "ela_enabled": true,
+      "orb_enabled": true,
+      "renderer_comparison_requested": false
+    },
+    "thresholds_and_limits": {
+      "DIFF_THRESHOLD_PX": 30,
+      "ELA_DEFAULT_AMP": 15,
+      "ELA_DEFAULT_QUALITY": 75,
+      "ELA_HIGH_THRESHOLD": 25.0,
+      "ELA_QUALITIES": [
+        65,
+        75,
+        85,
+        95
+      ],
+      "MAX_ANALYSIS_CANDIDATES": 60,
+      "MAX_CANDIDATE_PAIRS": 20,
+      "MAX_CONCURRENT_JOBS": 2,
+      "MAX_FILE_SIZE_MB": 50,
+      "MAX_LOC_CANDIDATES": 15,
+      "MAX_PAGE_COUNT": 200,
+      "MAX_PAGE_HEIGHT_PX": 7000,
+      "MAX_PAGE_WIDTH_PX": 5000,
+      "MAX_RENDERER_PAGES": 5,
+      "MAX_REVISIONS": 20,
+      "MAX_SIGNATURES": 10,
+      "MAX_STATIC_OBJECTS": 20000,
+      "MAX_TIMELINE_PAGE_COMPARISONS": 60,
+      "MAX_TOTAL_RENDER_PIXELS": 80000000,
+      "ORB_N_FEATURES": 500,
+      "ORB_RATIO_THRESH": 0.75,
+      "PROCESSING_TIMEOUT_S": 120,
+      "QUEUE_WAIT_S": 2.0,
+      "RANSAC_INLIER_RATIO_MIN": 0.3,
+      "RANSAC_MIN_INLIERS": 10,
+      "RANSAC_REPROJ_THRESH": 5.0,
+      "RENDERER_DIFFERENCE_THRESHOLD": 2.0,
+      "RENDER_DPI": 144,
+      "SHADOW_CHANGE_PCT_MIN": 0.5,
+      "THUMBNAIL_DPI": 96,
+      "WORKER_MEMORY_MB": 2048
+    },
+    "trust_roots_sha256": null,
+    "revocation_evidence_sha256": [],
+    "certificate_fetching": "disabled; operator-provided offline evidence only",
+    "pair_selection": "appearance/geometry ranking with page-pair round-robin allocation"
+  },
+  "static_content": {
+    "entries": [],
+    "objects_inspected": 12,
+    "complete": true,
+    "review_required": false,
+    "note": "Presence is not proof of malware. Inventory includes parsed object dictionaries, including potentially unreferenced objects; no actions are executed."
+  },
+  "revision_timeline": {
+    "transitions": [
+      {
+        "from_revision": 0,
+        "to_revision": 1,
+        "new_signature": false,
+        "page_count_before": 1,
+        "page_count_after": 1,
+        "pages": [
+          {
+            "page": 0,
+            "change": "unchanged",
+            "text_changes": [],
+            "changed_area_pct": 0.0,
+            "dimensions_changed": false
+          }
+        ],
+        "metadata_changed": true
+      },
+      {
+        "from_revision": 1,
+        "to_revision": 2,
+        "new_signature": true,
+        "page_count_before": 1,
+        "page_count_after": 1,
+        "pages": [
+          {
+            "page": 0,
+            "change": "unchanged",
+            "text_changes": [],
+            "changed_area_pct": 0.0,
+            "dimensions_changed": false
+          }
+        ],
+        "metadata_changed": false
+      }
+    ],
+    "complete": true,
+    "pages_compared": 2,
+    "revision_count": 3,
+    "discovery_method": "pyhanko_xref_chain",
+    "note": "Consecutive history comparison. A change later restored is still recorded. Added/removed pages are explicit; rendering differences do not prove malicious intent."
+  },
+  "renderer_comparison": {},
   "coverage": {
     "complete": true,
     "mode": "full",
@@ -202,7 +329,8 @@
     "candidates_analysed": 0,
     "pairs_available": 0,
     "pairs_analysed": 0,
-    "limitations": []
+    "limitations": [],
+    "pair_selection": "Ranked appearance/geometry; balanced page-pair allocation"
   },
   "page_results": [
     {
