@@ -1,89 +1,42 @@
-"""Page 6 — Reports and Audit."""
-
-from __future__ import annotations
-import streamlit as st
+"""Evidence exports and optional local audit custody."""
+import json
 import pandas as pd
+import streamlit as st
 import config
-from dashboard.components import inject_css, page_header, section_header, empty_state, download_button
-from core.audit_logger import verify_chain, get_records
+from dashboard.components import (page_header, card, section_header, feature_card, report_downloads, empty_state, navigation_button)
+from core.audit_logger import verify_chain,get_records,export_checkpoint
 
 
-def render() -> None:
-    inject_css()
-    page_header("Reports & Audit", "Download forensic reports and inspect the audit chain.")
-
-    result = st.session_state.get("pipeline_result")
-
-    # ── Report downloads ───────────────────────────────────────────────────
-    section_header("Forensic Reports")
-    if result is None:
-        empty_state("Run an analysis on the Document Analysis page to generate a report.")
+def render():
+    page_header('Reports & audit','Keep a reviewable record of the document, findings, measurements and analysis coverage.','EXPORT')
+    result=st.session_state.get('pipeline_result')
+    if result:
+        if result.parsed:
+            card(f'<div class="sg-eyebrow">CURRENT DOCUMENT</div><h3>{__import__("html").escape(result.parsed.file_name)}</h3><p>Analysed {result.analysis_ts} · {result.elapsed_sec:.2f}s processing time</p>')
+        section_header('Choose your export')
+        a,b=st.columns(2)
+        with a:feature_card('PDF','Forensic report','A readable summary of verification states, findings and limitations.','file')
+        with b:feature_card('JSON','Structured evidence','Document identity, measurements, per-page results and checked candidate pairs.','layers')
+        report_downloads(result,'reports')
+        from reporting.json_report import build_report
+        with st.expander('Preview structured evidence'):st.json(build_report(result))
     else:
-        from reporting.json_report import to_json
-        from reporting.pdf_report  import build_pdf_report
-        col1, col2 = st.columns(2)
-        with col1:
-            json_bytes = to_json(result).encode()
-            st.download_button(
-                "⬇ Download JSON Report",
-                data=json_bytes,
-                file_name="signguard_report.json",
-                mime="application/json",
-            )
-        with col2:
-            pdf_bytes = build_pdf_report(result)
-            st.download_button(
-                "⬇ Download PDF Report",
-                data=pdf_bytes,
-                file_name="signguard_report.pdf",
-                mime="application/pdf",
-            )
-
-        with st.expander("Preview JSON report"):
-            st.json(to_json(result))
-
-    st.markdown("---")
-
+        empty_state('Analyse a document to generate downloadable evidence and a forensic report.')
+        navigation_button('Start a document analysis →','Document analysis','reports_start',True)
+    section_header('Audit custody')
     if config.PUBLIC_DEMO:
-        st.info("Shared audit history is disabled for the public demo. Download your reports before leaving; hosted storage is temporary.")
+        st.info('Shared audit history is disabled for the public demo. Download your reports before leaving; hosted storage is temporary.')
         return
-
-    # ── Audit chain ────────────────────────────────────────────────────────
-    section_header("Tamper-Evident Audit Chain")
-
-    chain_ok, chain_msg = verify_chain()
-    if chain_ok:
-        st.success(f"✓ {chain_msg}")
-    else:
-        st.error(f"✗ {chain_msg}")
-
-    st.info(
-        "The audit chain uses SHA-256 hash linking: each record includes the hash of the "
-        "previous record. This provides tamper evidence for the log file itself. "
-        "Independent custody of the chain head is required for stronger assurance."
-    )
-
-    if chain_ok:
-        from core.audit_logger import export_checkpoint
-        import json
-        st.download_button("Export audit checkpoint (store independently)",
-            json.dumps(export_checkpoint(), indent=2), "audit_checkpoint.json", "application/json")
-    try:
-        records = get_records()
-    except ValueError as exc:
-        st.error(str(exc))
-        return
+    ok,message=verify_chain()
+    (st.success if ok else st.error)(message)
+    st.caption('Hash linking can reveal inconsistent records. Detecting a full rewrite or truncation requires an independently retained checkpoint.')
+    if ok:
+        st.download_button('Export independent audit checkpoint',json.dumps(export_checkpoint(),indent=2),'audit_checkpoint.json','application/json')
+    try:records=get_records()
+    except ValueError as exc:st.error(str(exc));return
     if records:
-        df = pd.DataFrame(records)
-        display_cols = ["event_id","timestamp","doc_hash","verdict","prev_hash","record_hash"]
-        display_cols = [c for c in display_cols if c in df.columns]
-
-        # Truncate hashes for readability
-        for col in ["prev_hash","record_hash","doc_hash"]:
-            if col in df.columns:
-                df[col] = df[col].str[:16] + "…"
-
-        st.dataframe(df[display_cols])
-        st.caption(f"{len(records)} audit record(s) on file.")
-    else:
-        empty_state("No audit records yet. Run an analysis to create the first entry.")
+        with st.expander(f'Inspect {len(records)} audit records'):
+            frame=pd.DataFrame(records)
+            for name in ('doc_hash','prev_hash','record_hash'):
+                if name in frame:frame[name]=frame[name].str[:20]+'…'
+            st.dataframe(frame,hide_index=True,width='stretch')
