@@ -1,6 +1,9 @@
 """Document intake and focused analysis results."""
 from html import escape
 import hashlib
+import json
+from pathlib import Path
+import config
 import streamlit as st
 from core.pipeline import run as run_pipeline
 from dashboard.components import (page_header, section_header, result_summary, metric_row, status_pill, finding_card, report_downloads, show_image, card, feature_card, svg_icon)
@@ -68,6 +71,20 @@ def render():
         uploaded=st.file_uploader('Choose a PDF document',type=['pdf'],help='PDF only. Maximum 50 MB. Encrypted and excessive rendering workloads are rejected.')
     with right:
         card('<div class="sg-eyebrow">BEFORE YOU UPLOAD</div><p>Use a document you are authorised to analyse. Public demo files are processed on the hosting server. Keep a copy of your exported report.</p>')
+    kit_root=Path(config.BASE_DIR)/'samples'/'upload-kit'
+    manifest=kit_root/'verified_results.json'
+    if manifest.exists():
+        with st.expander('Need a document? Download a verified sample',expanded=uploaded is None):
+            samples=json.loads(manifest.read_text())
+            sample=st.selectbox('Sample document',samples,format_func=lambda item:item['file']+' — '+item['title'],key='upload_sample_choice')
+            st.caption(sample['description'])
+            a,b=st.columns(2)
+            with a:
+                st.download_button('Download this PDF',(kit_root/sample['file']).read_bytes(),sample['file'],'application/pdf',key='download_sample_pdf',width='stretch')
+            with b:
+                archive=kit_root.parent/'signguard-upload-kit.zip'
+                if archive.exists():st.download_button('Download all 7 samples (ZIP)',archive.read_bytes(),archive.name,'application/zip',key='download_sample_zip',width='stretch')
+            st.caption('Download the PDF, then upload it above. Upload one numbered PDF at a time; extract the ZIP first. The expected outcomes are in START_HERE.txt inside the kit.')
     if uploaded is None:
         section_header('A clear view of document integrity')
         columns=st.columns(3)

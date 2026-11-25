@@ -1,0 +1,238 @@
+{
+  "report_type": "SignGuard Forensic Report",
+  "schema_version": "2.0",
+  "generated_at": "2026-11-25T16:41:22Z",
+  "analysis_ts": "2026-11-25T16:41:21Z",
+  "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
+  "document": {
+    "filename": "02_tampered_signed_bytes.pdf",
+    "sha256": "32ab4736bbeab50b9606d92fb5a39a7d4cfe1b0de2fc39e62fd287f45e19c764",
+    "size_bytes": 8689,
+    "page_count": 1,
+    "metadata": {
+      "title": "untitled",
+      "author": "anonymous",
+      "subject": "SIGNGUARD-INTEGRITY-CONTROL",
+      "creator": "anonymous",
+      "producer": "ReportLab PDF Library - (opensource); pyHanko 0.38.2",
+      "creation_date": "D:20261125164117+00'00'",
+      "mod_date": "D:20261125164117Z",
+      "format": "",
+      "pdf_version": ""
+    },
+    "encrypted": false,
+    "sig_fields": 0
+  },
+  "classification": {
+    "class": "Cryptographically Signed",
+    "crypto_sigs": 1,
+    "visual_candidates": 0,
+    "explanation": "The document contains 1 embedded cryptographic signature field(s).  Mathematical validity will be verified in Module 3.",
+    "completeness": "Full cryptographic and visual analysis applicable."
+  },
+  "cryptographic": {
+    "total_sigs": 1,
+    "total_discovered": 1,
+    "all_valid": false,
+    "pyhanko_used": true,
+    "summary": "[Signature1] integrity=FAIL | math=True | trust=SELF-SIGNED (untrusted) | modpolicy=COMPLIANT",
+    "signatures": [
+      {
+        "field": "Signature1",
+        "integrity_status": "FAIL",
+        "math_valid": true,
+        "trust_status": "SELF-SIGNED (untrusted)",
+        "modpolicy_status": "COMPLIANT",
+        "identity_status": "UNVERIFIED (untrusted cert)",
+        "completeness": "integrity | math | trust | modpolicy",
+        "modification_level": "NONE",
+        "revocation_status": "NOT CHECKED (offline)",
+        "timestamp_status": "NOT VALIDATED",
+        "digest_alg": "sha256",
+        "sig_alg": "unknown",
+        "signing_time": "2026-11-25 16:41:17+00:00",
+        "signed_attrs_ok": true,
+        "details": [
+          "INVALID",
+          "INTEGRITY FAILURE: signed bytes have been modified.",
+          "NOTE: Test/self-signed certificate \u2014 signer identity CANNOT be established from this certificate."
+        ],
+        "byte_range": {
+          "raw_values": [
+            0,
+            3095,
+            8233,
+            456
+          ],
+          "structurally_valid": true,
+          "covers_full_file": true,
+          "covers_signed_rev": true,
+          "notes": [
+            "Signature contents gap: bytes 3095\u20138233 (5138 bytes).",
+            "Signature covers the complete current document."
+          ]
+        },
+        "cert": {
+          "subject": "SignGuard Demo Signer [TEST \u2014 NOT TRUSTED]",
+          "issuer": "SignGuard Demo Signer [TEST \u2014 NOT TRUSTED]",
+          "serial": "171477686307882801511409803636177147174124918555",
+          "not_before": "2026-11-25 16:40:17+00:00",
+          "not_after": "2036-11-22 16:40:17+00:00",
+          "self_signed": true,
+          "is_test_cert": true,
+          "key_alg": "RSAPublicKey"
+        }
+      }
+    ]
+  },
+  "revision": {
+    "revision_count": 3,
+    "has_incremental": true,
+    "shadow_suspect": false,
+    "changed_area_pct": 0.0,
+    "text_diff": "",
+    "metadata_changed": false,
+    "discovery_method": "pyhanko_xref_chain",
+    "summary": "3 revision(s) discovered via pyhanko_xref_chain. 2 incremental update(s) present.",
+    "revisions": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 1485,
+        "is_signed": false,
+        "page_count": 1
+      },
+      {
+        "index": 1,
+        "start": 1485,
+        "end": 2579,
+        "is_signed": false,
+        "page_count": 1
+      },
+      {
+        "index": 2,
+        "start": 2579,
+        "end": 8689,
+        "is_signed": true,
+        "page_count": 1
+      }
+    ]
+  },
+  "localisation": {
+    "page": 0,
+    "candidates": [],
+    "note": "Confidence values are heuristic scores, not calibrated probabilities.",
+    "error": null
+  },
+  "ela": {
+    "quality_active": 75,
+    "amplification": 15,
+    "mean_residual": 0.082,
+    "max_residual": 36.0,
+    "std_residual": 0.94,
+    "high_pct": 0.0,
+    "finding": "Mean residual (0.1) is within a typical range for JPEG recompression at this quality setting. No strong ELA anomaly detected. Note: rendered PDF crops may not carry original JPEG compression history.",
+    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=0.1 | Q75: mean=0.1 | Q85: mean=0.1 | Q95: mean=0.0 \u2014 highest at Q65 (0.1).",
+    "multi_quality": {
+      "65": {
+        "mean": 0.104,
+        "max": 52.0,
+        "std": 1.221,
+        "high_pct": 0.0
+      },
+      "75": {
+        "mean": 0.082,
+        "max": 36.0,
+        "std": 0.94,
+        "high_pct": 0.0
+      },
+      "85": {
+        "mean": 0.053,
+        "max": 23.0,
+        "std": 0.603,
+        "high_pct": 0.0
+      },
+      "95": {
+        "mean": 0.018,
+        "max": 7.0,
+        "std": 0.211,
+        "high_pct": 0.0
+      }
+    },
+    "error": null
+  },
+  "orb_ransac": {},
+  "verdict": {
+    "verdict": "TAMPERING DETECTED",
+    "integrity_verdict": "INTEGRITY FAILURE",
+    "confidence_label": "High",
+    "explanation": "One or more cryptographic checks failed: signed bytes were altered or the public-key signature is invalid. Signed-byte integrity failure",
+    "completeness": "Modules completed: Cryptographic, Revision, Localisation, ELA | Pages analysed: 1/1 | Mode: full",
+    "findings": [
+      {
+        "code": "CRYPTO-001",
+        "severity": "CRITICAL",
+        "title": "Signed-byte integrity failure",
+        "description": "Signature field 'Signature1': the recorded digest of the signed bytes does not match the recorded value. The document has been modified after signing.",
+        "module": "Cryptographic Verification",
+        "measurements": "integrity_status=FAIL",
+        "page": null,
+        "limitation": "This is a definitive cryptographic finding."
+      }
+    ],
+    "module_scores": {
+      "Classification": "Cryptographically Signed",
+      "Cryptographic Verification": "FAIL",
+      "Revision Analysis": "3 revision(s) | no shadow | method=pyhanko_xref_chain",
+      "Signature Localisation": "0 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
+      "ELA": "mean=0.1 @ Q75 (normal)",
+      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=0.1 | Q75: mean=0.1 | Q85: mean=0.1 | Q95: mean=0.0 \u2014 highest at Q65 (0.1)."
+    }
+  },
+  "integrity_verdict": "INTEGRITY FAILURE",
+  "limitations": [
+    "Certificate for 'Signature1' is SELF-SIGNED (untrusted). Mathematical integrity may be valid but signer identity CANNOT be established from this certificate alone.",
+    "Shadow-attack detection compares rendered page images using one rendering engine. Attacks that produce identical renders are not detectable.",
+    "Legitimate incremental updates (annotations, additional sigs) may trigger the shadow-suspect flag; manual review distinguishes malicious from benign.",
+    "No visual signature candidates detected. The document may be unsigned, the signature may be very faint, or localisation may have missed it.",
+    "ELA applied to rendered PDF images may not reflect the original JPEG compression history of embedded content.",
+    "Results are based on automated analysis. Expert human review is required before use in any legal, compliance or operational context.",
+    "Synthetic evaluation does not establish real-world generalisation performance."
+  ],
+  "processing": {
+    "total_seconds": 1.151,
+    "stage_times": {
+      "analysis_total": 1.151
+    }
+  },
+  "coverage": {
+    "complete": true,
+    "mode": "full",
+    "pages_analysed": 1,
+    "page_count": 1,
+    "candidates_found": 0,
+    "candidates_analysed": 0,
+    "pairs_available": 0,
+    "pairs_analysed": 0,
+    "limitations": []
+  },
+  "page_results": [
+    {
+      "page": 0,
+      "candidate_count": 0,
+      "candidates": [],
+      "revision_changed_area_pct": 0.0,
+      "shadow_suspect": false,
+      "ela": [
+        {
+          "mean": 0.08150509744882584,
+          "high_pct": 0.0,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "candidate_pairs": [],
+  "audit_error": null,
+  "processing_error": null
+}

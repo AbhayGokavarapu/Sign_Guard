@@ -1,0 +1,100 @@
+[
+  {
+    "file": "01_signed_original.pdf",
+    "title": "Signed original",
+    "description": "A genuine test signature with intact signed bytes. The test certificate does not establish signer identity.",
+    "pages": 1,
+    "expected_verdict": "INCONCLUSIVE",
+    "observed_verdict": "INCONCLUSIVE",
+    "integrity": "NO TAMPERING DETECTED",
+    "finding_codes": [],
+    "sha256": "b70a982a5a9110817310e04f062547ee870edd07e7cb5146d2e2f71d2db6aca6",
+    "verified": true
+  },
+  {
+    "file": "02_tampered_signed_bytes.pdf",
+    "title": "Tampered signed bytes",
+    "description": "The original PDF with signed metadata changed. It looks identical to sample 01, but byte integrity must fail.",
+    "pages": 1,
+    "expected_verdict": "TAMPERING DETECTED",
+    "observed_verdict": "TAMPERING DETECTED",
+    "integrity": "INTEGRITY FAILURE",
+    "finding_codes": [
+      "CRYPTO-001"
+    ],
+    "sha256": "32ab4736bbeab50b9606d92fb5a39a7d4cfe1b0de2fc39e62fd287f45e19c764",
+    "verified": true
+  },
+  {
+    "file": "03_changed_after_signing.pdf",
+    "title": "Changed after signing",
+    "description": "The same signed original with a valid appended revision changing the displayed payment to $9,000. Signed bytes remain intact.",
+    "pages": 1,
+    "expected_verdict": "REVIEW REQUIRED",
+    "observed_verdict": "REVIEW REQUIRED",
+    "integrity": "NO TAMPERING DETECTED",
+    "finding_codes": [
+      "CRYPTO-003",
+      "CRYPTO-004",
+      "SHADOW-001",
+      "SHADOW-002"
+    ],
+    "sha256": "bde46676de1e0d684abd0c11e66576911a17965a56cbe8e07acaed733cca67ce",
+    "verified": true
+  },
+  {
+    "file": "04_duplicated_signature_images.pdf",
+    "title": "Duplicated signature images",
+    "description": "Two matching synthetic handwriting images. Geometric similarity warrants review; it does not prove theft.",
+    "pages": 1,
+    "expected_verdict": "REVIEW REQUIRED",
+    "observed_verdict": "REVIEW REQUIRED",
+    "integrity": "NOT APPLICABLE",
+    "finding_codes": [
+      "ORB-001"
+    ],
+    "sha256": "ec3beabded936194eeb7f50e2f0f13393503cff18b593c461249cfc777788753",
+    "verified": true
+  },
+  {
+    "file": "05_unsigned_document.pdf",
+    "title": "Unsigned document",
+    "description": "An ordinary unsigned PDF. Absence of a signature is not evidence of forgery.",
+    "pages": 1,
+    "expected_verdict": "INCONCLUSIVE",
+    "observed_verdict": "INCONCLUSIVE",
+    "integrity": "NOT APPLICABLE",
+    "finding_codes": [],
+    "sha256": "07cf4e41f3c3b66e8642a017ac7edafb8434330b3311a7eb4a7c25f834870b14",
+    "verified": true
+  },
+  {
+    "file": "06_change_on_last_page.pdf",
+    "title": "Change on the last page",
+    "description": "A three-page signed PDF with a post-signing content replacement on page 3.",
+    "pages": 3,
+    "expected_verdict": "REVIEW REQUIRED",
+    "observed_verdict": "REVIEW REQUIRED",
+    "integrity": "NO TAMPERING DETECTED",
+    "finding_codes": [
+      "CRYPTO-003",
+      "CRYPTO-004",
+      "SHADOW-001",
+      "SHADOW-002"
+    ],
+    "sha256": "ee4103084bcff47089968b6b8a0531a861d3b13e3de9dd15e5af5696c70ff15a",
+    "verified": true
+  },
+  {
+    "file": "07_signature_on_last_page.pdf",
+    "title": "Visual signature on the last page",
+    "description": "A three-page unsigned agreement with a handwritten-image candidate only on its final page.",
+    "pages": 3,
+    "expected_verdict": "INCONCLUSIVE",
+    "observed_verdict": "INCONCLUSIVE",
+    "integrity": "NOT APPLICABLE",
+    "finding_codes": [],
+    "sha256": "6d59f78b28e8752f5d3f4bb03a98a33acee333f4382a731acf59ae1d888f650e",
+    "verified": true
+  }
+]

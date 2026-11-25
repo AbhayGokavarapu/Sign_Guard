@@ -1,0 +1,177 @@
+{
+  "report_type": "SignGuard Forensic Report",
+  "schema_version": "2.0",
+  "generated_at": "2026-11-25T16:41:26Z",
+  "analysis_ts": "2026-11-25T16:41:25Z",
+  "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
+  "document": {
+    "filename": "05_unsigned_document.pdf",
+    "sha256": "07cf4e41f3c3b66e8642a017ac7edafb8434330b3311a7eb4a7c25f834870b14",
+    "size_bytes": 2013,
+    "page_count": 1,
+    "metadata": {
+      "title": "untitled",
+      "author": "anonymous",
+      "subject": "unspecified",
+      "creator": "anonymous",
+      "producer": "ReportLab PDF Library - (opensource)",
+      "creation_date": "D:20261125164118+00'00'",
+      "mod_date": "D:20261125164118+00'00'",
+      "format": "",
+      "pdf_version": ""
+    },
+    "encrypted": false,
+    "sig_fields": 0
+  },
+  "classification": {
+    "class": "Unsigned",
+    "crypto_sigs": 0,
+    "visual_candidates": 0,
+    "explanation": "No cryptographic signature fields and no visual signature candidates were detected.  The document appears unsigned.  Absence of a signature does not establish that the content is authentic.",
+    "completeness": "Limited analysis applicable to unsigned documents."
+  },
+  "cryptographic": {},
+  "revision": {
+    "revision_count": 1,
+    "has_incremental": false,
+    "shadow_suspect": false,
+    "changed_area_pct": 0.0,
+    "text_diff": "",
+    "metadata_changed": false,
+    "discovery_method": "pyhanko_xref_chain",
+    "summary": "1 revision(s) discovered via pyhanko_xref_chain. Single revision \u2014 no incremental updates.",
+    "revisions": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 2013,
+        "is_signed": false,
+        "page_count": 1
+      }
+    ]
+  },
+  "localisation": {
+    "page": 0,
+    "candidates": [
+      {
+        "page": 0,
+        "bbox": [
+          "372",
+          "1413",
+          "447",
+          "44"
+        ],
+        "heuristic_score": 0.965
+      }
+    ],
+    "note": "Confidence values are heuristic scores, not calibrated probabilities.",
+    "error": null
+  },
+  "ela": {
+    "quality_active": 75,
+    "amplification": 15,
+    "mean_residual": 2.314,
+    "max_residual": 35.0,
+    "std_residual": 3.137,
+    "high_pct": 0.0,
+    "finding": "Mean residual (2.3) is within a typical range for JPEG recompression at this quality setting. No strong ELA anomaly detected. Note: rendered PDF crops may not carry original JPEG compression history.",
+    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=2.8 | Q75: mean=2.3 | Q85: mean=1.5 | Q95: mean=0.9 \u2014 highest at Q65 (2.8).",
+    "multi_quality": {
+      "65": {
+        "mean": 2.752,
+        "max": 40.0,
+        "std": 3.657,
+        "high_pct": 0.0
+      },
+      "75": {
+        "mean": 2.314,
+        "max": 35.0,
+        "std": 3.137,
+        "high_pct": 0.0
+      },
+      "85": {
+        "mean": 1.521,
+        "max": 22.333,
+        "std": 2.355,
+        "high_pct": 0.0
+      },
+      "95": {
+        "mean": 0.935,
+        "max": 9.333,
+        "std": 1.197,
+        "high_pct": 0.0
+      }
+    },
+    "error": null
+  },
+  "orb_ransac": {},
+  "verdict": {
+    "verdict": "INCONCLUSIVE",
+    "integrity_verdict": "NOT APPLICABLE",
+    "confidence_label": "Low",
+    "explanation": "Insufficient or conflicting evidence across the analysed modules. The document may not contain enough forensic signals for a definitive verdict.",
+    "completeness": "Modules completed: Revision, Localisation, ELA | Pages analysed: 1/1 | Mode: full",
+    "findings": [],
+    "module_scores": {
+      "Classification": "Unsigned",
+      "Revision Analysis": "1 revision(s) | no shadow | method=pyhanko_xref_chain",
+      "Signature Localisation": "1 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
+      "ELA": "mean=2.3 @ Q75 (normal)",
+      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=2.8 | Q75: mean=2.3 | Q85: mean=1.5 | Q95: mean=0.9 \u2014 highest at Q65 (2.8)."
+    }
+  },
+  "integrity_verdict": "NOT APPLICABLE",
+  "limitations": [
+    "Shadow-attack detection compares rendered page images using one rendering engine. Attacks that produce identical renders are not detectable.",
+    "Legitimate incremental updates (annotations, additional sigs) may trigger the shadow-suspect flag; manual review distinguishes malicious from benign.",
+    "ELA applied to rendered PDF images may not reflect the original JPEG compression history of embedded content.",
+    "Results are based on automated analysis. Expert human review is required before use in any legal, compliance or operational context.",
+    "Synthetic evaluation does not establish real-world generalisation performance."
+  ],
+  "processing": {
+    "total_seconds": 0.419,
+    "stage_times": {
+      "analysis_total": 0.419
+    }
+  },
+  "coverage": {
+    "complete": true,
+    "mode": "full",
+    "pages_analysed": 1,
+    "page_count": 1,
+    "candidates_found": 1,
+    "candidates_analysed": 1,
+    "pairs_available": 0,
+    "pairs_analysed": 0,
+    "limitations": []
+  },
+  "page_results": [
+    {
+      "page": 0,
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "bbox": [
+            372,
+            1413,
+            447,
+            44
+          ],
+          "heuristic_score": 0.9648760330578512
+        }
+      ],
+      "revision_changed_area_pct": 0.0,
+      "shadow_suspect": false,
+      "ela": [
+        {
+          "mean": 2.3140296936035156,
+          "high_pct": 0.0,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "candidate_pairs": [],
+  "audit_error": null,
+  "processing_error": null
+}

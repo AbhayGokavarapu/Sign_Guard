@@ -1,0 +1,60 @@
+SIGNGUARD - READY-TO-UPLOAD SAMPLE KIT
+
+All documents are synthetic and safe to use for this demonstration.
+
+HOW TO USE
+1. Extract signguard-upload-kit.zip on your computer.
+2. Open SignGuard and select Document analysis.
+3. Upload ONE numbered PDF, then click Run document analysis.
+4. Compare the outcome with the list below.
+5. Open Digital signatures, Document revisions and Coverage for the explanation.
+6. Download your PDF report or JSON evidence after the analysis.
+
+START WITH FILES 01, 02, AND 03 IN THAT ORDER.
+
+EXPECTED AND LOCALLY OBSERVED OUTCOMES
+
+01_signed_original.pdf
+  Result: INCONCLUSIVE
+  Integrity: NO TAMPERING DETECTED
+  A genuine test signature with intact signed bytes. The test certificate does not establish signer identity.
+
+02_tampered_signed_bytes.pdf
+  Result: TAMPERING DETECTED
+  Integrity: INTEGRITY FAILURE
+  The original PDF with signed metadata changed. It looks identical to sample 01, but byte integrity must fail.
+
+03_changed_after_signing.pdf
+  Result: REVIEW REQUIRED
+  Integrity: NO TAMPERING DETECTED
+  The same signed original with a valid appended revision changing the displayed payment to $9,000. Signed bytes remain intact.
+
+04_duplicated_signature_images.pdf
+  Result: REVIEW REQUIRED
+  Integrity: NOT APPLICABLE
+  Two matching synthetic handwriting images. Geometric similarity warrants review; it does not prove theft.
+
+05_unsigned_document.pdf
+  Result: INCONCLUSIVE
+  Integrity: NOT APPLICABLE
+  An ordinary unsigned PDF. Absence of a signature is not evidence of forgery.
+
+06_change_on_last_page.pdf
+  Result: REVIEW REQUIRED
+  Integrity: NO TAMPERING DETECTED
+  A three-page signed PDF with a post-signing content replacement on page 3.
+
+07_signature_on_last_page.pdf
+  Result: INCONCLUSIVE
+  Integrity: NOT APPLICABLE
+  A three-page unsigned agreement with a handwritten-image candidate only on its final page.
+
+IMPORTANT INTERPRETATION
+- INCONCLUSIVE does not mean forged. An intact test signature cannot certify a real person's identity.
+- Samples 01 and 02 look the same. Signed-byte tampering does not need a visible page difference.
+- Sample 03 keeps the original signature's bytes intact but changes visible content in a later revision.
+- REVIEW REQUIRED is an investigation alert, not proof of fraud.
+- Samples 06 and 07 demonstrate analysis beyond the first page.
+- Upload the numbered source PDFs, not a generated forensic report or the ZIP archive.
+- verification/ contains engine reports from the local validation run; verified_results.csv/JSON contains the comparison.
+- These checks used the repository's current engine. The hosted site's results were not independently verified because its URL is blocked from the workspace.

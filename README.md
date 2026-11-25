@@ -98,3 +98,9 @@ See `docs/THREAT_MODEL.md` and `docs/RESEARCH_COMPARISON.md` for assumptions and
 ## Publish on Streamlit Community Cloud
 
 Use repository `AbhayGokavarapu/Sign_Guard`, branch `streamlit-deploy`, entry point `streamlit_app.py`, and Python **3.12** in Advanced settings. See `docs/DEPLOYMENT.md`. The public entry point disables shared audit persistence/history and benchmark regeneration.
+
+## Ready-to-upload sample documents
+
+Open Document analysis → Need a document? Download a verified sample. Download one PDF or the complete seven-file ZIP, then upload a numbered PDF through the input above. The kit is also in `samples/signguard-upload-kit.zip`. `START_HERE.txt` explains each case, and `verified_results.csv`/JSON records observed outcomes. Detailed local engine reports are in the kit's `verification/` folder.
+
+Regenerate and verify with `python -m simulation.build_upload_kit`. The generator asserts expected verdicts and key findings and checks that the original/tampered pair renders identically.

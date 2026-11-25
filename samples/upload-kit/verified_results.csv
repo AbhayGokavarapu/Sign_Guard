@@ -1,0 +1,8 @@
+file,pages,expected_verdict,observed_verdict,integrity,finding_codes,verified
+01_signed_original.pdf,1,INCONCLUSIVE,INCONCLUSIVE,NO TAMPERING DETECTED,[],True
+02_tampered_signed_bytes.pdf,1,TAMPERING DETECTED,TAMPERING DETECTED,INTEGRITY FAILURE,['CRYPTO-001'],True
+03_changed_after_signing.pdf,1,REVIEW REQUIRED,REVIEW REQUIRED,NO TAMPERING DETECTED,"['CRYPTO-003', 'CRYPTO-004', 'SHADOW-001', 'SHADOW-002']",True
+04_duplicated_signature_images.pdf,1,REVIEW REQUIRED,REVIEW REQUIRED,NOT APPLICABLE,['ORB-001'],True
+05_unsigned_document.pdf,1,INCONCLUSIVE,INCONCLUSIVE,NOT APPLICABLE,[],True
+06_change_on_last_page.pdf,3,REVIEW REQUIRED,REVIEW REQUIRED,NO TAMPERING DETECTED,"['CRYPTO-003', 'CRYPTO-004', 'SHADOW-001', 'SHADOW-002']",True
+07_signature_on_last_page.pdf,3,INCONCLUSIVE,INCONCLUSIVE,NOT APPLICABLE,[],True
