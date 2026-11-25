@@ -1,0 +1,58 @@
+
+=== SignGuard v2 Integration Tests ===
+
+--- Unsigned ---
+  PASS  validation
+  PASS  parsed
+  PASS  verdict not CLEAN
+  PASS  integrity N/A
+
+--- Visual Only ---
+  PASS  parsed
+  PASS  localization
+
+--- Shadow ---
+  PASS  revision analyzed
+  PASS  incremental updates
+  PASS  discovery method recorded
+
+--- Genuinely Signed (pyHanko) ---
+  PASS  signed PDF generated
+  PASS  pipeline completes
+  PASS  integrity verdict set
+  PASS  pyHanko used
+  PASS  integrity status: PASS
+
+--- Byte Tampering ---
+  PASS  hashes differ
+  PASS  tampered pipeline runs
+
+--- ELA multi-quality ---
+  PASS  ela produced
+  PASS  multi-quality sweep
+  PASS  sweep summary present
+
+--- ORB / RANSAC ---
+  PASS  orb present
+  PASS  ransac computed
+
+--- Reports ---
+  PASS  json has verdict
+  PASS  json schema 2.0
+  PASS  json disclaimer
+  PASS  json integrity_verdict
+  PASS  pdf generated
+
+--- Audit chain ---
+  PASS  chain intact
+
+--- Scenario evidence ---
+  PASS  Scenario A: evidence saved (verdict=REVIEW REQUIRED)
+  PASS  Scenario B: evidence saved (verdict=REVIEW REQUIRED)
+  PASS  Scenario C: evidence saved (verdict=REVIEW REQUIRED)
+  PASS  Scenario D: evidence saved (verdict=REVIEW REQUIRED)
+  PASS  Scenario E: evidence saved (verdict=REVIEW REQUIRED)
+  PASS  Scenario F: evidence saved (verdict=REVIEW REQUIRED)
+
+=== Results: 33 passed, 0 failed ===
+

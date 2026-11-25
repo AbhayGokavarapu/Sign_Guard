@@ -1,0 +1,28 @@
+
+=== SignGuard Integration Tests ===
+
+--- Pipeline: Unsigned ---
+  PASS  validation passes
+  PASS  parsed without error
+  PASS  classification not None
+  PASS  fusion not None
+  FAIL  verdict is inconclusive/clean  (got: REVIEW REQUIRED)
+
+--- Pipeline: Visual Only ---
+  PASS  parsed
+  PASS  localization done
+  PASS  has images
+     (candidates: 2)
+
+--- Pipeline: Shadow ---
+Traceback (most recent call last):
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\run_tests_quick.py", line 49, in <module>
+    r3 = run(build_shadow_pdf("AMOUNT: $1,000", "AMOUNT: $9,000"), "shadow.pdf")
+             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\simulation\sample_generator.py", line 282, in build_shadow_pdf
+    rev1 = _make_rev(original_amount, "REVISION 1 — SIGNED AMOUNT",   (30, 41, 59))
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\simulation\sample_generator.py", line 233, in _make_rev
+    ("Tax (10%):",   f"${int(amount.replace('$','').replace(',','')) // 10:,}"),
+                         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'AMOUNT: 9000'

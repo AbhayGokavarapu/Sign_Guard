@@ -1,0 +1,168 @@
+{
+  "report_type": "SignGuard Forensic Report",
+  "schema_version": "2.0",
+  "generated_at": "2026-11-25T13:27:51Z",
+  "analysis_ts": "2026-11-25T13:27:51Z",
+  "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
+  "document": {
+    "filename": "scenario_C.pdf",
+    "sha256": "62305b307fff4e260ac1ae6dbaf37e26f76d132c2ea9212bf6f7c1a3950be4e6",
+    "size_bytes": 4857,
+    "page_count": 1,
+    "metadata": {
+      "title": "untitled",
+      "author": "anonymous",
+      "subject": "unspecified",
+      "creator": "anonymous",
+      "producer": "ReportLab PDF Library - (opensource)",
+      "creation_date": "D:20261125185751+05'00'",
+      "mod_date": "D:20261125185751+05'00'",
+      "format": "",
+      "pdf_version": ""
+    },
+    "encrypted": false,
+    "sig_fields": 0
+  },
+  "classification": {
+    "class": "Unsigned",
+    "crypto_sigs": 0,
+    "visual_candidates": 0,
+    "explanation": "No cryptographic signature fields and no visual signature candidates were detected.  The document appears unsigned.  Absence of a signature does not establish that the content is authentic.",
+    "completeness": "Limited analysis applicable to unsigned documents."
+  },
+  "cryptographic": {},
+  "revision": {
+    "revision_count": 3,
+    "has_incremental": true,
+    "shadow_suspect": false,
+    "changed_area_pct": 0.0,
+    "text_diff": "",
+    "metadata_changed": false,
+    "discovery_method": "eof_fallback",
+    "summary": "3 revision(s) discovered via eof_fallback. 2 incremental update(s) present.",
+    "revisions": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 2423,
+        "is_signed": false,
+        "page_count": 0
+      },
+      {
+        "index": 1,
+        "start": 2423,
+        "end": 2429,
+        "is_signed": false,
+        "page_count": 0
+      },
+      {
+        "index": 2,
+        "start": 2429,
+        "end": 4857,
+        "is_signed": false,
+        "page_count": 0
+      }
+    ]
+  },
+  "localisation": {
+    "page": 0,
+    "candidates": [
+      {
+        "page": 0,
+        "bbox": [
+          323,
+          707,
+          545,
+          44
+        ],
+        "heuristic_score": 1.0
+      }
+    ],
+    "note": "Confidence values are heuristic scores, not calibrated probabilities.",
+    "error": null
+  },
+  "ela": {
+    "quality_active": 75,
+    "amplification": 15,
+    "mean_residual": 4.4,
+    "max_residual": 51.0,
+    "std_residual": 6.088,
+    "high_pct": 31.5,
+    "finding": "31.5% of pixels show high amplified residual energy. Localised high-residual regions may warrant investigation but are not standalone proof of manipulation.",
+    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=5.3 | Q75: mean=4.4 | Q85: mean=3.7 | Q95: mean=3.1 \u2014 highest at Q65 (5.3).",
+    "multi_quality": {
+      "65": {
+        "mean": 5.275,
+        "max": 53.333,
+        "std": 6.557,
+        "high_pct": 36.63
+      },
+      "75": {
+        "mean": 4.4,
+        "max": 51.0,
+        "std": 6.088,
+        "high_pct": 31.5
+      },
+      "85": {
+        "mean": 3.676,
+        "max": 45.0,
+        "std": 5.317,
+        "high_pct": 28.89
+      },
+      "95": {
+        "mean": 3.125,
+        "max": 41.667,
+        "std": 4.81,
+        "high_pct": 25.05
+      }
+    },
+    "error": null
+  },
+  "orb_ransac": {},
+  "verdict": {
+    "verdict": "REVIEW REQUIRED",
+    "integrity_verdict": "NOT APPLICABLE",
+    "confidence_label": "Low",
+    "explanation": "Supporting forensic indicators (ELA or ORB/RANSAC) suggest possible manipulation, but are insufficient for a definitive conclusion. Manual expert review is recommended.",
+    "completeness": "Modules completed: Revision, Localisation, ELA",
+    "findings": [
+      {
+        "code": "ELA-001",
+        "severity": "MEDIUM",
+        "title": "Elevated ELA residual",
+        "description": "Mean residual: 4.4 | High-energy pixels: 31.5% | Quality: 75.",
+        "module": "ELA",
+        "measurements": "mean=4.40 | max=51.00 | std=6.09",
+        "page": null,
+        "limitation": "ELA elevated residuals can be caused by high-contrast edges, fine textures, gradients or printed text \u2014 not only manipulation. ELA is a supporting indicator, not proof of forgery."
+      }
+    ],
+    "module_scores": {
+      "Classification": "Unsigned",
+      "Revision Analysis": "3 revision(s) | no shadow | method=eof_fallback",
+      "Signature Localisation": "1 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
+      "ELA": "mean=4.4 @ Q75 (elevated)",
+      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=5.3 | Q75: mean=4.4 | Q85: mean=3.7 | Q95: mean=3.1 \u2014 highest at Q65 (5.3)."
+    }
+  },
+  "integrity_verdict": "NOT APPLICABLE",
+  "limitations": [
+    "Shadow-attack detection compares rendered page images using one rendering engine. Attacks that produce identical renders are not detectable.",
+    "Legitimate incremental updates (annotations, additional sigs) may trigger the shadow-suspect flag; manual review distinguishes malicious from benign.",
+    "Primary revision discovery failed; used eof_fallback. Results may be less reliable for PDFs with embedded binary streams.",
+    "ELA applied to rendered PDF images may not reflect the original JPEG compression history of embedded content.",
+    "Results are based on automated analysis. Expert human review is required before use in any legal, compliance or operational context.",
+    "Synthetic evaluation does not establish real-world generalisation performance."
+  ],
+  "processing": {
+    "total_seconds": 0.2,
+    "stage_times": {
+      "parse": 0.013,
+      "classify": 0.001,
+      "revision": 0.02,
+      "localise": 0.123,
+      "ela": 0.023,
+      "fusion": 0.0
+    }
+  }
+}

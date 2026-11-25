@@ -1,0 +1,188 @@
+{
+  "report_type": "SignGuard Forensic Report",
+  "schema_version": "2.0",
+  "generated_at": "2026-11-25T13:27:51Z",
+  "analysis_ts": "2026-11-25T13:27:51Z",
+  "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
+  "document": {
+    "filename": "scenario_D.pdf",
+    "sha256": "3ef2dba13b8e4dd6bb0c3ed1e68a264e12ce34eed419340a09c0bd5c39c6337b",
+    "size_bytes": 3636,
+    "page_count": 1,
+    "metadata": {
+      "title": "untitled",
+      "author": "anonymous",
+      "subject": "unspecified",
+      "creator": "anonymous",
+      "producer": "ReportLab PDF Library - (opensource)",
+      "creation_date": "D:20261125185751+05'00'",
+      "mod_date": "D:20261125185751+05'00'",
+      "format": "",
+      "pdf_version": ""
+    },
+    "encrypted": false,
+    "sig_fields": 0
+  },
+  "classification": {
+    "class": "Visual Signature Candidate",
+    "crypto_sigs": 0,
+    "visual_candidates": 1,
+    "explanation": "No cryptographic signature fields found, but 1 region(s) resemble handwritten or stamped signatures.  Only image-forensic checks are applicable.",
+    "completeness": "Visual forensic analysis applicable; cryptographic checks not applicable."
+  },
+  "cryptographic": {},
+  "revision": {
+    "revision_count": 1,
+    "has_incremental": false,
+    "shadow_suspect": false,
+    "changed_area_pct": 0.0,
+    "text_diff": "",
+    "metadata_changed": false,
+    "discovery_method": "eof_fallback",
+    "summary": "1 revision(s) discovered via eof_fallback. Single revision \u2014 no incremental updates.",
+    "revisions": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 3636,
+        "is_signed": false,
+        "page_count": 0
+      }
+    ]
+  },
+  "localisation": {
+    "page": 0,
+    "candidates": [
+      {
+        "page": 0,
+        "bbox": [
+          88,
+          404,
+          357,
+          59
+        ],
+        "heuristic_score": 0.487
+      },
+      {
+        "page": 0,
+        "bbox": [
+          598,
+          404,
+          357,
+          59
+        ],
+        "heuristic_score": 0.488
+      },
+      {
+        "page": 0,
+        "bbox": [
+          233,
+          722,
+          726,
+          43
+        ],
+        "heuristic_score": 1.0
+      }
+    ],
+    "note": "Confidence values are heuristic scores, not calibrated probabilities.",
+    "error": null
+  },
+  "ela": {
+    "quality_active": 75,
+    "amplification": 15,
+    "mean_residual": 2.215,
+    "max_residual": 32.0,
+    "std_residual": 3.769,
+    "high_pct": 22.0,
+    "finding": "22.0% of pixels show high amplified residual energy. Localised high-residual regions may warrant investigation but are not standalone proof of manipulation.",
+    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=2.6 | Q75: mean=2.2 | Q85: mean=1.7 | Q95: mean=1.0 \u2014 highest at Q65 (2.6).",
+    "multi_quality": {
+      "65": {
+        "mean": 2.628,
+        "max": 37.0,
+        "std": 4.523,
+        "high_pct": 23.49
+      },
+      "75": {
+        "mean": 2.215,
+        "max": 32.0,
+        "std": 3.769,
+        "high_pct": 22.0
+      },
+      "85": {
+        "mean": 1.729,
+        "max": 26.667,
+        "std": 2.903,
+        "high_pct": 18.98
+      },
+      "95": {
+        "mean": 0.995,
+        "max": 12.333,
+        "std": 1.714,
+        "high_pct": 10.3
+      }
+    },
+    "error": null
+  },
+  "orb_ransac": {
+    "n_kp_a": 0,
+    "n_kp_b": 0,
+    "raw_matches": 0,
+    "filtered": 0,
+    "ransac_inliers": 0,
+    "ransac_outliers": 0,
+    "inlier_ratio": 0.0,
+    "geometric_ok": false,
+    "spatial_coverage": 0.0,
+    "summary": "ORB step failed: Insufficient keypoints for matching."
+  },
+  "verdict": {
+    "verdict": "REVIEW REQUIRED",
+    "integrity_verdict": "NOT APPLICABLE",
+    "confidence_label": "Low",
+    "explanation": "Supporting forensic indicators (ELA or ORB/RANSAC) suggest possible manipulation, but are insufficient for a definitive conclusion. Manual expert review is recommended.",
+    "completeness": "Modules completed: Revision, Localisation, ELA, ORB/RANSAC",
+    "findings": [
+      {
+        "code": "ELA-001",
+        "severity": "MEDIUM",
+        "title": "Elevated ELA residual",
+        "description": "Mean residual: 2.2 | High-energy pixels: 22.0% | Quality: 75.",
+        "module": "ELA",
+        "measurements": "mean=2.21 | max=32.00 | std=3.77",
+        "page": null,
+        "limitation": "ELA elevated residuals can be caused by high-contrast edges, fine textures, gradients or printed text \u2014 not only manipulation. ELA is a supporting indicator, not proof of forgery."
+      }
+    ],
+    "module_scores": {
+      "Classification": "Visual Signature Candidate",
+      "Revision Analysis": "1 revision(s) | no shadow | method=eof_fallback",
+      "Signature Localisation": "3 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
+      "ELA": "mean=2.2 @ Q75 (elevated)",
+      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=2.6 | Q75: mean=2.2 | Q85: mean=1.7 | Q95: mean=1.0 \u2014 highest at Q65 (2.6).",
+      "ORB/RANSAC": "inliers=0 | ratio=0% | geometric_ok=False"
+    }
+  },
+  "integrity_verdict": "NOT APPLICABLE",
+  "limitations": [
+    "Shadow-attack detection compares rendered page images using one rendering engine. Attacks that produce identical renders are not detectable.",
+    "Legitimate incremental updates (annotations, additional sigs) may trigger the shadow-suspect flag; manual review distinguishes malicious from benign.",
+    "Primary revision discovery failed; used eof_fallback. Results may be less reliable for PDFs with embedded binary streams.",
+    "ELA applied to rendered PDF images may not reflect the original JPEG compression history of embedded content.",
+    "Results are based on automated analysis. Expert human review is required before use in any legal, compliance or operational context.",
+    "Synthetic evaluation does not establish real-world generalisation performance."
+  ],
+  "processing": {
+    "total_seconds": 0.219,
+    "stage_times": {
+      "parse": 0.011,
+      "classify": 0.001,
+      "revision": 0.018,
+      "localise": 0.139,
+      "ela": 0.025,
+      "orb": 0.003,
+      "ransac": 0.0,
+      "fusion": 0.0
+    }
+  }
+}

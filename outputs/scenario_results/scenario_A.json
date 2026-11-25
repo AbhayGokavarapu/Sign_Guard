@@ -1,0 +1,178 @@
+{
+  "report_type": "SignGuard Forensic Report",
+  "schema_version": "2.0",
+  "generated_at": "2026-11-25T13:27:50Z",
+  "analysis_ts": "2026-11-25T13:27:50Z",
+  "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
+  "document": {
+    "filename": "scenario_A.pdf",
+    "sha256": "f88ed54fc6b8e114ca1b292f33b8126e83644876cf2b265c5756e77c10a93991",
+    "size_bytes": 4193,
+    "page_count": 1,
+    "metadata": {
+      "title": "untitled",
+      "author": "anonymous",
+      "subject": "unspecified",
+      "creator": "anonymous",
+      "producer": "ReportLab PDF Library - (opensource)",
+      "creation_date": "D:20261125185750+05'00'",
+      "mod_date": "D:20261125185750+05'00'",
+      "format": "",
+      "pdf_version": ""
+    },
+    "encrypted": false,
+    "sig_fields": 0
+  },
+  "classification": {
+    "class": "Visual Signature Candidate",
+    "crypto_sigs": 0,
+    "visual_candidates": 1,
+    "explanation": "No cryptographic signature fields found, but 1 region(s) resemble handwritten or stamped signatures.  Only image-forensic checks are applicable.",
+    "completeness": "Visual forensic analysis applicable; cryptographic checks not applicable."
+  },
+  "cryptographic": {},
+  "revision": {
+    "revision_count": 1,
+    "has_incremental": false,
+    "shadow_suspect": false,
+    "changed_area_pct": 0.0,
+    "text_diff": "",
+    "metadata_changed": false,
+    "discovery_method": "eof_fallback",
+    "summary": "1 revision(s) discovered via eof_fallback. Single revision \u2014 no incremental updates.",
+    "revisions": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 4193,
+        "is_signed": false,
+        "page_count": 0
+      }
+    ]
+  },
+  "localisation": {
+    "page": 0,
+    "candidates": [
+      {
+        "page": 0,
+        "bbox": [
+          116,
+          544,
+          370,
+          74
+        ],
+        "heuristic_score": 0.489
+      },
+      {
+        "page": 0,
+        "bbox": [
+          387,
+          642,
+          418,
+          44
+        ],
+        "heuristic_score": 0.966
+      }
+    ],
+    "note": "Confidence values are heuristic scores, not calibrated probabilities.",
+    "error": null
+  },
+  "ela": {
+    "quality_active": 75,
+    "amplification": 15,
+    "mean_residual": 2.263,
+    "max_residual": 33.0,
+    "std_residual": 3.865,
+    "high_pct": 22.01,
+    "finding": "22.0% of pixels show high amplified residual energy. Localised high-residual regions may warrant investigation but are not standalone proof of manipulation.",
+    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=2.7 | Q75: mean=2.3 | Q85: mean=1.7 | Q95: mean=1.0 \u2014 highest at Q65 (2.7).",
+    "multi_quality": {
+      "65": {
+        "mean": 2.658,
+        "max": 38.667,
+        "std": 4.606,
+        "high_pct": 23.41
+      },
+      "75": {
+        "mean": 2.263,
+        "max": 33.0,
+        "std": 3.865,
+        "high_pct": 22.01
+      },
+      "85": {
+        "mean": 1.748,
+        "max": 20.333,
+        "std": 2.914,
+        "high_pct": 19.11
+      },
+      "95": {
+        "mean": 0.994,
+        "max": 15.333,
+        "std": 1.727,
+        "high_pct": 9.9
+      }
+    },
+    "error": null
+  },
+  "orb_ransac": {
+    "n_kp_a": 71,
+    "n_kp_b": 0,
+    "raw_matches": 0,
+    "filtered": 0,
+    "ransac_inliers": 0,
+    "ransac_outliers": 0,
+    "inlier_ratio": 0.0,
+    "geometric_ok": false,
+    "spatial_coverage": 0.0,
+    "summary": "ORB step failed: Insufficient keypoints for matching."
+  },
+  "verdict": {
+    "verdict": "REVIEW REQUIRED",
+    "integrity_verdict": "NOT APPLICABLE",
+    "confidence_label": "Low",
+    "explanation": "Supporting forensic indicators (ELA or ORB/RANSAC) suggest possible manipulation, but are insufficient for a definitive conclusion. Manual expert review is recommended.",
+    "completeness": "Modules completed: Revision, Localisation, ELA, ORB/RANSAC",
+    "findings": [
+      {
+        "code": "ELA-001",
+        "severity": "MEDIUM",
+        "title": "Elevated ELA residual",
+        "description": "Mean residual: 2.3 | High-energy pixels: 22.0% | Quality: 75.",
+        "module": "ELA",
+        "measurements": "mean=2.26 | max=33.00 | std=3.87",
+        "page": null,
+        "limitation": "ELA elevated residuals can be caused by high-contrast edges, fine textures, gradients or printed text \u2014 not only manipulation. ELA is a supporting indicator, not proof of forgery."
+      }
+    ],
+    "module_scores": {
+      "Classification": "Visual Signature Candidate",
+      "Revision Analysis": "1 revision(s) | no shadow | method=eof_fallback",
+      "Signature Localisation": "2 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
+      "ELA": "mean=2.3 @ Q75 (elevated)",
+      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=2.7 | Q75: mean=2.3 | Q85: mean=1.7 | Q95: mean=1.0 \u2014 highest at Q65 (2.7).",
+      "ORB/RANSAC": "inliers=0 | ratio=0% | geometric_ok=False"
+    }
+  },
+  "integrity_verdict": "NOT APPLICABLE",
+  "limitations": [
+    "Shadow-attack detection compares rendered page images using one rendering engine. Attacks that produce identical renders are not detectable.",
+    "Legitimate incremental updates (annotations, additional sigs) may trigger the shadow-suspect flag; manual review distinguishes malicious from benign.",
+    "Primary revision discovery failed; used eof_fallback. Results may be less reliable for PDFs with embedded binary streams.",
+    "ELA applied to rendered PDF images may not reflect the original JPEG compression history of embedded content.",
+    "Results are based on automated analysis. Expert human review is required before use in any legal, compliance or operational context.",
+    "Synthetic evaluation does not establish real-world generalisation performance."
+  ],
+  "processing": {
+    "total_seconds": 0.2,
+    "stage_times": {
+      "parse": 0.016,
+      "classify": 0.001,
+      "revision": 0.021,
+      "localise": 0.124,
+      "ela": 0.024,
+      "orb": 0.004,
+      "ransac": 0.0,
+      "fusion": 0.0
+    }
+  }
+}

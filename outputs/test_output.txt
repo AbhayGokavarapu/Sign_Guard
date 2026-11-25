@@ -1,0 +1,44 @@
+
+=== SignGuard Integration Tests ===
+
+--- Pipeline: Unsigned ---
+  PASS  validation passes
+  PASS  parsed without error
+  PASS  classification not None
+  PASS  fusion not None
+  PASS  verdict is inconclusive/clean
+
+--- Pipeline: Visual Only ---
+  PASS  parsed
+  PASS  localization done
+  PASS  has images
+     (candidates: 1)
+
+--- Pipeline: Shadow ---
+  PASS  revision analyzed
+  PASS  has incremental updates
+  PASS  shadow suspect flagged
+
+--- Byte tampering detection ---
+  PASS  hashes differ
+
+--- ELA ---
+  PASS  ela result not None
+  PASS  ela stats valid
+
+--- ORB / RANSAC ---
+     (orb: True, ransac: True)
+  PASS  orb n_kp_a >= 0
+  PASS  ransac result valid
+
+--- JSON / PDF report ---
+  PASS  json has verdict
+  PASS  json has document
+  PASS  json has findings
+  PASS  pdf starts with %PDF
+
+--- Audit log ---
+  PASS  audit chain intact
+
+=== Results: 21 passed, 0 failed ===
+

@@ -1,0 +1,80 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.4, pytest-9.2.0, pluggy-1.7.0 -- c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: c:\Users\User\OneDrive\Desktop\IS\SignGuard
+plugins: anyio-4.16.0
+collecting ... collected 55 items
+
+tests/test_pipeline.py::test_parse_unsigned PASSED                       [  1%]
+tests/test_pipeline.py::test_validate_bad_header PASSED                  [  3%]
+tests/test_pipeline.py::test_validate_oversized PASSED                   [  5%]
+tests/test_pipeline.py::test_sha256_preserved PASSED                     [  7%]
+tests/test_pipeline.py::test_new_upload_clears_state PASSED              [  9%]
+tests/test_pipeline.py::test_encrypted_pdf_handled PASSED                [ 10%]
+tests/test_pipeline.py::test_classify_unsigned PASSED                    [ 12%]
+tests/test_pipeline.py::test_classify_visual PASSED                      [ 14%]
+tests/test_pipeline.py::test_classify_signed_pdf PASSED                  [ 16%]
+tests/test_pipeline.py::test_crypto_no_sigs PASSED                       [ 18%]
+tests/test_pipeline.py::test_crypto_signed_pdf PASSED                    [ 20%]
+tests/test_pipeline.py::test_crypto_trust_separated PASSED               [ 21%]
+tests/test_pipeline.py::test_tampered_bytes_detection PASSED             [ 23%]
+tests/test_pipeline.py::test_byte_range_validation PASSED                [ 25%]
+tests/test_pipeline.py::test_crypto_no_pyhanko_fallback_explicit PASSED  [ 27%]
+tests/test_pipeline.py::test_revision_single PASSED                      [ 29%]
+tests/test_pipeline.py::test_shadow_pdf_revisions PASSED                 [ 30%]
+tests/test_pipeline.py::test_shadow_suspect_flag PASSED                  [ 32%]
+tests/test_pipeline.py::test_revision_discovery_method PASSED            [ 34%]
+tests/test_pipeline.py::test_revision_reports_limitations PASSED         [ 36%]
+tests/test_pipeline.py::test_misleading_eof_in_stream PASSED             [ 38%]
+tests/test_pipeline.py::test_localise_unsigned PASSED                    [ 40%]
+tests/test_pipeline.py::test_localise_visual_returns_image PASSED        [ 41%]
+tests/test_pipeline.py::test_localise_duplicate_finds_candidates PASSED  [ 43%]
+tests/test_pipeline.py::test_localise_respects_candidate_limit PASSED    [ 45%]
+tests/test_pipeline.py::test_localise_confidence_is_heuristic PASSED     [ 47%]
+tests/test_pipeline.py::test_ela_runs PASSED                             [ 49%]
+tests/test_pipeline.py::test_ela_statistics_nonzero PASSED               [ 50%]
+tests/test_pipeline.py::test_ela_multi_quality PASSED                    [ 52%]
+tests/test_pipeline.py::test_ela_amplification_independent PASSED        [ 54%]
+tests/test_pipeline.py::test_orb_match_two_images PASSED                 [ 56%]
+tests/test_pipeline.py::test_ransac_too_few_matches PASSED               [ 58%]
+tests/test_pipeline.py::test_ransac_degenerate_homography PASSED         [ 60%]
+tests/test_pipeline.py::test_orb_handles_no_keypoints PASSED             [ 61%]
+tests/test_pipeline.py::test_fusion_unsupported PASSED                   [ 63%]
+tests/test_pipeline.py::test_fusion_no_sigs PASSED                       [ 65%]
+tests/test_pipeline.py::test_fusion_no_clean_verdict PASSED              [ 67%]
+tests/test_pipeline.py::test_fusion_scenario_label_not_used PASSED       [ 69%]
+tests/test_pipeline.py::test_fusion_has_integrity_verdict PASSED         [ 70%]
+tests/test_pipeline.py::test_fusion_ela_alone_not_definitive PASSED      [ 72%]
+tests/test_pipeline.py::test_json_report_generates PASSED                [ 74%]
+tests/test_pipeline.py::test_json_report_no_numpy PASSED                 [ 76%]
+tests/test_pipeline.py::test_pdf_report_generates PASSED                 [ 78%]
+tests/test_pipeline.py::test_pdf_report_openable PASSED                  [ 80%]
+tests/test_pipeline.py::test_json_integrity_verdict_present PASSED       [ 81%]
+tests/test_pipeline.py::test_audit_append_and_verify PASSED              [ 83%]
+tests/test_pipeline.py::test_audit_tamper_detection PASSED               [ 85%]
+tests/test_pipeline.py::test_audit_missing_field PASSED                  [ 87%]
+tests/test_pipeline.py::test_audit_empty_chain PASSED                    [ 89%]
+tests/test_pipeline.py::test_full_pipeline_unsigned PASSED               [ 90%]
+tests/test_pipeline.py::test_full_pipeline_visual PASSED                 [ 92%]
+tests/test_pipeline.py::test_full_pipeline_shadow PASSED                 [ 94%]
+tests/test_pipeline.py::test_full_pipeline_signed PASSED                 [ 96%]
+tests/test_pipeline.py::test_pipeline_has_timestamp PASSED               [ 98%]
+tests/test_pipeline.py::test_pipeline_state_invalidation PASSED          [100%]
+
+============================== warnings summary ===============================
+tests/test_pipeline.py::test_classify_signed_pdf
+  c:\Users\User\OneDrive\Desktop\IS\SignGuard\simulation\signed_samples.py:44: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.datetime.utcnow()
+
+tests/test_pipeline.py::test_crypto_signed_pdf
+tests/test_pipeline.py::test_crypto_trust_separated
+tests/test_pipeline.py::test_full_pipeline_signed
+  c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\pyhanko_certvalidator\registry.py:305: DeprecationWarning: Relying on the operating system's trust list is deprecated and will stop working in a future release; pass 'trust_roots' explicitly
+    warnings.warn(
+
+tests/test_pipeline.py::test_crypto_signed_pdf
+  c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\oscrypto\_win\trust_list.py:64: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.datetime.utcnow()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 55 passed, 5 warnings in 22.46s =======================

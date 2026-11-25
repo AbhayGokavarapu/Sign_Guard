@@ -1,0 +1,18 @@
+.......................................................                  [100%]
+============================== warnings summary ===============================
+tests/test_pipeline.py::test_classify_signed_pdf
+  c:\Users\User\OneDrive\Desktop\IS\SignGuard\simulation\signed_samples.py:44: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.datetime.utcnow()
+
+tests/test_pipeline.py::test_crypto_signed_pdf
+tests/test_pipeline.py::test_crypto_trust_separated
+tests/test_pipeline.py::test_full_pipeline_signed
+  c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\pyhanko_certvalidator\registry.py:305: DeprecationWarning: Relying on the operating system's trust list is deprecated and will stop working in a future release; pass 'trust_roots' explicitly
+    warnings.warn(
+
+tests/test_pipeline.py::test_crypto_signed_pdf
+  c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\oscrypto\_win\trust_list.py:64: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.datetime.utcnow()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+55 passed, 5 warnings in 16.44s

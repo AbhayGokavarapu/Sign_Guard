@@ -1,0 +1,38 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.4, pytest-9.2.0, pluggy-1.7.0 -- c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: c:\Users\User\OneDrive\Desktop\IS\SignGuard
+plugins: anyio-4.16.0
+collecting ... collected 29 items
+
+tests/test_pipeline.py::test_parse_unsigned PASSED                       [  3%]
+tests/test_pipeline.py::test_validate_bad_header PASSED                  [  6%]
+tests/test_pipeline.py::test_validate_oversized PASSED                   [ 10%]
+tests/test_pipeline.py::test_sha256_preserved PASSED                     [ 13%]
+tests/test_pipeline.py::test_new_upload_clears_state PASSED              [ 17%]
+tests/test_pipeline.py::test_classify_unsigned PASSED                    [ 20%]
+tests/test_pipeline.py::test_classify_visual PASSED                      [ 24%]
+tests/test_pipeline.py::test_crypto_no_sigs PASSED                       [ 27%]
+tests/test_pipeline.py::test_tampered_bytes_detection PASSED             [ 31%]
+tests/test_pipeline.py::test_revision_single PASSED                      [ 34%]
+tests/test_pipeline.py::test_shadow_pdf_revisions PASSED                 [ 37%]
+tests/test_pipeline.py::test_shadow_suspect_flag PASSED                  [ 41%]
+tests/test_pipeline.py::test_localise_unsigned PASSED                    [ 44%]
+tests/test_pipeline.py::test_localise_visual_returns_image PASSED        [ 48%]
+tests/test_pipeline.py::test_localise_duplicate_finds_candidates PASSED  [ 51%]
+tests/test_pipeline.py::test_ela_runs PASSED                             [ 55%]
+tests/test_pipeline.py::test_ela_statistics_nonzero PASSED               [ 58%]
+tests/test_pipeline.py::test_orb_match_two_images PASSED                 [ 62%]
+tests/test_pipeline.py::test_ransac_too_few_matches PASSED               [ 65%]
+tests/test_pipeline.py::test_fusion_unsupported PASSED                   [ 68%]
+tests/test_pipeline.py::test_fusion_no_sigs PASSED                       [ 72%]
+tests/test_pipeline.py::test_fusion_scenario_label_not_used PASSED       [ 75%]
+tests/test_pipeline.py::test_json_report_generates PASSED                [ 79%]
+tests/test_pipeline.py::test_pdf_report_generates PASSED                 [ 82%]
+tests/test_pipeline.py::test_audit_append_and_verify PASSED              [ 86%]
+tests/test_pipeline.py::test_audit_tamper_detection PASSED               [ 89%]
+tests/test_pipeline.py::test_full_pipeline_unsigned PASSED               [ 93%]
+tests/test_pipeline.py::test_full_pipeline_visual PASSED                 [ 96%]
+tests/test_pipeline.py::test_full_pipeline_shadow PASSED                 [100%]
+
+============================= 29 passed in 6.02s ==============================

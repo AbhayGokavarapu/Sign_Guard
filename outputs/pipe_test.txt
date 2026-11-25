@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from core.pipeline import run; from simulation.sample_generator import build_unsigned; r = run(build_unsigned('x'), 'x.pdf'); print(r.fusion.verdict)
+                                                                                               ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\core\pipeline.py", line 112, in run
+    fusion = fuse(
+        parsed=parsed, classification=classification,
+    ...<2 lines>...
+        orb_result=orb, ransac_result=ransac,
+    )
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\core\evidence_fusion.py", line 305, in fuse
+    if ela_result.mean_residual > config.ELA_HIGH_THRESHOLD or ela_result.high_pct > 10.0:
+                                  ^^^^^^
+NameError: name 'config' is not defined

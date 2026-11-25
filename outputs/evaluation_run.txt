@@ -1,0 +1,61 @@
+Generating evaluation dataset...
+  30 fixtures generated.
+Running pipeline on all fixtures...
+MuPDF error: library error: zlib error: incorrect header check
+
+MuPDF error: library error: zlib error: incorrect header check
+
+MuPDF error: library error: zlib error: incorrect header check
+
+MuPDF error: library error: zlib error: incorrect header check
+
+MuPDF error: syntax error: no XObject subtype specified
+
+MuPDF error: syntax error: no XObject subtype specified
+
+MuPDF error: syntax error: no XObject subtype specified
+
+MuPDF error: syntax error: no XObject subtype specified
+
+MuPDF error: syntax error: no XObject subtype specified
+
+MuPDF error: syntax error: no XObject subtype specified
+
+MuPDF error: syntax error: no XObject subtype specified
+
+MuPDF error: syntax error: no XObject subtype specified
+
+MuPDF error: format error: object is not a stream
+
+MuPDF error: format error: object is not a stream
+
+MuPDF error: format error: object is not a stream
+
+MuPDF error: format error: object is not a stream
+
+MuPDF error: format error: object is not a stream
+
+MuPDF error: format error: object is not a stream
+
+MuPDF error: format error: object is not a stream
+
+MuPDF error: format error: object is not a stream
+
+MuPDF error: library error: zlib error: invalid distance too far back
+
+MuPDF error: library error: zlib error: invalid distance too far back
+
+MuPDF error: library error: zlib error: invalid distance too far back
+
+MuPDF error: library error: zlib error: invalid distance too far back
+
+  Evaluation complete in 14.5s over 30 files.
+
+=== Evaluation Results ===
+  Task B — Tampering: Acc=46.7% P=42.9% R=100.0% F1=60.0% TP=12 FP=16 FN=0 TN=2
+  Task A — Classification accuracy: 80.0%
+  Task C — Localisation rate: 83.3%
+  Task E — Mean processing: 0.466s | Median: 0.254s | Max: 2.608s
+
+  Results saved to benchmarks/
+  IMPORTANT: Synthetic evaluation only — does not establish real-world generalisation.

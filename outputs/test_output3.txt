@@ -1,0 +1,121 @@
+
+=== SignGuard Integration Tests ===
+
+--- Pipeline: Unsigned ---
+  PASS  validation passes
+  PASS  parsed without error
+  PASS  classification not None
+  PASS  fusion not None
+  PASS  verdict is inconclusive/clean/review
+
+--- Pipeline: Visual Only ---
+  PASS  parsed
+  PASS  localization done
+  PASS  has images
+     (candidates: 2)
+
+--- Pipeline: Shadow ---
+  PASS  revision analyzed
+  PASS  has incremental updates
+  PASS  shadow suspect flagged
+
+--- Byte tampering detection ---
+  PASS  hashes differ
+
+--- ELA ---
+  PASS  ela result not None
+  PASS  ela stats valid
+
+--- ORB / RANSAC ---
+     (orb: True, ransac: True)
+  PASS  orb n_kp_a >= 0
+  PASS  ransac result valid
+
+--- JSON / PDF report ---
+  PASS  json has verdict
+  PASS  json has document
+  PASS  json has findings
+Traceback (most recent call last):
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\lib\colors.py", line 981, in __call__
+    return HexColor(arg)
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\lib\colors.py", line 391, in HexColor
+    val = int(val,b)
+ValueError: invalid literal for int() with base 16: 'xb45309'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 3218, in parse
+    self.feed(text)
+    ~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\html\parser.py", line 169, in feed
+    self.goahead(0)
+    ~~~~~~~~~~~~^^^
+  File "C:\Python314\Lib\html\parser.py", line 251, in goahead
+    k = self.parse_starttag(i)
+  File "C:\Python314\Lib\html\parser.py", line 465, in parse_starttag
+    self.handle_starttag(tag, attrs)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 3241, in handle_starttag
+    start(attrs or {})
+    ~~~~~^^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 2822, in start_font
+    A = self.getAttributes(attr,_spanAttrMap)
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 3078, in getAttributes
+    v = func(self,v) if isinstance(func,_ExValidate) else func(v)
+                                                          ~~~~^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\lib\colors.py", line 984, in __call__
+    raise ValueError('Invalid color value %r' % arg)
+ValueError: Invalid color value '#xb45309'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\run_tests_quick.py", line 89, in <module>
+    pdf_bytes = build_pdf_report(r)
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\reporting\pdf_report.py", line 176, in build_pdf_report
+    story.append(Paragraph(
+                 ~~~~~~~~~^
+        f'<font color="#{sev_color.hexval()[1:]}"><b>[{f.severity.value}]</b></font> '
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        f'{f.code} — {f.title}',
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+        body))
+        ^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paragraph.py", line 1873, in __init__
+    self._setup(text, style, bulletText or getattr(style,'bulletText',None), frags, cleanBlockQuotedText)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paragraph.py", line 1894, in _setup
+    style, frags, bulletTextFrags = _parser.parse(text,style)
+                                    ~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 3220, in parse
+    annotateException('\nparagraph text %s caused exception' % ascii(text))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\lib\utils.py", line 1214, in annotateException
+    rl_reraise(t,t(sep.join((_ for _ in (msg,str(v),postMsg) if _))),b)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\lib\utils.py", line 138, in rl_reraise
+    raise v.with_traceback(b)
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 3218, in parse
+    self.feed(text)
+    ~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\html\parser.py", line 169, in feed
+    self.goahead(0)
+    ~~~~~~~~~~~~^^^
+  File "C:\Python314\Lib\html\parser.py", line 251, in goahead
+    k = self.parse_starttag(i)
+  File "C:\Python314\Lib\html\parser.py", line 465, in parse_starttag
+    self.handle_starttag(tag, attrs)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 3241, in handle_starttag
+    start(attrs or {})
+    ~~~~~^^^^^^^^^^^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 2822, in start_font
+    A = self.getAttributes(attr,_spanAttrMap)
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\platypus\paraparser.py", line 3078, in getAttributes
+    v = func(self,v) if isinstance(func,_ExValidate) else func(v)
+                                                          ~~~~^^^
+  File "c:\Users\User\OneDrive\Desktop\IS\SignGuard\venv\Lib\site-packages\reportlab\lib\colors.py", line 984, in __call__
+    raise ValueError('Invalid color value %r' % arg)
+ValueError: 
+paragraph text '<para><font color="#xb45309"><b>[MEDIUM]</b></font> ELA-001 \u2014 Elevated ELA residual</para>' caused exception Invalid color value '#xb45309'
