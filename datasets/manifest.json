@@ -1,0 +1,216 @@
+{
+  "generated_at": "2026-11-25T13:34:40Z",
+  "total": 30,
+  "files": [
+    {
+      "file": "datasets\\genuine\\genuine_01.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "notes": "Synthetic signed document, seed=0",
+      "size": 11493
+    },
+    {
+      "file": "datasets\\genuine\\genuine_02.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "notes": "Synthetic signed document, seed=1",
+      "size": 11494
+    },
+    {
+      "file": "datasets\\genuine\\genuine_03.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "notes": "Synthetic signed document, seed=2",
+      "size": 11493
+    },
+    {
+      "file": "datasets\\genuine\\genuine_04.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "notes": "Synthetic signed document, seed=3",
+      "size": 11494
+    },
+    {
+      "file": "datasets\\genuine\\genuine_05.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "notes": "Synthetic signed document, seed=4",
+      "size": 11494
+    },
+    {
+      "file": "datasets\\tampered\\tampered_01.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "notes": "Byte flip at offset 400",
+      "size": 11480
+    },
+    {
+      "file": "datasets\\tampered\\tampered_02.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "notes": "Byte flip at offset 450",
+      "size": 11483
+    },
+    {
+      "file": "datasets\\tampered\\tampered_03.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "notes": "Byte flip at offset 500",
+      "size": 11483
+    },
+    {
+      "file": "datasets\\tampered\\tampered_04.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "notes": "Byte flip at offset 550",
+      "size": 11480
+    },
+    {
+      "file": "datasets\\tampered\\tampered_05.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "notes": "Byte flip at offset 600",
+      "size": 11482
+    },
+    {
+      "file": "datasets\\shadow\\shadow_01.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "notes": "shadow: '$1,000' \u2192 '$9,000'",
+      "size": 4689
+    },
+    {
+      "file": "datasets\\shadow\\shadow_02.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "notes": "shadow: '$100' \u2192 '$900'",
+      "size": 4682
+    },
+    {
+      "file": "datasets\\shadow\\shadow_03.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "notes": "shadow: 'Approved' \u2192 'Rejected'",
+      "size": 4693
+    },
+    {
+      "file": "datasets\\shadow\\shadow_04.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "notes": "shadow: '2024-01-01' \u2192 '2025-12-31'",
+      "size": 4688
+    },
+    {
+      "file": "datasets\\shadow\\shadow_05.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "notes": "shadow: 'Section 3 applies' \u2192 'Section 7 applies'",
+      "size": 4703
+    },
+    {
+      "file": "datasets\\visual_only\\visual_01.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "notes": "Visual signature candidate, no crypto sig",
+      "size": 3706
+    },
+    {
+      "file": "datasets\\visual_only\\visual_02.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "notes": "Visual signature candidate, no crypto sig",
+      "size": 3299
+    },
+    {
+      "file": "datasets\\visual_only\\visual_03.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "notes": "Visual signature candidate, no crypto sig",
+      "size": 3504
+    },
+    {
+      "file": "datasets\\visual_only\\visual_multi_01.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "notes": "Multi-page (2 pages)",
+      "size": 3961
+    },
+    {
+      "file": "datasets\\visual_only\\visual_multi_02.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "notes": "Multi-page (3 pages)",
+      "size": 4505
+    },
+    {
+      "file": "datasets\\unsigned\\unsigned_01.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "notes": "Plain unsigned PDF",
+      "size": 1950
+    },
+    {
+      "file": "datasets\\unsigned\\unsigned_02.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "notes": "Plain unsigned PDF",
+      "size": 1952
+    },
+    {
+      "file": "datasets\\unsigned\\unsigned_03.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "notes": "Plain unsigned PDF",
+      "size": 1950
+    },
+    {
+      "file": "datasets\\unsigned\\unsigned_04.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "notes": "Plain unsigned PDF",
+      "size": 1952
+    },
+    {
+      "file": "datasets\\unsigned\\unsigned_05.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "notes": "Plain unsigned PDF",
+      "size": 1952
+    },
+    {
+      "file": "datasets\\visual_only\\duplicate_sig_01.pdf",
+      "category": "visual_only",
+      "label": "REVIEW_REQUIRED",
+      "notes": "Two near-identical signature images",
+      "size": 3636
+    },
+    {
+      "file": "datasets\\visual_only\\ela_target_01.pdf",
+      "category": "visual_only",
+      "label": "REVIEW_REQUIRED",
+      "notes": "ELA manipulation target",
+      "size": 3118
+    },
+    {
+      "file": "datasets\\unsigned\\faint_mark_01.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "notes": "Faint graphical marks",
+      "size": 1947
+    },
+    {
+      "file": "datasets\\unsigned\\multi_rev_01.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "notes": "Two revisions but no crypto sig",
+      "size": 4689
+    },
+    {
+      "file": "datasets\\unsigned\\minimal_01.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "notes": "Minimal content",
+      "size": 1913
+    }
+  ]
+}

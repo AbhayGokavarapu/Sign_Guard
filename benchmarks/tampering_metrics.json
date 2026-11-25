@@ -1,0 +1,15 @@
+{
+  "task": "Task B \u2014 Tampering Alert Detection",
+  "note": "Synthetic dataset only. Does not establish real-world generalisation.",
+  "total": 30,
+  "evaluated": 30,
+  "unsupported": 0,
+  "TP": 12,
+  "FP": 16,
+  "FN": 0,
+  "TN": 2,
+  "accuracy": 0.4667,
+  "precision": 0.4286,
+  "recall": 1.0,
+  "f1": 0.6
+}

@@ -1,0 +1,31 @@
+file,category,label,pred,cls_pred,n_cands,elapsed
+genuine_01.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,2.608
+genuine_02.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,0.984
+genuine_03.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,0.962
+genuine_04.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,0.766
+genuine_05.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,0.526
+tampered_01.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.491
+tampered_02.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.6
+tampered_03.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.531
+tampered_04.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.499
+tampered_05.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.511
+shadow_01.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.252
+shadow_02.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.302
+shadow_03.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.256
+shadow_04.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.247
+shadow_05.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.301
+visual_01.pdf,visual_only,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,2,0.227
+visual_02.pdf,visual_only,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,4,0.223
+visual_03.pdf,visual_only,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,2,0.233
+visual_multi_01.pdf,visual_only,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,0,0.991
+visual_multi_02.pdf,visual_only,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,0,0.826
+unsigned_01.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.16
+unsigned_02.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.177
+unsigned_03.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.153
+unsigned_04.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.158
+unsigned_05.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.173
+duplicate_sig_01.pdf,visual_only,REVIEW_REQUIRED,REVIEW REQUIRED,Visual Signature Candidate,3,0.181
+ela_target_01.pdf,visual_only,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.18
+faint_mark_01.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.141
+multi_rev_01.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.161
+minimal_01.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.164

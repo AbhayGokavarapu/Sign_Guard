@@ -1,0 +1,290 @@
+{
+  "generated_at": "2026-11-25T13:34:55Z",
+  "total_files": 30,
+  "total_time_s": 14.52,
+  "note": "Synthetic dataset only. Does not establish real-world generalisation.",
+  "records": [
+    {
+      "file": "genuine_01.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 2,
+      "elapsed": 2.608
+    },
+    {
+      "file": "genuine_02.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 2,
+      "elapsed": 0.984
+    },
+    {
+      "file": "genuine_03.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 2,
+      "elapsed": 0.962
+    },
+    {
+      "file": "genuine_04.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 2,
+      "elapsed": 0.766
+    },
+    {
+      "file": "genuine_05.pdf",
+      "category": "genuine",
+      "label": "CLEAN",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 2,
+      "elapsed": 0.526
+    },
+    {
+      "file": "tampered_01.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "pred": "TAMPERING DETECTED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 1,
+      "elapsed": 0.491
+    },
+    {
+      "file": "tampered_02.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "pred": "TAMPERING DETECTED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 1,
+      "elapsed": 0.6
+    },
+    {
+      "file": "tampered_03.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "pred": "TAMPERING DETECTED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 1,
+      "elapsed": 0.531
+    },
+    {
+      "file": "tampered_04.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "pred": "TAMPERING DETECTED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 1,
+      "elapsed": 0.499
+    },
+    {
+      "file": "tampered_05.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "pred": "TAMPERING DETECTED",
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 1,
+      "elapsed": 0.511
+    },
+    {
+      "file": "shadow_01.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.252
+    },
+    {
+      "file": "shadow_02.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.302
+    },
+    {
+      "file": "shadow_03.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.256
+    },
+    {
+      "file": "shadow_04.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.247
+    },
+    {
+      "file": "shadow_05.pdf",
+      "category": "shadow",
+      "label": "REVIEW_REQUIRED",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.301
+    },
+    {
+      "file": "visual_01.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "elapsed": 0.227
+    },
+    {
+      "file": "visual_02.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 4,
+      "elapsed": 0.223
+    },
+    {
+      "file": "visual_03.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "elapsed": 0.233
+    },
+    {
+      "file": "visual_multi_01.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "pred": "INCONCLUSIVE",
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 0,
+      "elapsed": 0.991
+    },
+    {
+      "file": "visual_multi_02.pdf",
+      "category": "visual_only",
+      "label": "INCONCLUSIVE",
+      "pred": "INCONCLUSIVE",
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 0,
+      "elapsed": 0.826
+    },
+    {
+      "file": "unsigned_01.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.16
+    },
+    {
+      "file": "unsigned_02.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.177
+    },
+    {
+      "file": "unsigned_03.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.153
+    },
+    {
+      "file": "unsigned_04.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.158
+    },
+    {
+      "file": "unsigned_05.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.173
+    },
+    {
+      "file": "duplicate_sig_01.pdf",
+      "category": "visual_only",
+      "label": "REVIEW_REQUIRED",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 3,
+      "elapsed": 0.181
+    },
+    {
+      "file": "ela_target_01.pdf",
+      "category": "visual_only",
+      "label": "REVIEW_REQUIRED",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.18
+    },
+    {
+      "file": "faint_mark_01.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.141
+    },
+    {
+      "file": "multi_rev_01.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.161
+    },
+    {
+      "file": "minimal_01.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "pred": "REVIEW REQUIRED",
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "elapsed": 0.164
+    }
+  ],
+  "task": "Task B \u2014 Tampering Alert Detection",
+  "total": 30,
+  "evaluated": 30,
+  "unsupported": 0,
+  "TP": 12,
+  "FP": 16,
+  "FN": 0,
+  "TN": 2,
+  "accuracy": 0.4667,
+  "precision": 0.4286,
+  "recall": 1.0,
+  "f1": 0.6
+}

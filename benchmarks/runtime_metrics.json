@@ -1,0 +1,14 @@
+{
+  "task": "Task E \u2014 Runtime Performance",
+  "total_s": 14.52,
+  "n_files": 30,
+  "mean_s": 0.466,
+  "median_s": 0.254,
+  "min_s": 0.141,
+  "max_s": 2.608,
+  "stdev_s": 0.488,
+  "environment": {
+    "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "win32"
+  }
+}

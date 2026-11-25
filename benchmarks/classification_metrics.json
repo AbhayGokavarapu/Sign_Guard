@@ -1,0 +1,8 @@
+{
+  "task": "Task A \u2014 Document Classification",
+  "total": 30,
+  "correct": 24,
+  "incorrect": 6,
+  "accuracy": 0.8,
+  "note": "Per-class P/R/F1 requires more samples per class for statistical validity."
+}

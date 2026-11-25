@@ -1,0 +1,8 @@
+{
+  "task": "Task C \u2014 Signature Localisation",
+  "sig_documents": 12,
+  "at_least_one_found": 10,
+  "none_found": 2,
+  "detection_rate": 0.8333,
+  "note": "IoU-based precision/recall requires ground-truth bounding-box annotations, which are not available for auto-generated synthetic fixtures. Detection rate measures whether >=1 candidate was found in documents expected to have visual signature regions."
+}
