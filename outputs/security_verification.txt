@@ -1,0 +1,37 @@
+........................................................................ [ 85%]
+............                                                             [100%]
+84 passed in 61.90s (0:01:01)
+
+Quick validation:
+.............................                                            [100%]
+29 passed in 40.29s
+
+{'scenario': 'A', 'passed': True, 'verdict': 'INCONCLUSIVE', 'findings': []}
+{'scenario': 'B', 'passed': True, 'verdict': 'TAMPERING DETECTED', 'findings': ['CRYPTO-001']}
+{'scenario': 'C', 'passed': True, 'verdict': 'REVIEW REQUIRED', 'findings': ['CRYPTO-003', 'CRYPTO-004', 'SHADOW-001', 'SHADOW-002']}
+{'scenario': 'D', 'passed': True, 'verdict': 'REVIEW REQUIRED', 'findings': ['ORB-001']}
+{'scenario': 'E', 'passed': True, 'verdict': 'INCONCLUSIVE', 'findings': []}
+{'scenario': 'F', 'passed': True, 'verdict': 'INCONCLUSIVE', 'findings': []}
+
+Dashboard pages:
+2026-11-25 16:08:11.994 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+PASS 🏠  Overview
+PASS 📄  Document Analysis
+PASS ⚗️  Attack Simulation Lab
+PASS 🔬  Algorithm Visualizations
+PASS 📊  Evaluation
+PASS 📋  Reports & Audit
+PASS 🎓  Presentation Mode
+
+Attack Lab UI flows:
+2026-11-25 16:09:26.743 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+PASS A INCONCLUSIVE
+PASS B TAMPERING DETECTED
+PASS C REVIEW REQUIRED
+PASS D REVIEW REQUIRED
+PASS E INCONCLUSIVE
+PASS F INCONCLUSIVE
+
+Final signature-limit regression:
+.                                                                        [100%]
+1 passed in 4.82s

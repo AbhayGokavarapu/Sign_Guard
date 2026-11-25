@@ -1,8 +1,21 @@
 {
-  "task": "Task A \u2014 Document Classification",
-  "total": 30,
-  "correct": 24,
-  "incorrect": 6,
-  "accuracy": 0.8,
-  "note": "Per-class P/R/F1 requires more samples per class for statistical validity."
+  "total": 39,
+  "correct": 39,
+  "incorrect": 0,
+  "accuracy": 1.0,
+  "note": "Held-out synthetic classification; repeated logos/image regions are candidate heuristics.",
+  "per_class": {
+    "Cryptographically Signed": {
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "Unsigned": {
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "Visual Signature Candidate": {
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  }
 }

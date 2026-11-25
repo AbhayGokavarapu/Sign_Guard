@@ -68,7 +68,7 @@ class ELAResult:
     error:            Optional[str] = None
 
 
-HIGH_RESIDUAL_THRESHOLD = 50   # applied to amplified gray image
+HIGH_RESIDUAL_THRESHOLD = 50   # raw, unamplified grayscale residual
 
 
 def _ela_single(original_arr: np.ndarray,
@@ -101,8 +101,7 @@ def _ela_single(original_arr: np.ndarray,
     max_res  = float(gray.max())
     std_res  = float(gray.std())
 
-    amp_gray = amp_arr.mean(axis=2)
-    high_pct = float((amp_gray > HIGH_RESIDUAL_THRESHOLD).sum()) / max(amp_gray.size, 1) * 100
+    high_pct = float((gray > HIGH_RESIDUAL_THRESHOLD).sum()) / max(gray.size, 1) * 100
 
     histo = np.histogram(gray.flatten(), bins=256, range=(0, 256))[0].tolist()
 
@@ -192,7 +191,7 @@ def _interpret(mean: float, high_pct: float) -> str:
         )
     elif high_pct > 5.0:
         return (
-            f"{high_pct:.1f}% of pixels show high amplified residual energy. "
+            f"{high_pct:.1f}% of pixels show high raw residual energy. "
             "Localised high-residual regions may warrant investigation but "
             "are not standalone proof of manipulation."
         )

@@ -1,7 +1,7 @@
 """
 Module 4 — PDF revision and shadow attack analysis.
 
-Uses PyMuPDF's xref/trailer API for reliable revision reconstruction
+Uses pyHanko's parsed xref chain for reliable revision reconstruction
 rather than raw %%EOF byte scanning (which is fooled by stream data).
 
 Limitations documented inline:
@@ -12,7 +12,7 @@ Limitations documented inline:
 
 from __future__ import annotations
 
-import io
+import io, re
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple, Dict, Any
 
@@ -59,139 +59,42 @@ class RevisionAnalysisResult:
     discovery_method:     str    # "pymupdf_xref" | "eof_fallback"
     limitations:          List[str] = field(default_factory=list)
     error:                Optional[str] = None
+    page_index: int = 0
+    affected_pages: List[int] = field(default_factory=list)
+    pages_compared: int = 0
 
 
 # ── Revision discovery ─────────────────────────────────────────────────────
 
 def _discover_revisions_pymupdf(raw: bytes) -> Tuple[List[RevisionInfo], str]:
+    """Resolve revision offsets from pyHanko's parsed /Prev xref chain.
+
+    Raw startxref strings only locate the EOF belonging to each verified offset;
+    arbitrary tokens in content streams cannot introduce additional revisions.
     """
-    Use PyMuPDF trailer chain (xref_prev) to find genuine revision boundaries.
-    Returns (revisions, method_name).
-    """
-    revisions: List[RevisionInfo] = []
+    from pyhanko.pdf_utils.reader import PdfFileReader
     try:
-        doc = fitz.open(stream=raw, filetype="pdf")
-
-        # Collect all trailer dictionaries in reverse order
-        # PyMuPDF exposes trailer xref_prev chain
-        boundaries = []
-        seen_offsets = set()
-
-        # Walk the xref table: PyMuPDF's trailer has /Prev pointing to
-        # earlier cross-references.
-        trailer = doc.pdf_trailer()
-        prev_offset = None
-        try:
-            prev_offset = int(trailer.get("Prev", 0) or 0)
-        except (TypeError, ValueError):
-            prev_offset = 0
-
-        # Simple approach: find all startxref offsets in raw bytes
-        # This is safer than %%EOF scanning because we look for
-        # "startxref\n<number>\n%%EOF" patterns
-        startxref_positions = []
-        pos = 0
-        while True:
-            idx = raw.find(b"startxref", pos)
-            if idx == -1:
-                break
-            # Read number after startxref
-            after = raw[idx+9:idx+40].strip().split()
-            if after:
-                try:
-                    xref_offset = int(after[0])
-                    startxref_positions.append((idx, xref_offset))
-                except ValueError:
-                    pass
-            pos = idx + 1
-
-        doc.close()
-
-        if not startxref_positions:
-            return [], "failed"
-
-        # Each startxref occurrence = one revision
-        for i, (sxref_pos, _xref_off) in enumerate(startxref_positions):
-            # Revision end = find %%EOF after this startxref
-            eof_pos = raw.find(b"%%EOF", sxref_pos)
-            if eof_pos == -1:
-                eof_pos = len(raw) - 1
-            end = eof_pos + 5
-            while end < len(raw) and raw[end:end+1] in (b"\r", b"\n"):
-                end += 1
-            start = startxref_positions[i-1][0] if i > 0 else 0
-            # Avoid duplicates
-            if end not in seen_offsets:
-                seen_offsets.add(end)
-                revisions.append(RevisionInfo(
-                    index=i, start_offset=start, end_offset=end,
-                    is_signed=False, xref_count=0
-                ))
-
-        # Mark which revisions contain a /Sig entry
-        for rev in revisions:
-            chunk = raw[rev.start_offset:rev.end_offset]
-            if b"/Type /Sig" in chunk or b"/Type/Sig" in chunk:
-                rev.is_signed = True
-
-        # Enrich with page/text info
-        for rev in revisions:
-            try:
-                rev_raw = raw[:rev.end_offset]
-                d = fitz.open(stream=rev_raw, filetype="pdf")
-                rev.page_count = len(d)
-                rev.metadata_summary = str(d.metadata)
-                # Sample text from first page
-                if len(d) > 0:
-                    rev.text_summary = d[0].get_text()[:200]
-                d.close()
-            except Exception:
-                pass
-
-        return revisions, "pymupdf_startxref"
-
+        reader = PdfFileReader(io.BytesIO(raw), strict=True)
+        if reader.xrefs.total_revisions > config.MAX_REVISIONS:
+            return [], "failed:revision limit exceeded"
+        signed = {sig.signed_revision for sig in reader.embedded_signatures}
+        boundaries = list(re.finditer(rb"startxref\s+(\d+)\s+%%EOF[\r\n]*", raw))
+        revisions = []
+        previous_end = 0
+        for i in range(reader.xrefs.total_revisions):
+            offset = reader.xrefs.get_startxref_for_revision(i)
+            candidates = [m for m in boundaries if int(m.group(1)) == offset and m.start() >= offset and m.end() > previous_end]
+            if not candidates:
+                raise ValueError("Missing EOF for parsed xref revision")
+            end = candidates[0].end()
+            with fitz.open(stream=raw[:end], filetype="pdf") as doc:
+                revisions.append(RevisionInfo(i, previous_end, end, i in signed,
+                    doc.xref_length(), len(doc), str(doc.metadata),
+                    doc[0].get_text()[:200] if len(doc) else ""))
+            previous_end = end
+        return revisions, "pyhanko_xref_chain"
     except Exception as exc:
         return [], f"failed:{exc}"
-
-
-def _discover_revisions_fallback(raw: bytes) -> Tuple[List[RevisionInfo], str]:
-    """
-    Fallback: scan for %%EOF in the raw stream.
-    Less reliable — documented as fallback, not primary method.
-    """
-    revisions: List[RevisionInfo] = []
-    pos = 0
-    idx = 0
-    while True:
-        eof = raw.find(b"%%EOF", pos)
-        if eof == -1:
-            break
-        # Check this %%EOF is at a likely PDF boundary (preceded by startxref)
-        ctx = raw[max(0, eof-50):eof]
-        # Skip %%EOF inside stream data (heuristic: should be near a digit line)
-        if b"startxref" not in ctx and idx > 0:
-            pos = eof + 5
-            continue
-        end = eof + 5
-        while end < len(raw) and raw[end:end+1] in (b"\r", b"\n"):
-            end += 1
-        revisions.append(RevisionInfo(
-            index=idx,
-            start_offset=0 if idx == 0 else revisions[-1].end_offset,
-            end_offset=end,
-            is_signed=False, xref_count=0
-        ))
-        pos = end
-        idx += 1
-        if end >= len(raw):
-            break
-
-    for rev in revisions:
-        chunk = raw[rev.start_offset:rev.end_offset]
-        if b"/Type /Sig" in chunk or b"/Type/Sig" in chunk:
-            rev.is_signed = True
-
-    return revisions, "eof_fallback"
 
 
 # ── Rendering helpers ──────────────────────────────────────────────────────
@@ -204,14 +107,8 @@ def _render_at_dpi(raw: bytes, page_index: int = 0,
             return None
         pi   = min(page_index, len(doc) - 1)
         page = doc[pi]
-        mat  = fitz.Matrix(dpi / 72, dpi / 72)
-        # Cap dimensions to prevent memory issues
-        pix  = page.get_pixmap(matrix=mat, alpha=False)
-        if pix.width > config.MAX_PAGE_WIDTH_PX or pix.height > config.MAX_PAGE_HEIGHT_PX:
-            scale = min(config.MAX_PAGE_WIDTH_PX  / pix.width,
-                        config.MAX_PAGE_HEIGHT_PX / pix.height)
-            mat  = fitz.Matrix(dpi / 72 * scale, dpi / 72 * scale)
-            pix  = page.get_pixmap(matrix=mat, alpha=False)
+        from core.pdf_parser import render_bounded
+        pix = render_bounded(page, dpi, annots=False)
         img  = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
         doc.close()
         return img
@@ -257,12 +154,12 @@ def _find_change_boxes(mask: np.ndarray,
     return boxes
 
 
-def _extract_text_first_page(raw: bytes) -> str:
+def _extract_text_first_page(raw: bytes, page_index: int = 0) -> str:
     try:
         doc = fitz.open(stream=raw, filetype="pdf")
         if len(doc) == 0:
             return ""
-        txt = doc[0].get_text()
+        txt = doc[page_index].get_text() if page_index < len(doc) else ""
         doc.close()
         return txt
     except Exception:
@@ -284,7 +181,7 @@ def _metadata(raw: bytes) -> Dict[str, Any]:
 def analyze(raw: bytes, page_index: int = 0) -> RevisionAnalysisResult:
     """
     Discover revisions and compare signed vs current page content.
-    Uses startxref-based discovery; falls back to %%EOF scan if needed.
+    Uses the parsed /Prev xref chain. Fails explicitly when reconstruction fails.
     """
     limitations = [
         "Shadow-attack detection compares rendered page images using one rendering engine. "
@@ -295,14 +192,6 @@ def analyze(raw: bytes, page_index: int = 0) -> RevisionAnalysisResult:
 
     # Primary: startxref-based
     revisions, method = _discover_revisions_pymupdf(raw)
-
-    if not revisions:
-        # Fallback
-        revisions, method = _discover_revisions_fallback(raw)
-        limitations.append(
-            f"Primary revision discovery failed; used {method}. "
-            "Results may be less reliable for PDFs with embedded binary streams."
-        )
 
     if not revisions:
         return RevisionAnalysisResult(
@@ -322,8 +211,8 @@ def analyze(raw: bytes, page_index: int = 0) -> RevisionAnalysisResult:
 
     has_incremental = len(revisions) > 1
 
-    # Signed revision = latest revision containing a /Sig entry
-    signed_rev = next((r for r in reversed(revisions) if r.is_signed), None)
+    # Signed revision = earliest revision containing a /Sig entry
+    signed_rev = next((r for r in revisions if r.is_signed), None)
     signed_idx = signed_rev.index if signed_rev else None
 
     signed_image  = None
@@ -346,8 +235,8 @@ def analyze(raw: bytes, page_index: int = 0) -> RevisionAnalysisResult:
                 shadow_suspect = True
 
         # Text comparison
-        signed_text  = _extract_text_first_page(signed_bytes)
-        current_text = _extract_text_first_page(raw)
+        signed_text  = _extract_text_first_page(signed_bytes, page_index)
+        current_text = _extract_text_first_page(raw, page_index)
         if signed_text != current_text:
             # Simple line-level diff summary
             s_lines = set(signed_text.splitlines())
@@ -359,6 +248,9 @@ def analyze(raw: bytes, page_index: int = 0) -> RevisionAnalysisResult:
                     f"{len(removed)} line(s) removed, {len(added)} line(s) added "
                     "between signed revision and current document."
                 )
+
+        if text_diff_summary:
+            shadow_suspect = True
 
         # Metadata comparison
         signed_meta  = _metadata(signed_bytes)
@@ -408,4 +300,7 @@ def analyze(raw: bytes, page_index: int = 0) -> RevisionAnalysisResult:
         summary=" ".join(parts),
         discovery_method=method,
         limitations=limitations,
+        page_index=page_index,
+        affected_pages=[page_index] if shadow_suspect else [],
+        pages_compared=1 if signed_image else 0,
     )

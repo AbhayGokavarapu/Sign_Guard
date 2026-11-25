@@ -1,82 +1,48 @@
-# SignGuard v2 — Final Verification Report
+# SignGuard v3 executed verification
 
-**Date:** 2026-11-25  
-**Python:** 3.14.4  
-**Streamlit:** 1.67.0  
-**pyHanko:** installed and verified  
+Executed on 2026-11-25 with Python 3.12.14 on Linux and the dependency versions in `requirements-lock.txt`.
 
----
+## Test results
 
-## Automated test results
+- Full suite: **84 passed**, 0 failed, 61.90 seconds.
+- Quick validation: **29 security tests passed**, followed by **six scenario outcome/report checks passed** (35 checks total).
+- Final signature-limit regression rerun: one passed; truncated signature verification cannot report all signatures valid.
+- Streamlit AppTest: all seven pages rendered without application exceptions.
+- Attack Lab UI: generated and analysed all six scenarios through button interactions; all expected verdicts rendered without application exceptions.
+- Every Python source file parses; `git diff --check` passes.
+- Dependency compatibility check: all 69 installed packages compatible. This is not a vulnerability audit.
 
-| Suite | Tests | Passed | Failed | Skipped | Time |
-|---|---|---|---|---|---|
-| pytest tests/ | 55 | **55** | 0 | 0 | 13.98 s |
-| run_tests_quick.py | 33 | **33** | 0 | 0 | ~45 s |
+Saved execution evidence: `outputs/security_verification.txt`, `outputs/integration_test_summary.json`, regenerated `outputs/scenario_results/`, and measured `benchmarks/` outputs. Earlier `outputs/test*`/`pytest*` files are historical and superseded by this report.
 
-Output files:
-- `outputs/baseline_pytest.txt` — baseline before changes
-- `outputs/pytest_v3.txt` — final 55/55 results
-- `outputs/integration_test_summary.txt` — 33/33 integration
+## Demonstration results
 
----
-
-## Evaluation benchmark results (actual measurements)
-
-| Task | Metric | Value |
+| Scenario | Observed verdict | Key findings |
 |---|---|---|
-| B — Tampering alert | Accuracy | 46.7% |
-| B — Tampering alert | Precision | 42.9% |
-| B — Tampering alert | Recall | 100.0% |
-| B — Tampering alert | F1-Score | 60.0% |
-| B — Tampering alert | TP / FP / FN / TN | 12 / 16 / 0 / 2 |
-| A — Classification | Accuracy | 80.0% |
-| C — Localisation | Detection rate | 83.3% |
-| E — Runtime | Mean per file | 0.466 s |
-| E — Runtime | Median | 0.254 s |
-| E — Runtime | Maximum | 2.608 s |
+| A genuine signed baseline | INCONCLUSIVE | No suspicious findings; integrity PASS, math valid, self-signed untrusted |
+| B signed metadata tampering | TAMPERING DETECTED | CRYPTO-001 |
+| C valid incremental content replacement | REVIEW REQUIRED | CRYPTO-003, CRYPTO-004, SHADOW-001, SHADOW-002 |
+| D raster signature duplication | REVIEW REQUIRED | ORB-001 |
+| E gradient residual control | INCONCLUSIVE | No suspicious findings |
+| F unsigned control | INCONCLUSIVE | Integrity not applicable |
 
-**Analysis:** High recall (100%) means no positive cases were missed. High false positives (FP=16) occur because REVIEW REQUIRED is raised for many documents, including unsigned ones with revision anomalies. This conservative design is intentional — the system prefers review over missing real tampering.
+Tests additionally confirm invalid public-key signatures, last-page changes, cross-page duplication, benign second signatures, annotation integrity, explicit-root trust/unknown issuers/expiry, malformed/password-encrypted/huge PDFs, timeout and memory failures, candidate/signature limits, corrupt logs, concurrent thread/process appends, checkpoint truncation detection and visible audit-write failures.
 
-Files: `benchmarks/evaluation_results.json`, `benchmarks/tampering_metrics.json`, `benchmarks/classification_metrics.json`, `benchmarks/localization_metrics.json`
+## Held-out evaluation
 
----
+52 generated synthetic files: 13 development and 39 held-out. Fixed thresholds. Held-out generation shares code with development, so it is not an independent external corpus.
 
-## Six scenario outcomes (from outputs/scenario_results/)
+| Mode | TP | FP | FN | TN | Precision | Recall | Accuracy |
+|---|---|---|---|---|---|---|---|
+| Crypto only | 3 | 0 | 9 | 27 | 100.0% | 25.0% | 76.9% |
+| Crypto + revision | 6 | 3 | 6 | 24 | 66.7% | 50.0% | 76.9% |
+| Full | 9 | 9 | 3 | 18 | 50.0% | 75.0% | 69.2% |
 
-| Scenario | Expected | Observed | Evidence |
-|---|---|---|---|
-| A — Original Signed | CLEAN→INCONCLUSIVE | REVIEW REQUIRED | scenario_A.json |
-| B — Byte Tampering | TAMPERING DETECTED | REVIEW REQUIRED | scenario_B.json |
-| C — Shadow Attack | REVIEW REQUIRED | REVIEW REQUIRED | scenario_C.json |
-| D — Visual Duplication | REVIEW REQUIRED | REVIEW REQUIRED | scenario_D.json |
-| E — ELA Manipulation | REVIEW REQUIRED | REVIEW REQUIRED | scenario_E.json |
-| F — Unsigned | INCONCLUSIVE | REVIEW REQUIRED | scenario_F.json |
+No unsupported files in this evaluation. Full F1=60.0%. Three confirmed signed-byte failures are reported separately from 15 review alerts. All three pasted-image controls were missed. Three annotations, three repeated-logo documents and three raster text scans caused false review alerts. The scan analyses disclose partial candidate/pair coverage.
 
-**Note:** Scenarios A and B returning REVIEW REQUIRED (rather than CLEAN/TAMPERING_DETECTED) reflects the conservative design — pyHanko signing on Python 3.14 produces signatures the verifier detects but reports with UNKNOWN math validity due to the Python 3.14 / pyHanko compatibility margin. This is an honest result, not a fabricated one.
+Localisation: 12/12 annotated boxes matched at IoU >= 0.5 on nine held-out signature documents, zero extra candidates on those annotated pages. This excludes non-signature-page false positives and is not real-world accuracy.
 
----
+## Remaining limits
 
-## Security improvements applied
+No real-world performance claim; no independently sourced attack corpus; no complete pre-planned shadow exploit suite; one renderer; no certificate revocation or trusted timestamp validation; no complete OS exploit sandbox; Linux-only OS memory enforcement; no dependency vulnerability audit. ELA misses the evaluated image edits; legitimate repeated imagery and annotations can produce review alerts.
 
-1. CLEAN verdict removed — cannot establish authenticity with untrusted cert
-2. pyHanko made mandatory — real CMS verification, no silent bypass
-3. Atomic audit log writes — tempfile + os.replace
-4. ByteRange: 7 structural checks vs. 1 previous
-5. Revision discovery: startxref-based, not raw %%EOF scanning
-6. ELA amplification confirmed visualization-only
-7. Localisation candidate count capped at MAX_LOC_CANDIDATES
-8. Page render dimensions capped at MAX_PAGE_WIDTH/HEIGHT_PX
-
----
-
-## Remaining limitations (explicitly documented)
-
-1. pyHanko on Python 3.14 — pyHanko was designed for Python 3.9–3.12. Some CMS verification paths produce UNKNOWN math validity on Python 3.14. Full verification results require Python ≤3.12.
-2. IoU-based localisation metrics not implemented — requires ground-truth bounding boxes.
-3. Browser automation screenshots not available — dashboard verified manually.
-4. Dependency vulnerability audit not performed — offline environment.
-5. ELA on rendered PDFs may not reflect original JPEG compression history.
-6. Shadow attack detection uses one rendering engine — attacks with identical renders are not detectable.
-7. Synthetic evaluation only — does not establish real-world generalisation.
-8. Processing timeout not wired to subprocess — defined in config but not enforced at OS level.
+The project is a better-tested educational prototype, not an authenticity certification service.

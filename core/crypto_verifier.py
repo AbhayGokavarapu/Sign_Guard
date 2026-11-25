@@ -16,6 +16,10 @@ Separates:
 from __future__ import annotations
 
 import hashlib, io, logging, re
+import config
+from cryptography import x509
+from cryptography.hazmat.primitives.serialization import Encoding
+from datetime import datetime, timezone
 from dataclasses import dataclass, field
 from typing import List, Optional, Dict, Any
 
@@ -46,6 +50,7 @@ class TrustStatus:
     SELF_SIGNED    = "SELF-SIGNED (untrusted)"
     UNKNOWN_ISSUER = "UNKNOWN ISSUER (untrusted)"
     NOT_EVALUATED  = "NOT EVALUATED"
+    EXPIRED = "EXPIRED OR NOT YET VALID"
 
 
 class ModpolicyStatus:
@@ -103,6 +108,9 @@ class SigVerificationResult:
     signed_attrs_ok:    Optional[bool]
     details:            List[str] = field(default_factory=list)
     error:              Optional[str] = None
+    modification_level: str = "UNKNOWN"
+    revocation_status: str = "NOT CHECKED (offline)"
+    timestamp_status: str = "NOT VALIDATED"
 
     # Legacy compat helpers (used by dashboard/reporting)
     @property
@@ -115,7 +123,7 @@ class SigVerificationResult:
     def cert_trusted(self) -> Optional[bool]:
         if self.trust_status == TrustStatus.TRUSTED:        return True
         if self.trust_status in (TrustStatus.SELF_SIGNED,
-                                 TrustStatus.UNKNOWN_ISSUER): return False
+                                 TrustStatus.UNKNOWN_ISSUER, TrustStatus.EXPIRED): return False
         return None
 
     @property
@@ -141,33 +149,45 @@ class CryptoReport:
     summary:      str
     pyhanko_used: bool
     byterange_analysis_available: bool = True
+    total_discovered: int = 0
 
 
 # ── Public API ─────────────────────────────────────────────────────────────
 
-def verify(raw: bytes) -> CryptoReport:
+def verify(raw: bytes, trust_roots=None, skip_diff=False) -> CryptoReport:
     """
     Main entry point.  Returns a CryptoReport with per-signature results.
     Uses pyHanko when available; otherwise returns explicit UNSUPPORTED results.
     """
+    if trust_roots is None and config.TRUST_ROOTS_FILE:
+        from asn1crypto import x509 as asn1_x509
+        with open(config.TRUST_ROOTS_FILE, 'rb') as root_file:
+            trust_roots = [asn1_x509.Certificate.load(c.public_bytes(Encoding.DER))
+                           for c in x509.load_pem_x509_certificates(root_file.read())]
     try:
         from pyhanko.sign.validation import validate_pdf_signature
         from pyhanko.pdf_utils.reader import PdfFileReader
-        results = _verify_with_pyhanko(raw)
+        results = _verify_with_pyhanko(raw, trust_roots=trust_roots, skip_diff=skip_diff)
         pyhanko_used = True
     except ImportError:
         results = _verify_no_pyhanko(raw)
         pyhanko_used = False
 
     if not results:
-        return CryptoReport([], 0, True,
+        return CryptoReport([], 0, False,
             "No cryptographic signatures found in this document.", pyhanko_used)
 
     all_valid = all(r.integrity_status == IntegrityStatus.PASS and
-                    r.math_valid is not False
+                    r.math_valid is True
                     for r in results)
     summary   = _build_summary(results)
-    return CryptoReport(results, len(results), all_valid, summary, pyhanko_used)
+    discovered = len(results)
+    if pyhanko_used:
+        try:
+            discovered = len(PdfFileReader(io.BytesIO(raw), strict=False).embedded_signatures)
+        except Exception:
+            pass
+    return CryptoReport(results, len(results), all_valid and discovered == len(results), summary, pyhanko_used, total_discovered=discovered)
 
 
 # ── ByteRange structural validation ───────────────────────────────────────
@@ -203,7 +223,7 @@ def validate_byte_range(raw: bytes, br: List[int]) -> ByteRangeInfo:
 
     # 4. off1 should be 0 (PDF spec §12.8.1)
     if off1 != 0:
-        notes.append(f"ByteRange does not start at offset 0 (starts at {off1}).")
+        return ByteRangeInfo(br, False, False, False, ["ByteRange must start at offset 0."])
 
     # 5. The gap between region 1 and region 2 is the /Contents hex blob
     gap_start = off1 + len1
@@ -223,7 +243,11 @@ def validate_byte_range(raw: bytes, br: List[int]) -> ByteRangeInfo:
         )
 
     # 7. Covers a valid signed revision even if not the whole file
-    covers_signed_rev = True   # if structure is valid it covers some revision
+    end = off2 + len2
+    covers_signed_rev = raw[:end].rstrip().endswith(b"%%EOF")
+    gap = raw[gap_start:gap_end].strip()
+    if not (gap.startswith(b"<") and gap.endswith(b">")):
+        return ByteRangeInfo(br, False, False, False, ["Contents gap is not a PDF hex string."])
 
     if covers_full:
         notes.append("Signature covers the complete current document.")
@@ -241,7 +265,7 @@ def validate_byte_range(raw: bytes, br: List[int]) -> ByteRangeInfo:
 
 # ── pyHanko verification path ─────────────────────────────────────────────
 
-def _verify_with_pyhanko(raw: bytes) -> List[SigVerificationResult]:
+def _verify_with_pyhanko(raw: bytes, trust_roots=None, skip_diff=False) -> List[SigVerificationResult]:
     from pyhanko.sign.validation import validate_pdf_signature
     from pyhanko.pdf_utils.reader import PdfFileReader
 
@@ -255,17 +279,19 @@ def _verify_with_pyhanko(raw: bytes) -> List[SigVerificationResult]:
             TrustStatus.NOT_EVALUATED, ModpolicyStatus.UNKNOWN,
             IdentityStatus.NOT_ESTABLISHED,
             "pyHanko reader failed — document may be malformed or corrupt",
-            None, "unknown", "unknown", "", None,
+            None, None, "unknown", "unknown", "", None,
             error=str(exc)
         )]
 
     if not embedded_sigs:
         return []
 
+    from pyhanko_certvalidator import ValidationContext
+    context = ValidationContext(trust_roots=list(trust_roots or []), allow_fetching=False)
     out: List[SigVerificationResult] = []
-    for idx, sig in enumerate(embedded_sigs[:10]):   # max 10 sigs
+    for idx, sig in enumerate(embedded_sigs[:config.MAX_SIGNATURES]):   # max 10 sigs
         try:
-            status = validate_pdf_signature(sig, skip_diff=False)
+            status = validate_pdf_signature(sig, signer_validation_context=context, skip_diff=skip_diff)
         except Exception as exc:
             out.append(SigVerificationResult(
                 idx, getattr(sig, "field_name", f"sig_{idx}"),
@@ -273,7 +299,7 @@ def _verify_with_pyhanko(raw: bytes) -> List[SigVerificationResult]:
                 TrustStatus.NOT_EVALUATED, ModpolicyStatus.UNKNOWN,
                 IdentityStatus.NOT_ESTABLISHED,
                 "pyHanko validation raised an exception",
-                None, "unknown", "unknown", "", None,
+                None, None, "unknown", "unknown", "", None,
                 error=str(exc)
             ))
             continue
@@ -297,6 +323,7 @@ def _verify_with_pyhanko(raw: bytes) -> List[SigVerificationResult]:
 
         if cert is not None:
             try:
+                cert = x509.load_der_x509_certificate(cert.dump())
                 self_signed = (cert.subject == cert.issuer)
                 subj_str    = _cert_cn(cert.subject)
                 iss_str     = _cert_cn(cert.issuer)
@@ -304,19 +331,20 @@ def _verify_with_pyhanko(raw: bytes) -> List[SigVerificationResult]:
                                "TEST" in subj_str.upper() or
                                "DEMO" in subj_str.upper() or
                                "SIGNGUARD" in subj_str.upper())
-                nb = str(getattr(cert, "not_valid_before_utc",
-                                 getattr(cert, "not_valid_before", "")))
-                na = str(getattr(cert, "not_valid_after_utc",
-                                 getattr(cert, "not_valid_after", "")))
+                nb = str(cert.not_valid_before_utc)
+                na = str(cert.not_valid_after_utc)
                 key_alg = type(cert.public_key()).__name__
                 cert_info = CertInfo(subj_str, iss_str,
                                      str(cert.serial_number),
                                      nb, na, self_signed, test_cert, key_alg)
 
-                if self_signed:
-                    trust_status = TrustStatus.SELF_SIGNED
+                now = datetime.now(timezone.utc)
+                if not (cert.not_valid_before_utc <= now <= cert.not_valid_after_utc):
+                    trust_status = TrustStatus.EXPIRED
                 elif trusted_raw is True:
                     trust_status = TrustStatus.TRUSTED
+                elif self_signed:
+                    trust_status = TrustStatus.SELF_SIGNED
                 elif trusted_raw is False:
                     trust_status = TrustStatus.UNKNOWN_ISSUER
                 else:
@@ -331,9 +359,9 @@ def _verify_with_pyhanko(raw: bytes) -> List[SigVerificationResult]:
                         ModpolicyStatus.UNKNOWN)
 
         # ── Signer identity ────────────────────────────────────────────
-        if trust_status == TrustStatus.TRUSTED:
+        if trust_status == TrustStatus.TRUSTED and valid is True and int_status == IntegrityStatus.PASS and not test_cert:
             identity = IdentityStatus.ESTABLISHED
-        elif trust_status in (TrustStatus.SELF_SIGNED, TrustStatus.UNKNOWN_ISSUER):
+        elif trust_status in (TrustStatus.SELF_SIGNED, TrustStatus.UNKNOWN_ISSUER, TrustStatus.EXPIRED):
             identity = IdentityStatus.UNVERIFIED
         else:
             identity = IdentityStatus.NOT_ESTABLISHED
@@ -398,6 +426,7 @@ def _verify_with_pyhanko(raw: bytes) -> List[SigVerificationResult]:
             signing_time=signing_time,
             signed_attrs_ok=signed_attrs_ok,
             details=details,
+            modification_level=getattr(getattr(status, "modification_level", None), "name", "UNKNOWN"),
         ))
 
     return out
@@ -432,7 +461,7 @@ def _verify_no_pyhanko(raw: bytes) -> List[SigVerificationResult]:
             TrustStatus.NOT_EVALUATED, ModpolicyStatus.UNKNOWN,
             IdentityStatus.NOT_ESTABLISHED,
             "pyHanko not installed — cryptographic verification not available",
-            None, "unknown", "unknown", "", None,
+            None, None, "unknown", "unknown", "", None,
             error="pyHanko package not installed. Run: pip install pyhanko pyhanko-certvalidator"
         ))
     return out

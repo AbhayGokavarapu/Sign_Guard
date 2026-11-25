@@ -50,7 +50,7 @@ def verify(orb: ORBResult,
     pts_b = np.float32(orb.kp_b_coords).reshape(-1,1,2)
 
     try:
-        H, mask = cv2.findHomography(pts_a, pts_b, cv2.RANSAC, 5.0)
+        H, mask = cv2.findHomography(pts_a, pts_b, cv2.RANSAC, config.RANSAC_REPROJ_THRESH)
     except Exception as exc:
         return _empty(n, f"Homography estimation failed: {exc}")
 
@@ -75,10 +75,8 @@ def verify(orb: ORBResult,
                           inlier_matches, None,
                           matchColor=(34,197,94),
                           flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-    vis = cv2.drawMatches(cv2.cvtColor(vis[:, :vis.shape[1]//2 + gray_b.shape[1], :], cv2.COLOR_BGR2GRAY),
-                          kp_a,
-                          gray_b, kp_b,
-                          outlier_matches, vis,
+    # Draw outliers onto the same canvas using the original two images.
+    vis = cv2.drawMatches(gray_a, kp_a, gray_b, kp_b, outlier_matches, vis,
                           matchColor=(185,28,28),
                           flags=cv2.DrawMatchesFlags_DRAW_OVER_OUTIMG |
                                 cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)

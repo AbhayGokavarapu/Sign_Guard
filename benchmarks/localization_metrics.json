@@ -1,8 +1,13 @@
 {
-  "task": "Task C \u2014 Signature Localisation",
-  "sig_documents": 12,
-  "at_least_one_found": 10,
-  "none_found": 2,
-  "detection_rate": 0.8333,
-  "note": "IoU-based precision/recall requires ground-truth bounding-box annotations, which are not available for auto-generated synthetic fixtures. Detection rate measures whether >=1 candidate was found in documents expected to have visual signature regions."
+  "sig_documents": 9,
+  "at_least_one_found": 9,
+  "none_found": 0,
+  "detection_rate": 1.0,
+  "TP": 12,
+  "FP": 0,
+  "FN": 0,
+  "iou_threshold": 0.5,
+  "precision": 1.0,
+  "recall": 1.0,
+  "note": "IoU >= 0.5 one-to-one matching on annotated held-out signature pages; FP counts only those pages."
 }

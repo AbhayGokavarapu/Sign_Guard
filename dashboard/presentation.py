@@ -103,14 +103,17 @@ def render() -> None:
             raw = uploaded.read()
             st.session_state["pres_raw"]  = raw
             st.session_state["pres_name"] = uploaded.name
-            from core.pdf_parser import render_page
-            st.success(f"Loaded: **{uploaded.name}** ({len(raw):,} bytes)")
-            show_image(render_page(raw), "Page 1 preview")
+            preview = run_pipeline(raw, uploaded.name, analysis_mode="crypto_only", record_audit=False)
+            if preview.parsed and not preview.parsed.error:
+                show_image(preview.parsed.page_images[0], "Page 1 preview")
+            else:
+                st.error(preview.processing_error or preview.validation.reason)
+                return
         else:
             st.markdown("**Or use a quick synthetic demo document:**")
             if st.button("Load Synthetic Demo Document"):
-                from simulation.sample_generator import build_visual_only
-                raw  = build_visual_only(sig_seed=5)
+                from simulation.security_fixtures import signed_control
+                raw = signed_control()
                 st.session_state["pres_raw"]  = raw
                 st.session_state["pres_name"] = "demo_document.pdf"
                 from core.pdf_parser import render_page

@@ -16,6 +16,8 @@ IMPORTANT LIMITATIONS:
 from __future__ import annotations
 
 import hashlib, json, os, tempfile, time, uuid
+from contextlib import contextmanager
+from filelock import FileLock
 from dataclasses import asdict, dataclass
 from typing import List, Optional, Tuple
 
@@ -45,11 +47,11 @@ def _load_chain() -> List[dict]:
     try:
         with open(config.AUDIT_LOG_PATH, "r", encoding="utf-8") as f:
             data = json.load(f)
-        if not isinstance(data, list):
-            return []
+        if not isinstance(data, list) or any(not isinstance(r, dict) for r in data):
+            raise ValueError("Audit log must be an array of record objects.")
         return data
-    except (json.JSONDecodeError, OSError):
-        return []
+    except (json.JSONDecodeError, OSError) as exc:
+        raise ValueError(f"Audit log cannot be read: {exc}") from exc
 
 
 def _save_chain(chain: List[dict]) -> None:
@@ -60,6 +62,8 @@ def _save_chain(chain: List[dict]) -> None:
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as f:
             json.dump(chain, f, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
         os.replace(tmp_path, config.AUDIT_LOG_PATH)
     except Exception:
         try:
@@ -71,16 +75,21 @@ def _save_chain(chain: List[dict]) -> None:
 
 def append_record(doc_hash: str, verdict: str) -> AuditRecord:
     """Append a new record to the chain. Thread-safe via atomic replace."""
-    chain    = _load_chain()
-    prev_h   = chain[-1]["record_hash"] if chain else "0" * 64
-    event_id = str(uuid.uuid4())
-    ts       = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-    rec_hash = _hash_record(event_id, ts, doc_hash, verdict, prev_h)
+    os.makedirs(os.path.dirname(config.AUDIT_LOG_PATH), exist_ok=True)
+    with FileLock(config.AUDIT_LOG_PATH + ".lock", timeout=10):
+        ok, message = verify_chain()
+        if not ok:
+            raise ValueError(f"Refusing to append to inconsistent audit chain: {message}")
+        chain    = _load_chain()
+        prev_h   = chain[-1]["record_hash"] if chain else "0" * 64
+        event_id = str(uuid.uuid4())
+        ts       = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        rec_hash = _hash_record(event_id, ts, doc_hash, verdict, prev_h)
 
-    record = AuditRecord(event_id, ts, doc_hash, verdict, prev_h, rec_hash)
-    chain.append(asdict(record))
-    _save_chain(chain)
-    return record
+        record = AuditRecord(event_id, ts, doc_hash, verdict, prev_h, rec_hash)
+        chain.append(asdict(record))
+        _save_chain(chain)
+        return record
 
 
 def verify_chain() -> Tuple[bool, str]:
@@ -88,7 +97,10 @@ def verify_chain() -> Tuple[bool, str]:
     Walk the entire chain verifying each record hash and prev_hash linkage.
     Returns (is_intact, human_readable_message).
     """
-    chain = _load_chain()
+    try:
+        chain = _load_chain()
+    except ValueError as exc:
+        return False, str(exc)
     if not chain:
         return True, "Audit chain is empty — no records to verify."
 
@@ -98,7 +110,7 @@ def verify_chain() -> Tuple[bool, str]:
         # Validate required fields exist
         required = ("event_id", "timestamp", "doc_hash", "verdict",
                     "prev_hash", "record_hash")
-        missing  = [k for k in required if k not in rec]
+        missing  = [k for k in required if k not in rec or not isinstance(rec[k], str)]
         if missing:
             return False, (
                 f"Record {i} is missing fields: {missing}. "
@@ -136,3 +148,25 @@ def verify_chain() -> Tuple[bool, str]:
 
 def get_records() -> List[dict]:
     return _load_chain()
+
+
+def export_checkpoint():
+    """Store this checkpoint independently; keeping it beside the log is insufficient."""
+    with FileLock(config.AUDIT_LOG_PATH + ".lock", timeout=10):
+        ok, message = verify_chain()
+        if not ok:
+            raise ValueError(message)
+        records = _load_chain()
+        return {"record_count": len(records), "head_hash": records[-1]["record_hash"] if records else "0" * 64}
+
+
+def verify_checkpoint(checkpoint):
+    ok, message = verify_chain()
+    if not ok:
+        return False, message
+    records = _load_chain()
+    count = checkpoint["record_count"]
+    if count > len(records):
+        return False, "Audit chain was truncated relative to the checkpoint."
+    head = records[count - 1]["record_hash"] if count else "0" * 64
+    return (head == checkpoint["head_hash"], "Checkpoint matches." if head == checkpoint["head_hash"] else "Checkpoint mismatch.")

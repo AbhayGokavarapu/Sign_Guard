@@ -42,6 +42,8 @@ class LocalizationResult:
     annotated:      Image.Image           # blue boxes on original
     candidates:     List[SignatureCandidate]
     error:          Optional[str] = None
+    total_candidates: int = 0
+    truncated: bool = False
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────
@@ -92,7 +94,8 @@ def localize(raw: bytes, page_index: int = 0) -> LocalizationResult:
         doc  = fitz.open(stream=raw, filetype="pdf")
         page = doc[page_index]
         mat  = fitz.Matrix(config.RENDER_DPI / 72, config.RENDER_DPI / 72)
-        pix  = page.get_pixmap(matrix=mat, alpha=False)
+        from core.pdf_parser import render_bounded
+        pix = render_bounded(page, config.RENDER_DPI)
         original = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
         doc.close()
     except Exception as exc:
@@ -176,6 +179,28 @@ def localize(raw: bytes, page_index: int = 0) -> LocalizationResult:
         candidates.append(SignatureCandidate(page_index, (x,y,bw,bh), crop, confidence))
         draw.rectangle([x, y, x+bw, y+bh], outline=(37,99,235), width=3)
 
+    # Embedded raster placements provide precise boxes, including repeated xrefs.
+    # Their geometry is only a candidate heuristic, never proof of a signature.
+    with fitz.open(stream=raw, filetype="pdf") as pdf:
+        page = pdf[page_index]
+        sx, sy = W / page.rect.width, H / page.rect.height
+        embedded = []
+        for info in page.get_image_info():
+            x0, y0, x1, y1 = info['bbox']
+            x, y, bw, bh = int(x0*sx), int(y0*sy), int((x1-x0)*sx), int((y1-y0)*sy)
+            if 60 <= bw <= W * .7 and 12 <= bh <= H * .25 and 2 <= bw/max(bh, 1) <= 20:
+                embedded.append(SignatureCandidate(page_index, (x,y,bw,bh),
+                    original.crop((x,y,x+bw,y+bh)), .8))
+        # Prefer actual image bounds over overlapping connected components.
+        for candidate in embedded:
+            x,y,w,h = candidate.bbox
+            candidates = [c for c in candidates if not (
+                max(0,min(x+w,c.bbox[0]+c.bbox[2])-max(x,c.bbox[0])) *
+                max(0,min(y+h,c.bbox[1]+c.bbox[3])-max(y,c.bbox[1])) > .5 * min(w*h,c.bbox[2]*c.bbox[3]))]
+        candidates = embedded + candidates
+    candidates.sort(key=lambda c: c.confidence, reverse=True)
+    total_candidates = len(candidates)
+    candidates = candidates[:config.MAX_LOC_CANDIDATES]
     return LocalizationResult(
         page_index=page_index,
         original=original,
@@ -185,4 +210,6 @@ def localize(raw: bytes, page_index: int = 0) -> LocalizationResult:
         components_vis=comp_img,
         annotated=annotated,
         candidates=candidates,
+        total_candidates=total_candidates,
+        truncated=total_candidates > len(candidates),
     )

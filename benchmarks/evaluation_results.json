@@ -1,290 +1,1450 @@
 {
-  "generated_at": "2026-11-25T13:34:55Z",
-  "total_files": 30,
-  "total_time_s": 14.52,
-  "note": "Synthetic dataset only. Does not establish real-world generalisation.",
+  "generated_at": "2026-11-25T16:03:52Z",
+  "total_files": 52,
+  "total_time_s": 148.44,
+  "note": "Synthetic controls only. Held-out seeds were not used to tune thresholds; shared generator limits independence.",
+  "evaluation_split": "held_out",
   "records": [
     {
-      "file": "genuine_01.pdf",
+      "file": "datasets/security_v3/development_genuine_101.pdf",
       "category": "genuine",
-      "label": "CLEAN",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 2,
-      "elapsed": 2.608
-    },
-    {
-      "file": "genuine_02.pdf",
-      "category": "genuine",
-      "label": "CLEAN",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 2,
-      "elapsed": 0.984
-    },
-    {
-      "file": "genuine_03.pdf",
-      "category": "genuine",
-      "label": "CLEAN",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 2,
-      "elapsed": 0.962
-    },
-    {
-      "file": "genuine_04.pdf",
-      "category": "genuine",
-      "label": "CLEAN",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 2,
-      "elapsed": 0.766
-    },
-    {
-      "file": "genuine_05.pdf",
-      "category": "genuine",
-      "label": "CLEAN",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 2,
-      "elapsed": 0.526
-    },
-    {
-      "file": "tampered_01.pdf",
-      "category": "tampered",
-      "label": "TAMPERING_DETECTED",
-      "pred": "TAMPERING DETECTED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 1,
-      "elapsed": 0.491
-    },
-    {
-      "file": "tampered_02.pdf",
-      "category": "tampered",
-      "label": "TAMPERING_DETECTED",
-      "pred": "TAMPERING DETECTED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 1,
-      "elapsed": 0.6
-    },
-    {
-      "file": "tampered_03.pdf",
-      "category": "tampered",
-      "label": "TAMPERING_DETECTED",
-      "pred": "TAMPERING DETECTED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 1,
-      "elapsed": 0.531
-    },
-    {
-      "file": "tampered_04.pdf",
-      "category": "tampered",
-      "label": "TAMPERING_DETECTED",
-      "pred": "TAMPERING DETECTED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 1,
-      "elapsed": 0.499
-    },
-    {
-      "file": "tampered_05.pdf",
-      "category": "tampered",
-      "label": "TAMPERING_DETECTED",
-      "pred": "TAMPERING DETECTED",
-      "cls_pred": "Cryptographically Signed",
-      "n_cands": 1,
-      "elapsed": 0.511
-    },
-    {
-      "file": "shadow_01.pdf",
-      "category": "shadow",
-      "label": "REVIEW_REQUIRED",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.252
-    },
-    {
-      "file": "shadow_02.pdf",
-      "category": "shadow",
-      "label": "REVIEW_REQUIRED",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.302
-    },
-    {
-      "file": "shadow_03.pdf",
-      "category": "shadow",
-      "label": "REVIEW_REQUIRED",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.256
-    },
-    {
-      "file": "shadow_04.pdf",
-      "category": "shadow",
-      "label": "REVIEW_REQUIRED",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.247
-    },
-    {
-      "file": "shadow_05.pdf",
-      "category": "shadow",
-      "label": "REVIEW_REQUIRED",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.301
-    },
-    {
-      "file": "visual_01.pdf",
-      "category": "visual_only",
       "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Visual Signature Candidate",
-      "n_cands": 2,
-      "elapsed": 0.227
-    },
-    {
-      "file": "visual_02.pdf",
-      "category": "visual_only",
-      "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Visual Signature Candidate",
-      "n_cands": 4,
-      "elapsed": 0.223
-    },
-    {
-      "file": "visual_03.pdf",
-      "category": "visual_only",
-      "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Visual Signature Candidate",
-      "n_cands": 2,
-      "elapsed": 0.233
-    },
-    {
-      "file": "visual_multi_01.pdf",
-      "category": "visual_only",
-      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
       "pred": "INCONCLUSIVE",
-      "cls_pred": "Visual Signature Candidate",
+      "elapsed": 1.519,
+      "cls_pred": "Cryptographically Signed",
       "n_cands": 0,
-      "elapsed": 0.991
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
     },
     {
-      "file": "visual_multi_02.pdf",
-      "category": "visual_only",
+      "file": "datasets/security_v3/development_tampered_101.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "positive": true,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "TAMPERING DETECTED",
+      "elapsed": 0.999,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/development_content_change_101.pdf",
+      "category": "content_change",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 1.355,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-003",
+        "CRYPTO-004",
+        "SHADOW-001",
+        "SHADOW-002"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/development_annotation_101.pdf",
+      "category": "annotation",
       "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "Benign annotations may still be rejected by pyHanko policy.",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 1.467,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-003",
+        "CRYPTO-004"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/development_additional_signature_101.pdf",
+      "category": "additional_signature",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
       "pred": "INCONCLUSIVE",
-      "cls_pred": "Visual Signature Candidate",
+      "elapsed": 1.336,
+      "cls_pred": "Cryptographically Signed",
       "n_cands": 0,
-      "elapsed": 0.826
+      "finding_codes": [
+        "CRYPTO-004"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
     },
     {
-      "file": "unsigned_01.pdf",
-      "category": "unsigned",
+      "file": "datasets/security_v3/development_visual_101.pdf",
+      "category": "visual",
       "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.16
-    },
-    {
-      "file": "unsigned_02.pdf",
-      "category": "unsigned",
-      "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.177
-    },
-    {
-      "file": "unsigned_03.pdf",
-      "category": "unsigned",
-      "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.153
-    },
-    {
-      "file": "unsigned_04.pdf",
-      "category": "unsigned",
-      "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.158
-    },
-    {
-      "file": "unsigned_05.pdf",
-      "category": "unsigned",
-      "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.173
-    },
-    {
-      "file": "duplicate_sig_01.pdf",
-      "category": "visual_only",
-      "label": "REVIEW_REQUIRED",
-      "pred": "REVIEW REQUIRED",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.503,
       "cls_pred": "Visual Signature Candidate",
-      "n_cands": 3,
-      "elapsed": 0.181
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
     },
     {
-      "file": "ela_target_01.pdf",
-      "category": "visual_only",
+      "file": "datasets/security_v3/development_last_page_101.pdf",
+      "category": "last_page",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 2,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 1.136,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/development_duplicate_101.pdf",
+      "category": "duplicate",
       "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        },
+        {
+          "page": 0,
+          "bbox": [
+            660,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
       "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.18
+      "elapsed": 0.689,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
     },
     {
-      "file": "faint_mark_01.pdf",
-      "category": "unsigned",
+      "file": "datasets/security_v3/development_repeated_logo_101.pdf",
+      "category": "repeated_logo",
       "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": "",
       "pred": "REVIEW REQUIRED",
-      "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.141
+      "elapsed": 0.496,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
     },
     {
-      "file": "multi_rev_01.pdf",
-      "category": "unsigned",
+      "file": "datasets/security_v3/development_scan_101.pdf",
+      "category": "scan",
       "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
       "pred": "REVIEW REQUIRED",
+      "elapsed": 0.765,
       "cls_pred": "Unsigned",
-      "n_cands": 1,
-      "elapsed": 0.161
+      "n_cands": 15,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": false,
+      "processing_error": null
     },
     {
-      "file": "minimal_01.pdf",
-      "category": "unsigned",
+      "file": "datasets/security_v3/development_image_edit_101.pdf",
+      "category": "image_edit",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.565,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/development_ela_101.pdf",
+      "category": "ela",
       "label": "INCONCLUSIVE",
-      "pred": "REVIEW REQUIRED",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.4,
       "cls_pred": "Unsigned",
       "n_cands": 1,
-      "elapsed": 0.164
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/development_unsigned_101.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.435,
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_genuine_2001.pdf",
+      "category": "genuine",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.997,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_tampered_2001.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "TAMPERING DETECTED",
+      "elapsed": 1.125,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_content_change_2001.pdf",
+      "category": "content_change",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 1.296,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-003",
+        "CRYPTO-004",
+        "SHADOW-001",
+        "SHADOW-002"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_annotation_2001.pdf",
+      "category": "annotation",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "Benign annotations may still be rejected by pyHanko policy.",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 1.141,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-003",
+        "CRYPTO-004"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_additional_signature_2001.pdf",
+      "category": "additional_signature",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 1.076,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-004"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_visual_2001.pdf",
+      "category": "visual",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.483,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_last_page_2001.pdf",
+      "category": "last_page",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 2,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 1.04,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_duplicate_2001.pdf",
+      "category": "duplicate",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        },
+        {
+          "page": 0,
+          "bbox": [
+            660,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.462,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_repeated_logo_2001.pdf",
+      "category": "repeated_logo",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.492,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_scan_2001.pdf",
+      "category": "scan",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.67,
+      "cls_pred": "Unsigned",
+      "n_cands": 20,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": false,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_image_edit_2001.pdf",
+      "category": "image_edit",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.453,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_ela_2001.pdf",
+      "category": "ela",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.554,
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_unsigned_2001.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.522,
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_genuine_2002.pdf",
+      "category": "genuine",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.983,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_tampered_2002.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "TAMPERING DETECTED",
+      "elapsed": 1.032,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_content_change_2002.pdf",
+      "category": "content_change",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 1.137,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-003",
+        "CRYPTO-004",
+        "SHADOW-001",
+        "SHADOW-002"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_annotation_2002.pdf",
+      "category": "annotation",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "Benign annotations may still be rejected by pyHanko policy.",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 1.024,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-003",
+        "CRYPTO-004"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_additional_signature_2002.pdf",
+      "category": "additional_signature",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 1.085,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-004"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_visual_2002.pdf",
+      "category": "visual",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.414,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_last_page_2002.pdf",
+      "category": "last_page",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 2,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 1.16,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_duplicate_2002.pdf",
+      "category": "duplicate",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        },
+        {
+          "page": 0,
+          "bbox": [
+            660,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.46,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_repeated_logo_2002.pdf",
+      "category": "repeated_logo",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.502,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_scan_2002.pdf",
+      "category": "scan",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.923,
+      "cls_pred": "Unsigned",
+      "n_cands": 20,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": false,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_image_edit_2002.pdf",
+      "category": "image_edit",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.461,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_ela_2002.pdf",
+      "category": "ela",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.405,
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_unsigned_2002.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.405,
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_genuine_2003.pdf",
+      "category": "genuine",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 1.166,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_tampered_2003.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "TAMPERING DETECTED",
+      "elapsed": 1.268,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_content_change_2003.pdf",
+      "category": "content_change",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 1.159,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-003",
+        "CRYPTO-004",
+        "SHADOW-001",
+        "SHADOW-002"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_annotation_2003.pdf",
+      "category": "annotation",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "Benign annotations may still be rejected by pyHanko policy.",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 1.079,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-003",
+        "CRYPTO-004"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_additional_signature_2003.pdf",
+      "category": "additional_signature",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 1.015,
+      "cls_pred": "Cryptographically Signed",
+      "n_cands": 0,
+      "finding_codes": [
+        "CRYPTO-004"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_visual_2003.pdf",
+      "category": "visual",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.418,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_last_page_2003.pdf",
+      "category": "last_page",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 2,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 1.052,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_duplicate_2003.pdf",
+      "category": "duplicate",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        },
+        {
+          "page": 0,
+          "bbox": [
+            660,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.514,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_repeated_logo_2003.pdf",
+      "category": "repeated_logo",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.549,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 2,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_scan_2003.pdf",
+      "category": "scan",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "REVIEW REQUIRED",
+      "elapsed": 0.743,
+      "cls_pred": "Unsigned",
+      "n_cands": 20,
+      "finding_codes": [
+        "ORB-001"
+      ],
+      "coverage_complete": false,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_image_edit_2003.pdf",
+      "category": "image_edit",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.652,
+      "cls_pred": "Visual Signature Candidate",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_ela_2003.pdf",
+      "category": "ela",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.557,
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
+    },
+    {
+      "file": "datasets/security_v3/held_out_unsigned_2003.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": "",
+      "pred": "INCONCLUSIVE",
+      "elapsed": 0.613,
+      "cls_pred": "Unsigned",
+      "n_cands": 1,
+      "finding_codes": [],
+      "coverage_complete": true,
+      "processing_error": null
     }
   ],
-  "task": "Task B \u2014 Tampering Alert Detection",
-  "total": 30,
-  "evaluated": 30,
+  "total": 39,
+  "evaluated": 39,
   "unsupported": 0,
-  "TP": 12,
-  "FP": 16,
-  "FN": 0,
-  "TN": 2,
-  "accuracy": 0.4667,
-  "precision": 0.4286,
-  "recall": 1.0,
-  "f1": 0.6
+  "TP": 9,
+  "FP": 9,
+  "FN": 3,
+  "TN": 18,
+  "accuracy": 0.6923,
+  "precision": 0.5,
+  "recall": 0.75,
+  "f1": 0.6,
+  "per_category": {
+    "additional_signature": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 3,
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    },
+    "annotation": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 3,
+      "FN": 0,
+      "TN": 0,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    },
+    "content_change": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 3,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_95pct_wilson": [
+        0.4385,
+        1
+      ]
+    },
+    "duplicate": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 3,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_95pct_wilson": [
+        0.4385,
+        1
+      ]
+    },
+    "ela": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 3,
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    },
+    "genuine": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 3,
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    },
+    "image_edit": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 3,
+      "TN": 0,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        0.5615
+      ]
+    },
+    "last_page": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 3,
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    },
+    "repeated_logo": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 3,
+      "FN": 0,
+      "TN": 0,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    },
+    "scan": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 3,
+      "FN": 0,
+      "TN": 0,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    },
+    "tampered": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 3,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_95pct_wilson": [
+        0.4385,
+        1
+      ]
+    },
+    "unsigned": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 3,
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    },
+    "visual": {
+      "total": 3,
+      "evaluated": 3,
+      "unsupported": 0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 3,
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_95pct_wilson": [
+        0,
+        1
+      ]
+    }
+  },
+  "ablations": {
+    "crypto_only": {
+      "total": 39,
+      "evaluated": 39,
+      "unsupported": 0,
+      "TP": 3,
+      "FP": 0,
+      "FN": 9,
+      "TN": 27,
+      "accuracy": 0.7692,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4
+    },
+    "crypto_revision": {
+      "total": 39,
+      "evaluated": 39,
+      "unsupported": 0,
+      "TP": 6,
+      "FP": 3,
+      "FN": 6,
+      "TN": 24,
+      "accuracy": 0.7692,
+      "precision": 0.6667,
+      "recall": 0.5,
+      "f1": 0.5714
+    },
+    "full": {
+      "total": 39,
+      "evaluated": 39,
+      "unsupported": 0,
+      "TP": 9,
+      "FP": 9,
+      "FN": 3,
+      "TN": 18,
+      "accuracy": 0.6923,
+      "precision": 0.5,
+      "recall": 0.75,
+      "f1": 0.6
+    }
+  },
+  "confirmed_integrity_failures": 3,
+  "review_alerts": 15
 }

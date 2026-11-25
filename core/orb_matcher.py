@@ -53,7 +53,7 @@ def match(img_a: Image.Image, img_b: Image.Image,
         gray_a = _to_gray(img_a)
         gray_b = _to_gray(img_b)
 
-        orb = cv2.ORB_create(nfeatures=n_features)
+        orb = cv2.ORB_create(nfeatures=n_features, edgeThreshold=8, patchSize=15)
         kp_a, des_a = orb.detectAndCompute(gray_a, None)
         kp_b, des_b = orb.detectAndCompute(gray_b, None)
 
@@ -90,12 +90,10 @@ def match(img_a: Image.Image, img_b: Image.Image,
 
         # Mutual (cross-check) filter
         knn_rev    = bf.knnMatch(des_b, des_a, k=2)
-        good_rev   = {m.queryIdx for pair in knn_rev
+        good_rev   = {(m.queryIdx, m.trainIdx) for pair in knn_rev
                       if len(pair) == 2 and pair[0].distance < ratio_thresh * pair[1].distance
                       for m in [pair[0]]}
-        mutual     = [m for m in good if m.trainIdx in good_rev]
-        if len(mutual) < 2:
-            mutual = good   # fall back if too aggressive
+        mutual     = [m for m in good if (m.trainIdx, m.queryIdx) in good_rev]
 
         # Raw match visualisation
         raw_arr = cv2.drawMatches(

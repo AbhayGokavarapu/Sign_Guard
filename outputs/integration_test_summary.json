@@ -1,6 +1,53 @@
 {
-  "timestamp": "2026-11-25T13:27:52Z",
-  "passed": 33,
+  "timestamp": "2026-11-25T16:08:35Z",
+  "passed": 35,
   "failed": 0,
-  "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]"
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "scenarios": [
+    {
+      "scenario": "A",
+      "passed": true,
+      "verdict": "INCONCLUSIVE",
+      "findings": []
+    },
+    {
+      "scenario": "B",
+      "passed": true,
+      "verdict": "TAMPERING DETECTED",
+      "findings": [
+        "CRYPTO-001"
+      ]
+    },
+    {
+      "scenario": "C",
+      "passed": true,
+      "verdict": "REVIEW REQUIRED",
+      "findings": [
+        "CRYPTO-003",
+        "CRYPTO-004",
+        "SHADOW-001",
+        "SHADOW-002"
+      ]
+    },
+    {
+      "scenario": "D",
+      "passed": true,
+      "verdict": "REVIEW REQUIRED",
+      "findings": [
+        "ORB-001"
+      ]
+    },
+    {
+      "scenario": "E",
+      "passed": true,
+      "verdict": "INCONCLUSIVE",
+      "findings": []
+    },
+    {
+      "scenario": "F",
+      "passed": true,
+      "verdict": "INCONCLUSIVE",
+      "findings": []
+    }
+  ]
 }

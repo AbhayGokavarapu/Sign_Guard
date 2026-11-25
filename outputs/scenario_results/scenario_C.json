@@ -1,22 +1,22 @@
 {
   "report_type": "SignGuard Forensic Report",
   "schema_version": "2.0",
-  "generated_at": "2026-11-25T13:27:51Z",
-  "analysis_ts": "2026-11-25T13:27:51Z",
+  "generated_at": "2026-11-25T16:08:31Z",
+  "analysis_ts": "2026-11-25T16:08:29Z",
   "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
   "document": {
     "filename": "scenario_C.pdf",
-    "sha256": "62305b307fff4e260ac1ae6dbaf37e26f76d132c2ea9212bf6f7c1a3950be4e6",
-    "size_bytes": 4857,
+    "sha256": "b5353f9ede429dfa695a2f49a2575f8f61d332e2f1673351947f7e4cda24adf5",
+    "size_bytes": 9731,
     "page_count": 1,
     "metadata": {
       "title": "untitled",
       "author": "anonymous",
-      "subject": "unspecified",
+      "subject": "SIGNGUARD-INTEGRITY-CONTROL",
       "creator": "anonymous",
-      "producer": "ReportLab PDF Library - (opensource)",
-      "creation_date": "D:20261125185751+05'00'",
-      "mod_date": "D:20261125185751+05'00'",
+      "producer": "ReportLab PDF Library - (opensource); pyHanko 0.38.2",
+      "creation_date": "D:20261125160827+00'00'",
+      "mod_date": "D:20261125160827Z",
       "format": "",
       "pdf_version": ""
     },
@@ -24,96 +24,147 @@
     "sig_fields": 0
   },
   "classification": {
-    "class": "Unsigned",
-    "crypto_sigs": 0,
+    "class": "Cryptographically Signed",
+    "crypto_sigs": 1,
     "visual_candidates": 0,
-    "explanation": "No cryptographic signature fields and no visual signature candidates were detected.  The document appears unsigned.  Absence of a signature does not establish that the content is authentic.",
-    "completeness": "Limited analysis applicable to unsigned documents."
+    "explanation": "The document contains 1 embedded cryptographic signature field(s).  Mathematical validity will be verified in Module 3.",
+    "completeness": "Full cryptographic and visual analysis applicable."
   },
-  "cryptographic": {},
+  "cryptographic": {
+    "total_sigs": 1,
+    "total_discovered": 1,
+    "all_valid": true,
+    "pyhanko_used": true,
+    "summary": "[Signature1] integrity=PASS | math=True | trust=SELF-SIGNED (untrusted) | modpolicy=VIOLATION",
+    "signatures": [
+      {
+        "field": "Signature1",
+        "integrity_status": "PASS",
+        "math_valid": true,
+        "trust_status": "SELF-SIGNED (untrusted)",
+        "modpolicy_status": "VIOLATION",
+        "identity_status": "UNVERIFIED (untrusted cert)",
+        "completeness": "integrity | math | trust | modpolicy",
+        "modification_level": "OTHER",
+        "revocation_status": "NOT CHECKED (offline)",
+        "timestamp_status": "NOT VALIDATED",
+        "digest_alg": "sha256",
+        "sig_alg": "unknown",
+        "signing_time": "2026-11-25 16:08:27+00:00",
+        "signed_attrs_ok": true,
+        "details": [
+          "INTACT:UNTRUSTED,EXTENDED_WITH_OTHER,ILLEGAL_MODIFICATIONS",
+          "NOTE: Test/self-signed certificate \u2014 signer identity CANNOT be established from this certificate.",
+          "ByteRange does not cover the full current file \u2014 incremental update likely present."
+        ],
+        "byte_range": {
+          "raw_values": [
+            0,
+            3095,
+            8233,
+            456
+          ],
+          "structurally_valid": true,
+          "covers_full_file": false,
+          "covers_signed_rev": true,
+          "notes": [
+            "Signature contents gap: bytes 3095\u20138233 (5138 bytes).",
+            "ByteRange ends at 8689, file is 9731 bytes \u2014 1042 trailing bytes not covered (incremental update likely).",
+            "Signature covers an earlier revision; later content is not signed."
+          ]
+        },
+        "cert": {
+          "subject": "SignGuard Demo Signer [TEST \u2014 NOT TRUSTED]",
+          "issuer": "SignGuard Demo Signer [TEST \u2014 NOT TRUSTED]",
+          "serial": "217768185093404779466147871903606458638342205539",
+          "not_before": "2026-11-25 16:07:21+00:00",
+          "not_after": "2036-11-22 16:07:21+00:00",
+          "self_signed": true,
+          "is_test_cert": true,
+          "key_alg": "RSAPublicKey"
+        }
+      }
+    ]
+  },
   "revision": {
-    "revision_count": 3,
+    "revision_count": 4,
     "has_incremental": true,
-    "shadow_suspect": false,
-    "changed_area_pct": 0.0,
-    "text_diff": "",
+    "shadow_suspect": true,
+    "changed_area_pct": 0.013063135830685805,
+    "text_diff": "0 line(s) removed, 1 line(s) added between signed revision and current document.",
     "metadata_changed": false,
-    "discovery_method": "eof_fallback",
-    "summary": "3 revision(s) discovered via eof_fallback. 2 incremental update(s) present.",
+    "discovery_method": "pyhanko_xref_chain",
+    "summary": "4 revision(s) discovered via pyhanko_xref_chain. 3 incremental update(s) present. Visual content changed 0.0% between signed revision and current \u2014 possible shadow attack; manual review required. 0 line(s) removed, 1 line(s) added between signed revision and current document.",
     "revisions": [
       {
         "index": 0,
         "start": 0,
-        "end": 2423,
+        "end": 1485,
         "is_signed": false,
-        "page_count": 0
+        "page_count": 1
       },
       {
         "index": 1,
-        "start": 2423,
-        "end": 2429,
+        "start": 1485,
+        "end": 2579,
         "is_signed": false,
-        "page_count": 0
+        "page_count": 1
       },
       {
         "index": 2,
-        "start": 2429,
-        "end": 4857,
+        "start": 2579,
+        "end": 8690,
+        "is_signed": true,
+        "page_count": 1
+      },
+      {
+        "index": 3,
+        "start": 8690,
+        "end": 9731,
         "is_signed": false,
-        "page_count": 0
+        "page_count": 1
       }
     ]
   },
   "localisation": {
     "page": 0,
-    "candidates": [
-      {
-        "page": 0,
-        "bbox": [
-          323,
-          707,
-          545,
-          44
-        ],
-        "heuristic_score": 1.0
-      }
-    ],
+    "candidates": [],
     "note": "Confidence values are heuristic scores, not calibrated probabilities.",
     "error": null
   },
   "ela": {
     "quality_active": 75,
     "amplification": 15,
-    "mean_residual": 4.4,
-    "max_residual": 51.0,
-    "std_residual": 6.088,
-    "high_pct": 31.5,
-    "finding": "31.5% of pixels show high amplified residual energy. Localised high-residual regions may warrant investigation but are not standalone proof of manipulation.",
-    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=5.3 | Q75: mean=4.4 | Q85: mean=3.7 | Q95: mean=3.1 \u2014 highest at Q65 (5.3).",
+    "mean_residual": 0.082,
+    "max_residual": 37.0,
+    "std_residual": 0.947,
+    "high_pct": 0.0,
+    "finding": "Mean residual (0.1) is within a typical range for JPEG recompression at this quality setting. No strong ELA anomaly detected. Note: rendered PDF crops may not carry original JPEG compression history.",
+    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=0.1 | Q75: mean=0.1 | Q85: mean=0.1 | Q95: mean=0.0 \u2014 highest at Q65 (0.1).",
     "multi_quality": {
       "65": {
-        "mean": 5.275,
-        "max": 53.333,
-        "std": 6.557,
-        "high_pct": 36.63
+        "mean": 0.105,
+        "max": 52.0,
+        "std": 1.228,
+        "high_pct": 0.0
       },
       "75": {
-        "mean": 4.4,
-        "max": 51.0,
-        "std": 6.088,
-        "high_pct": 31.5
+        "mean": 0.082,
+        "max": 37.0,
+        "std": 0.947,
+        "high_pct": 0.0
       },
       "85": {
-        "mean": 3.676,
-        "max": 45.0,
-        "std": 5.317,
-        "high_pct": 28.89
+        "mean": 0.054,
+        "max": 23.0,
+        "std": 0.606,
+        "high_pct": 0.0
       },
       "95": {
-        "mean": 3.125,
-        "max": 41.667,
-        "std": 4.81,
-        "high_pct": 25.05
+        "mean": 0.018,
+        "max": 7.0,
+        "std": 0.212,
+        "high_pct": 0.0
       }
     },
     "error": null
@@ -121,48 +172,105 @@
   "orb_ransac": {},
   "verdict": {
     "verdict": "REVIEW REQUIRED",
-    "integrity_verdict": "NOT APPLICABLE",
-    "confidence_label": "Low",
-    "explanation": "Supporting forensic indicators (ELA or ORB/RANSAC) suggest possible manipulation, but are insufficient for a definitive conclusion. Manual expert review is recommended.",
-    "completeness": "Modules completed: Revision, Localisation, ELA",
+    "integrity_verdict": "NO TAMPERING DETECTED",
+    "confidence_label": "Moderate",
+    "explanation": "No cryptographic integrity failure detected, but significant anomalies require manual expert review. Modification-policy violation | Post-signing visible content change",
+    "completeness": "Modules completed: Cryptographic, Revision, Localisation, ELA | Pages analysed: 1/1 | Mode: full",
     "findings": [
       {
-        "code": "ELA-001",
-        "severity": "MEDIUM",
-        "title": "Elevated ELA residual",
-        "description": "Mean residual: 4.4 | High-energy pixels: 31.5% | Quality: 75.",
-        "module": "ELA",
-        "measurements": "mean=4.40 | max=51.00 | std=6.09",
+        "code": "CRYPTO-003",
+        "severity": "HIGH",
+        "title": "Modification-policy violation",
+        "description": "Signature field 'Signature1': changes were made that violate the document's DocMDP/FieldMDP modification policy.",
+        "module": "Cryptographic Verification",
+        "measurements": "modpolicy=VIOLATION",
         "page": null,
-        "limitation": "ELA elevated residuals can be caused by high-contrast edges, fine textures, gradients or printed text \u2014 not only manipulation. ELA is a supporting indicator, not proof of forgery."
+        "limitation": ""
+      },
+      {
+        "code": "CRYPTO-004",
+        "severity": "LOW",
+        "title": "Signature does not cover the complete current file",
+        "description": "Signature field 'Signature1' was created on an earlier revision. Post-signing incremental updates exist and are not covered by this signature.",
+        "module": "Cryptographic Verification",
+        "measurements": "['Signature contents gap: bytes 3095\u20138233 (5138 bytes).', 'ByteRange ends at 8689, file is 9731 bytes \u2014 1042 trailing bytes not covered (incremental update likely).', 'Signature covers an earlier revision; later content is not signed.']",
+        "page": null,
+        "limitation": "Incremental updates may be legitimate (e.g. annotations)."
+      },
+      {
+        "code": "SHADOW-001",
+        "severity": "HIGH",
+        "title": "Post-signing visible content change",
+        "description": "The signed revision and the current revision differ on 0.0% of the page area. This is a post-signing content change; it does not by itself establish a pre-planned shadow exploit. Content displayed to the signer differs from content shown to later readers.",
+        "module": "Revision Analysis",
+        "measurements": "changed_area=0.0% | revisions=4 | method=pyhanko_xref_chain",
+        "page": 0,
+        "limitation": "Shadow-attack detection uses rendered image comparison. Attacks with identical renders are not detectable. Legitimate annotations/signatures also create incremental updates."
+      },
+      {
+        "code": "SHADOW-002",
+        "severity": "MEDIUM",
+        "title": "Text content changed between signed and current revision",
+        "description": "0 line(s) removed, 1 line(s) added between signed revision and current document.",
+        "module": "Revision Analysis",
+        "measurements": "",
+        "page": 0,
+        "limitation": "Text extraction may miss some content types."
       }
     ],
     "module_scores": {
-      "Classification": "Unsigned",
-      "Revision Analysis": "3 revision(s) | no shadow | method=eof_fallback",
-      "Signature Localisation": "1 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
-      "ELA": "mean=4.4 @ Q75 (elevated)",
-      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=5.3 | Q75: mean=4.4 | Q85: mean=3.7 | Q95: mean=3.1 \u2014 highest at Q65 (5.3)."
+      "Classification": "Cryptographically Signed",
+      "Cryptographic Verification": "PASS",
+      "Revision Analysis": "4 revision(s) | shadow suspect | method=pyhanko_xref_chain",
+      "Signature Localisation": "0 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
+      "ELA": "mean=0.1 @ Q75 (normal)",
+      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=0.1 | Q75: mean=0.1 | Q85: mean=0.1 | Q95: mean=0.0 \u2014 highest at Q65 (0.1)."
     }
   },
-  "integrity_verdict": "NOT APPLICABLE",
+  "integrity_verdict": "NO TAMPERING DETECTED",
   "limitations": [
+    "Certificate for 'Signature1' is SELF-SIGNED (untrusted). Mathematical integrity may be valid but signer identity CANNOT be established from this certificate alone.",
     "Shadow-attack detection compares rendered page images using one rendering engine. Attacks that produce identical renders are not detectable.",
     "Legitimate incremental updates (annotations, additional sigs) may trigger the shadow-suspect flag; manual review distinguishes malicious from benign.",
-    "Primary revision discovery failed; used eof_fallback. Results may be less reliable for PDFs with embedded binary streams.",
+    "No visual signature candidates detected. The document may be unsigned, the signature may be very faint, or localisation may have missed it.",
     "ELA applied to rendered PDF images may not reflect the original JPEG compression history of embedded content.",
     "Results are based on automated analysis. Expert human review is required before use in any legal, compliance or operational context.",
     "Synthetic evaluation does not establish real-world generalisation performance."
   ],
   "processing": {
-    "total_seconds": 0.2,
+    "total_seconds": 1.934,
     "stage_times": {
-      "parse": 0.013,
-      "classify": 0.001,
-      "revision": 0.02,
-      "localise": 0.123,
-      "ela": 0.023,
-      "fusion": 0.0
+      "analysis_total": 1.934
     }
-  }
+  },
+  "coverage": {
+    "complete": true,
+    "mode": "full",
+    "pages_analysed": 1,
+    "page_count": 1,
+    "candidates_found": 0,
+    "candidates_analysed": 0,
+    "pairs_available": 0,
+    "pairs_analysed": 0,
+    "limitations": []
+  },
+  "page_results": [
+    {
+      "page": 0,
+      "candidate_count": 0,
+      "candidates": [],
+      "revision_changed_area_pct": 0.013063135830685805,
+      "shadow_suspect": true,
+      "ela": [
+        {
+          "mean": 0.08231482654809952,
+          "high_pct": 0.0,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "candidate_pairs": [],
+  "audit_error": null,
+  "processing_error": null
 }

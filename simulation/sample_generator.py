@@ -210,85 +210,9 @@ def build_shadow_pdf(
     shadow_amount: str = "$9,000",
     note: str = ""
 ) -> bytes:
-    def _make_rev(amount: str, rev_label: str, header_color: Tuple) -> bytes:
-        b = io.BytesIO()
-        cv = canvas.Canvas(b, pagesize=A4)
-        _header_band(cv, title, bg=header_color)
-
-        cv.setFont("Helvetica-Bold", 13)
-        cv.setFillColor(_hex(15, 23, 42))
-        cv.drawString(2*cm, H - 4.5*cm, "Invoice Details")
-
-        # Parse numeric value safely for tax calculation
-        try:
-            numeric = int(amount.replace('$','').replace(',','').strip())
-            tax_str = f"${numeric // 10:,}"
-        except (ValueError, AttributeError):
-            tax_str = "N/A"
-
-        rows = [
-            ("Invoice No:",  "INV-2024-1042"),
-            ("Date:",        "2024-01-15"),
-            ("Client:",      "Acme Corporation"),
-            ("Description:", "Professional Services — Q4 2024"),
-            ("Subtotal:",    amount),
-            ("Tax (10%):",   tax_str),
-            ("TOTAL DUE:",   amount),
-        ]
-        y = H - 5.5*cm
-        for label, value in rows:
-            is_total = label == "TOTAL DUE:"
-            cv.setFont("Helvetica-Bold" if is_total else "Helvetica", 11)
-            if is_total:
-                cv.setFillColor(_hex(185, 28, 28))
-                cv.setFont("Helvetica-Bold", 14)
-            else:
-                cv.setFillColor(_hex(71, 85, 105))
-            cv.drawString(2*cm, y, label)
-            if is_total:
-                cv.setFillColor(_hex(185, 28, 28))
-                cv.setFont("Helvetica-Bold", 14)
-            else:
-                cv.setFillColor(_hex(15, 23, 42))
-                cv.setFont("Helvetica", 11)
-            cv.drawString(8*cm, y, value)
-            if is_total:
-                cv.setStrokeColor(_hex(185, 28, 28))
-                cv.setLineWidth(1.5)
-                cv.line(2*cm, y - 2, W - 2*cm, y - 2)
-                cv.setLineWidth(1)
-            y -= 0.75*cm
-
-        # Big amount display
-        cv.setFillColor(_hex(37, 99, 235))
-        cv.setFont("Helvetica-Bold", 28)
-        cv.drawCentredString(W/2, y - 1*cm, f"AMOUNT DUE: {amount}")
-
-        # Revision label badge
-        badge_color = (21, 128, 61) if "ORIGINAL" in rev_label else (185, 28, 28)
-        _status_badge(cv, f"  {rev_label}  ", badge_color, y - 2.5*cm)
-
-        if note:
-            cv.setFont("Helvetica-Bold", 9)
-            cv.setFillColor(_hex(185, 28, 28) if "SHADOW" in note or "MODIFIED" in note
-                             else _hex(21, 128, 61))
-            cv.drawCentredString(W/2, y - 3.5*cm, note)
-
-        cv.setFont("Helvetica", 8)
-        cv.setFillColor(_hex(148, 163, 184))
-        cv.drawCentredString(W/2, 1.5*cm,
-            "SignGuard Synthetic Document — Shadow Attack Test")
-        cv.save()
-        return b.getvalue()
-
-    rev1 = _make_rev(original_amount, "REVISION 1 — SIGNED AMOUNT",   (30, 41, 59))
-    rev2 = _make_rev(shadow_amount,   "REVISION 2 — OVERRIDDEN AMOUNT",(127, 29, 29))
-
-    # Concatenate with %%EOF boundary to simulate incremental update
-    combined  = rev1.rstrip(b"\n").rstrip(b"\r")
-    combined += b"\n%%EOF\n"
-    combined += rev2
-    return combined
+    # Compatibility API: a genuinely signed document plus a valid incremental update.
+    from simulation.security_fixtures import shadow_pair
+    return shadow_pair(original_amount, shadow_amount)[1]
 
 
 def build_tampered_bytes(original_pdf: bytes,

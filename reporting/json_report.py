@@ -91,6 +91,9 @@ def build_report(result: PipelineResult) -> dict:
                 "modpolicy_status":   sig.modpolicy_status,
                 "identity_status":    sig.identity_status,
                 "completeness":       sig.completeness,
+                "modification_level": sig.modification_level,
+                "revocation_status": sig.revocation_status,
+                "timestamp_status": sig.timestamp_status,
                 "digest_alg":         sig.digest_alg,
                 "sig_alg":            sig.sig_alg,
                 "signing_time":       sig.signing_time,
@@ -124,6 +127,7 @@ def build_report(result: PipelineResult) -> dict:
 
         r["cryptographic"] = {
             "total_sigs":   cr.total_sigs,
+            "total_discovered": cr.total_discovered,
             "all_valid":    cr.all_valid,
             "pyhanko_used": cr.pyhanko_used,
             "summary":      cr.summary,
@@ -239,6 +243,12 @@ def build_report(result: PipelineResult) -> dict:
             "module_scores": fu.module_scores,
         }
         r["limitations"] = fu.limitations
+
+    r["coverage"] = _safe(result.coverage)
+    r["page_results"] = _safe(result.page_results)
+    r["candidate_pairs"] = _safe(result.pair_results)
+    r["audit_error"] = result.audit_error
+    r["processing_error"] = result.processing_error
 
     # Processing
     r["processing"] = {

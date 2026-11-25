@@ -1,13 +1,13 @@
 {
   "report_type": "SignGuard Forensic Report",
   "schema_version": "2.0",
-  "generated_at": "2026-11-25T13:27:51Z",
-  "analysis_ts": "2026-11-25T13:27:51Z",
+  "generated_at": "2026-11-25T16:08:32Z",
+  "analysis_ts": "2026-11-25T16:08:31Z",
   "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
   "document": {
     "filename": "scenario_D.pdf",
-    "sha256": "3ef2dba13b8e4dd6bb0c3ed1e68a264e12ce34eed419340a09c0bd5c39c6337b",
-    "size_bytes": 3636,
+    "sha256": "3395e8c9e1e9f90c3796d9fb01714677d0f8d98cb3122e6b1e5baf059e506082",
+    "size_bytes": 3672,
     "page_count": 1,
     "metadata": {
       "title": "untitled",
@@ -15,8 +15,8 @@
       "subject": "unspecified",
       "creator": "anonymous",
       "producer": "ReportLab PDF Library - (opensource)",
-      "creation_date": "D:20261125185751+05'00'",
-      "mod_date": "D:20261125185751+05'00'",
+      "creation_date": "D:20261125160831+00'00'",
+      "mod_date": "D:20261125160831+00'00'",
       "format": "",
       "pdf_version": ""
     },
@@ -38,15 +38,15 @@
     "changed_area_pct": 0.0,
     "text_diff": "",
     "metadata_changed": false,
-    "discovery_method": "eof_fallback",
-    "summary": "1 revision(s) discovered via eof_fallback. Single revision \u2014 no incremental updates.",
+    "discovery_method": "pyhanko_xref_chain",
+    "summary": "1 revision(s) discovered via pyhanko_xref_chain. Single revision \u2014 no incremental updates.",
     "revisions": [
       {
         "index": 0,
         "start": 0,
-        "end": 3636,
+        "end": 3672,
         "is_signed": false,
-        "page_count": 0
+        "page_count": 1
       }
     ]
   },
@@ -56,32 +56,32 @@
       {
         "page": 0,
         "bbox": [
-          88,
-          404,
-          357,
-          59
-        ],
-        "heuristic_score": 0.487
-      },
-      {
-        "page": 0,
-        "bbox": [
-          598,
-          404,
-          357,
-          59
-        ],
-        "heuristic_score": 0.488
-      },
-      {
-        "page": 0,
-        "bbox": [
           233,
           722,
           726,
           43
         ],
         "heuristic_score": 1.0
+      },
+      {
+        "page": 0,
+        "bbox": [
+          102,
+          396,
+          328,
+          85
+        ],
+        "heuristic_score": 0.8
+      },
+      {
+        "page": 0,
+        "bbox": [
+          612,
+          396,
+          328,
+          85
+        ],
+        "heuristic_score": 0.8
       }
     ],
     "note": "Confidence values are heuristic scores, not calibrated probabilities.",
@@ -90,99 +90,233 @@
   "ela": {
     "quality_active": 75,
     "amplification": 15,
-    "mean_residual": 2.215,
-    "max_residual": 32.0,
-    "std_residual": 3.769,
-    "high_pct": 22.0,
-    "finding": "22.0% of pixels show high amplified residual energy. Localised high-residual regions may warrant investigation but are not standalone proof of manipulation.",
-    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=2.6 | Q75: mean=2.2 | Q85: mean=1.7 | Q95: mean=1.0 \u2014 highest at Q65 (2.6).",
+    "mean_residual": 4.267,
+    "max_residual": 49.0,
+    "std_residual": 6.711,
+    "high_pct": 0.0,
+    "finding": "Mean residual (4.3) is within a typical range for JPEG recompression at this quality setting. No strong ELA anomaly detected. Note: rendered PDF crops may not carry original JPEG compression history.",
+    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=5.7 | Q75: mean=4.3 | Q85: mean=3.7 | Q95: mean=3.2 \u2014 highest at Q65 (5.7).",
     "multi_quality": {
       "65": {
-        "mean": 2.628,
-        "max": 37.0,
-        "std": 4.523,
-        "high_pct": 23.49
+        "mean": 5.747,
+        "max": 62.667,
+        "std": 6.947,
+        "high_pct": 0.02
       },
       "75": {
-        "mean": 2.215,
-        "max": 32.0,
-        "std": 3.769,
-        "high_pct": 22.0
+        "mean": 4.267,
+        "max": 49.0,
+        "std": 6.711,
+        "high_pct": 0.0
       },
       "85": {
-        "mean": 1.729,
-        "max": 26.667,
-        "std": 2.903,
-        "high_pct": 18.98
+        "mean": 3.732,
+        "max": 46.333,
+        "std": 5.766,
+        "high_pct": 0.0
       },
       "95": {
-        "mean": 0.995,
-        "max": 12.333,
-        "std": 1.714,
-        "high_pct": 10.3
+        "mean": 3.239,
+        "max": 37.667,
+        "std": 5.146,
+        "high_pct": 0.0
       }
     },
     "error": null
   },
   "orb_ransac": {
-    "n_kp_a": 0,
-    "n_kp_b": 0,
-    "raw_matches": 0,
-    "filtered": 0,
-    "ransac_inliers": 0,
+    "n_kp_a": 497,
+    "n_kp_b": 499,
+    "raw_matches": 354,
+    "filtered": 323,
+    "ransac_inliers": 323,
     "ransac_outliers": 0,
-    "inlier_ratio": 0.0,
-    "geometric_ok": false,
-    "spatial_coverage": 0.0,
-    "summary": "ORB step failed: Insufficient keypoints for matching."
+    "inlier_ratio": 1.0,
+    "geometric_ok": true,
+    "spatial_coverage": 0.542,
+    "summary": "323/323 matches are geometric inliers (ratio 100%). A consistent geometric transformation exists between the two regions \u2014 possible copy-move or duplicated signature candidate."
   },
   "verdict": {
     "verdict": "REVIEW REQUIRED",
     "integrity_verdict": "NOT APPLICABLE",
     "confidence_label": "Low",
     "explanation": "Supporting forensic indicators (ELA or ORB/RANSAC) suggest possible manipulation, but are insufficient for a definitive conclusion. Manual expert review is recommended.",
-    "completeness": "Modules completed: Revision, Localisation, ELA, ORB/RANSAC",
+    "completeness": "Modules completed: Revision, Localisation, ELA, ORB/RANSAC | Pages analysed: 1/1 | Mode: full",
     "findings": [
       {
-        "code": "ELA-001",
+        "code": "ORB-001",
         "severity": "MEDIUM",
-        "title": "Elevated ELA residual",
-        "description": "Mean residual: 2.2 | High-energy pixels: 22.0% | Quality: 75.",
-        "module": "ELA",
-        "measurements": "mean=2.21 | max=32.00 | std=3.77",
-        "page": null,
-        "limitation": "ELA elevated residuals can be caused by high-contrast edges, fine textures, gradients or printed text \u2014 not only manipulation. ELA is a supporting indicator, not proof of forgery."
+        "title": "Geometrically consistent duplicate region detected",
+        "description": "323/323 RANSAC inliers (100%) \u2014 a possible copy-move or visually duplicated signature region.",
+        "module": "ORB/RANSAC",
+        "measurements": "inliers=323 | ratio=100% | coverage=54% | pages=1,1",
+        "page": 0,
+        "limitation": "Visual similarity does not establish signer identity or prove unauthorised reuse. Legitimate repeated graphics can produce false matches."
       }
     ],
     "module_scores": {
       "Classification": "Visual Signature Candidate",
-      "Revision Analysis": "1 revision(s) | no shadow | method=eof_fallback",
+      "Revision Analysis": "1 revision(s) | no shadow | method=pyhanko_xref_chain",
       "Signature Localisation": "3 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
-      "ELA": "mean=2.2 @ Q75 (elevated)",
-      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=2.6 | Q75: mean=2.2 | Q85: mean=1.7 | Q95: mean=1.0 \u2014 highest at Q65 (2.6).",
-      "ORB/RANSAC": "inliers=0 | ratio=0% | geometric_ok=False"
+      "ELA": "mean=4.3 @ Q75 (normal)",
+      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=5.7 | Q75: mean=4.3 | Q85: mean=3.7 | Q95: mean=3.2 \u2014 highest at Q65 (5.7).",
+      "ORB/RANSAC": "inliers=323 | ratio=100% | geometric_ok=True"
     }
   },
   "integrity_verdict": "NOT APPLICABLE",
   "limitations": [
     "Shadow-attack detection compares rendered page images using one rendering engine. Attacks that produce identical renders are not detectable.",
     "Legitimate incremental updates (annotations, additional sigs) may trigger the shadow-suspect flag; manual review distinguishes malicious from benign.",
-    "Primary revision discovery failed; used eof_fallback. Results may be less reliable for PDFs with embedded binary streams.",
     "ELA applied to rendered PDF images may not reflect the original JPEG compression history of embedded content.",
+    "ORB/RANSAC visual similarity does not prove unauthorised signature reuse or establish signer identity.",
     "Results are based on automated analysis. Expert human review is required before use in any legal, compliance or operational context.",
     "Synthetic evaluation does not establish real-world generalisation performance."
   ],
   "processing": {
-    "total_seconds": 0.219,
+    "total_seconds": 0.757,
     "stage_times": {
-      "parse": 0.011,
-      "classify": 0.001,
-      "revision": 0.018,
-      "localise": 0.139,
-      "ela": 0.025,
-      "orb": 0.003,
-      "ransac": 0.0,
-      "fusion": 0.0
+      "analysis_total": 0.757
     }
-  }
+  },
+  "coverage": {
+    "complete": true,
+    "mode": "full",
+    "pages_analysed": 1,
+    "page_count": 1,
+    "candidates_found": 3,
+    "candidates_analysed": 3,
+    "pairs_available": 3,
+    "pairs_analysed": 3,
+    "limitations": []
+  },
+  "page_results": [
+    {
+      "page": 0,
+      "candidate_count": 3,
+      "candidates": [
+        {
+          "bbox": [
+            233,
+            722,
+            726,
+            43
+          ],
+          "heuristic_score": 1.0
+        },
+        {
+          "bbox": [
+            102,
+            396,
+            328,
+            85
+          ],
+          "heuristic_score": 0.8
+        },
+        {
+          "bbox": [
+            612,
+            396,
+            328,
+            85
+          ],
+          "heuristic_score": 0.8
+        }
+      ],
+      "revision_changed_area_pct": 0.0,
+      "shadow_suspect": false,
+      "ela": [
+        {
+          "mean": 4.267377853393555,
+          "high_pct": 0.0,
+          "error": null
+        },
+        {
+          "mean": 1.6849592924118042,
+          "high_pct": 0.0,
+          "error": null
+        },
+        {
+          "mean": 1.6972861289978027,
+          "high_pct": 0.0,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "candidate_pairs": [
+    {
+      "pages": [
+        0,
+        0
+      ],
+      "boxes": [
+        [
+          233,
+          722,
+          726,
+          43
+        ],
+        [
+          102,
+          396,
+          328,
+          85
+        ]
+      ],
+      "inliers": 0,
+      "ratio": 0.0,
+      "geometric_match": false,
+      "error": null
+    },
+    {
+      "pages": [
+        0,
+        0
+      ],
+      "boxes": [
+        [
+          233,
+          722,
+          726,
+          43
+        ],
+        [
+          612,
+          396,
+          328,
+          85
+        ]
+      ],
+      "inliers": 0,
+      "ratio": 0.0,
+      "geometric_match": false,
+      "error": null
+    },
+    {
+      "pages": [
+        0,
+        0
+      ],
+      "boxes": [
+        [
+          102,
+          396,
+          328,
+          85
+        ],
+        [
+          612,
+          396,
+          328,
+          85
+        ]
+      ],
+      "inliers": 323,
+      "ratio": 1.0,
+      "geometric_match": true,
+      "error": null
+    }
+  ],
+  "audit_error": null,
+  "processing_error": null
 }

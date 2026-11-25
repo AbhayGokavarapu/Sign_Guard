@@ -41,7 +41,7 @@ def generate_test_certificate() -> Tuple[bytes, bytes]:
         x509.NameAttribute(NameOID.COMMON_NAME,
                            "SignGuard Demo Signer [TEST — NOT TRUSTED]"),
     ])
-    now = datetime.datetime.utcnow()
+    now = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(minutes=1)
     cert = (
         x509.CertificateBuilder()
         .subject_name(subject)
@@ -169,11 +169,4 @@ def build_signed_pdf(content_text: str = "This document is digitally signed.") -
     if signed:
         return signed
 
-    # Explicit fallback — annotated, NOT labelled as signed
-    from simulation.sample_generator import build_unsigned
-    fallback_text = (
-        f"SIGNING UNAVAILABLE: {msg}\n\n"
-        "This is a plain PDF without a real digital signature.\n"
-        "Install pyHanko for genuine signing: pip install pyhanko pyhanko-certvalidator"
-    )
-    return build_unsigned(fallback_text)
+    raise RuntimeError(f"Cannot generate signed fixture: {msg}")

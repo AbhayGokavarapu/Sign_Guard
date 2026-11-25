@@ -124,7 +124,7 @@ def fuse(
                     severity=Severity.CRITICAL,
                     title="Signed-byte integrity failure",
                     description=(
-                        f"Signature field '{r.field_name}': the SHA-256 digest of the "
+                        f"Signature field '{r.field_name}': the recorded digest of the "
                         "signed bytes does not match the recorded value. The document "
                         "has been modified after signing."
                     ),
@@ -133,7 +133,7 @@ def fuse(
                     evidence=r.error,
                     limitation="This is a definitive cryptographic finding.",
                 ))
-                affected_pages.append(0)
+                affected_pages.extend(range(parsed.page_count) if parsed is not None else [])
 
             elif r.integrity_status == IntegrityStatus.UNKNOWN:
                 findings.append(Finding(
@@ -183,7 +183,7 @@ def fuse(
 
             # Certificate trust note
             from core.crypto_verifier import TrustStatus
-            if r.trust_status in (TrustStatus.SELF_SIGNED, TrustStatus.UNKNOWN_ISSUER):
+            if r.trust_status in (TrustStatus.SELF_SIGNED, TrustStatus.UNKNOWN_ISSUER, TrustStatus.EXPIRED):
                 limitations.append(
                     f"Certificate for '{r.field_name}' is {r.trust_status}. "
                     "Mathematical integrity may be valid but signer identity CANNOT "
@@ -236,11 +236,11 @@ def fuse(
             findings.append(Finding(
                 code="SHADOW-001",
                 severity=sev,
-                title="Possible shadow attack — visual content changed post-signing",
+                title="Post-signing visible content change",
                 description=(
                     f"The signed revision and the current revision differ on "
                     f"{revision_result.changed_area_pct:.1f}% of the page area. "
-                    "This pattern may indicate a PDF shadow attack where content "
+                    "This is a post-signing content change; it does not by itself establish a pre-planned shadow exploit. Content "
                     "displayed to the signer differs from content shown to later readers."
                 ),
                 module="Revision Analysis",
@@ -249,14 +249,14 @@ def fuse(
                     f"revisions={len(revision_result.revisions)} | "
                     f"method={revision_result.discovery_method}"
                 ),
-                page=0,
+                page=getattr(revision_result, "page_index", 0),
                 limitation=(
                     "Shadow-attack detection uses rendered image comparison. "
                     "Attacks with identical renders are not detectable. "
                     "Legitimate annotations/signatures also create incremental updates."
                 ),
             ))
-            affected_pages.append(0)
+            affected_pages.append(getattr(revision_result, "page_index", 0))
 
         if revision_result.text_diff_summary:
             findings.append(Finding(
@@ -383,8 +383,8 @@ def fuse(
         verdict    = Verdict.TAMPERING_DETECTED
         conf_label = "High"
         explanation = (
-            "One or more critical cryptographic failures confirm the document "
-            "was modified after the digital signature was applied. "
+            "One or more cryptographic checks failed: signed bytes were altered "
+            "or the public-key signature is invalid. "
             + " | ".join(f.title for f in critical)
         )
     elif high:
@@ -410,8 +410,8 @@ def fuse(
             "Signed-byte integrity verified — no cryptographic evidence of tampering. "
             "No suspicious revision changes or strong visual evidence detected. "
             "NOTE: This verdict does not establish document authenticity or signer "
-            "identity. Certificate trust was not established (self-signed or "
-            "untrusted issuer). An independent audit is required for high-stakes decisions."
+            "identity. Certificate trust, revocation, timestamps and signer identity must be "
+            "reviewed separately."
         )
     else:
         verdict    = Verdict.INCONCLUSIVE

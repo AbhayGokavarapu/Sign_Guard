@@ -30,8 +30,8 @@ def render() -> None:
   </div>
   <div class="sg-metric-card" style="border-top:3px solid #7C3AED;">
     <div class="sg-metric-label">Test Cases</div>
-    <div class="sg-metric-value" style="color:#7C3AED;">29</div>
-    <div class="sg-metric-sub">All passing</div>
+    <div class="sg-metric-value" style="color:#7C3AED;">Security</div>
+    <div class="sg-metric-sub">Outcome-based tests</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -92,7 +92,7 @@ However, several attack classes undermine their trustworthiness even when the
         st.markdown("""
 <div class="sg-card">
 <p style="color:#334155;font-size:0.88rem;line-height:1.7;margin:0 0 0.8rem;">
-No open-source framework integrates all five layers of PDF forgery detection:
+This project explores integrating five complementary layers of PDF analysis:
 </p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
   <div style="background:#F0FDF4;border:1px solid #86EFAC;border-radius:8px;padding:0.6rem 0.8rem;">

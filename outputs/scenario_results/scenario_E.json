@@ -1,13 +1,13 @@
 {
   "report_type": "SignGuard Forensic Report",
   "schema_version": "2.0",
-  "generated_at": "2026-11-25T13:27:51Z",
-  "analysis_ts": "2026-11-25T13:27:51Z",
+  "generated_at": "2026-11-25T16:08:33Z",
+  "analysis_ts": "2026-11-25T16:08:33Z",
   "disclaimer": "This report is produced by SignGuard for educational and research purposes. Results require qualified expert review before any legal, compliance, or operational use. This report is NOT an authenticity certificate.",
   "document": {
     "filename": "scenario_E.pdf",
-    "sha256": "0f7d0ac5319cf0501e5a2c3253ae103a2bbcb4aa181bad8b589d6958087e8ce6",
-    "size_bytes": 3118,
+    "sha256": "0681a2f4a10ff70683bddc31cd1b11adffff205c5fa30e0d260a802b79d61a57",
+    "size_bytes": 3116,
     "page_count": 1,
     "metadata": {
       "title": "untitled",
@@ -15,8 +15,8 @@
       "subject": "unspecified",
       "creator": "anonymous",
       "producer": "ReportLab PDF Library - (opensource)",
-      "creation_date": "D:20261125185751+05'00'",
-      "mod_date": "D:20261125185751+05'00'",
+      "creation_date": "D:20261125160832+00'00'",
+      "mod_date": "D:20261125160832+00'00'",
       "format": "",
       "pdf_version": ""
     },
@@ -38,15 +38,15 @@
     "changed_area_pct": 0.0,
     "text_diff": "",
     "metadata_changed": false,
-    "discovery_method": "eof_fallback",
-    "summary": "1 revision(s) discovered via eof_fallback. Single revision \u2014 no incremental updates.",
+    "discovery_method": "pyhanko_xref_chain",
+    "summary": "1 revision(s) discovered via pyhanko_xref_chain. Single revision \u2014 no incremental updates.",
     "revisions": [
       {
         "index": 0,
         "start": 0,
-        "end": 3118,
+        "end": 3116,
         "is_signed": false,
-        "page_count": 0
+        "page_count": 1
       }
     ]
   },
@@ -61,7 +61,7 @@
           447,
           44
         ],
-        "heuristic_score": 1.0
+        "heuristic_score": 0.981
       }
     ],
     "note": "Confidence values are heuristic scores, not calibrated probabilities.",
@@ -70,85 +70,108 @@
   "ela": {
     "quality_active": 75,
     "amplification": 15,
-    "mean_residual": 3.459,
-    "max_residual": 34.333,
-    "std_residual": 4.749,
-    "high_pct": 29.88,
-    "finding": "29.9% of pixels show high amplified residual energy. Localised high-residual regions may warrant investigation but are not standalone proof of manipulation.",
-    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=3.8 | Q75: mean=3.5 | Q85: mean=2.9 | Q95: mean=2.2 \u2014 highest at Q65 (3.8).",
+    "mean_residual": 3.31,
+    "max_residual": 41.333,
+    "std_residual": 4.57,
+    "high_pct": 0.0,
+    "finding": "Mean residual (3.3) is within a typical range for JPEG recompression at this quality setting. No strong ELA anomaly detected. Note: rendered PDF crops may not carry original JPEG compression history.",
+    "sweep_summary": "Multi-quality sweep \u2014 Q65: mean=3.6 | Q75: mean=3.3 | Q85: mean=2.8 | Q95: mean=2.2 \u2014 highest at Q65 (3.6).",
     "multi_quality": {
       "65": {
-        "mean": 3.825,
-        "max": 44.667,
-        "std": 5.474,
-        "high_pct": 28.11
+        "mean": 3.643,
+        "max": 48.333,
+        "std": 5.232,
+        "high_pct": 0.0
       },
       "75": {
-        "mean": 3.459,
-        "max": 34.333,
-        "std": 4.749,
-        "high_pct": 29.88
+        "mean": 3.31,
+        "max": 41.333,
+        "std": 4.57,
+        "high_pct": 0.0
       },
       "85": {
-        "mean": 2.928,
-        "max": 29.667,
-        "std": 3.936,
-        "high_pct": 26.56
+        "mean": 2.758,
+        "max": 30.333,
+        "std": 3.737,
+        "high_pct": 0.0
       },
       "95": {
-        "mean": 2.211,
-        "max": 24.667,
-        "std": 3.282,
-        "high_pct": 19.49
+        "mean": 2.161,
+        "max": 28.0,
+        "std": 3.174,
+        "high_pct": 0.0
       }
     },
     "error": null
   },
   "orb_ransac": {},
   "verdict": {
-    "verdict": "REVIEW REQUIRED",
+    "verdict": "INCONCLUSIVE",
     "integrity_verdict": "NOT APPLICABLE",
     "confidence_label": "Low",
-    "explanation": "Supporting forensic indicators (ELA or ORB/RANSAC) suggest possible manipulation, but are insufficient for a definitive conclusion. Manual expert review is recommended.",
-    "completeness": "Modules completed: Revision, Localisation, ELA",
-    "findings": [
-      {
-        "code": "ELA-001",
-        "severity": "MEDIUM",
-        "title": "Elevated ELA residual",
-        "description": "Mean residual: 3.5 | High-energy pixels: 29.9% | Quality: 75.",
-        "module": "ELA",
-        "measurements": "mean=3.46 | max=34.33 | std=4.75",
-        "page": null,
-        "limitation": "ELA elevated residuals can be caused by high-contrast edges, fine textures, gradients or printed text \u2014 not only manipulation. ELA is a supporting indicator, not proof of forgery."
-      }
-    ],
+    "explanation": "Insufficient or conflicting evidence across the analysed modules. The document may not contain enough forensic signals for a definitive verdict.",
+    "completeness": "Modules completed: Revision, Localisation, ELA | Pages analysed: 1/1 | Mode: full",
+    "findings": [],
     "module_scores": {
       "Classification": "Unsigned",
-      "Revision Analysis": "1 revision(s) | no shadow | method=eof_fallback",
+      "Revision Analysis": "1 revision(s) | no shadow | method=pyhanko_xref_chain",
       "Signature Localisation": "1 candidate(s) \u2014 heuristic scores, not calibrated probabilities",
-      "ELA": "mean=3.5 @ Q75 (elevated)",
-      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=3.8 | Q75: mean=3.5 | Q85: mean=2.9 | Q95: mean=2.2 \u2014 highest at Q65 (3.8)."
+      "ELA": "mean=3.3 @ Q75 (normal)",
+      "ELA multi-quality": "Multi-quality sweep \u2014 Q65: mean=3.6 | Q75: mean=3.3 | Q85: mean=2.8 | Q95: mean=2.2 \u2014 highest at Q65 (3.6)."
     }
   },
   "integrity_verdict": "NOT APPLICABLE",
   "limitations": [
     "Shadow-attack detection compares rendered page images using one rendering engine. Attacks that produce identical renders are not detectable.",
     "Legitimate incremental updates (annotations, additional sigs) may trigger the shadow-suspect flag; manual review distinguishes malicious from benign.",
-    "Primary revision discovery failed; used eof_fallback. Results may be less reliable for PDFs with embedded binary streams.",
     "ELA applied to rendered PDF images may not reflect the original JPEG compression history of embedded content.",
     "Results are based on automated analysis. Expert human review is required before use in any legal, compliance or operational context.",
     "Synthetic evaluation does not establish real-world generalisation performance."
   ],
   "processing": {
-    "total_seconds": 0.192,
+    "total_seconds": 0.458,
     "stage_times": {
-      "parse": 0.013,
-      "classify": 0.001,
-      "revision": 0.014,
-      "localise": 0.121,
-      "ela": 0.019,
-      "fusion": 0.0
+      "analysis_total": 0.458
     }
-  }
+  },
+  "coverage": {
+    "complete": true,
+    "mode": "full",
+    "pages_analysed": 1,
+    "page_count": 1,
+    "candidates_found": 1,
+    "candidates_analysed": 1,
+    "pairs_available": 0,
+    "pairs_analysed": 0,
+    "limitations": []
+  },
+  "page_results": [
+    {
+      "page": 0,
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "bbox": [
+            372,
+            636,
+            447,
+            44
+          ],
+          "heuristic_score": 0.9814049586776858
+        }
+      ],
+      "revision_changed_area_pct": 0.0,
+      "shadow_suspect": false,
+      "ela": [
+        {
+          "mean": 3.3097586631774902,
+          "high_pct": 0.0,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "candidate_pairs": [],
+  "audit_error": null,
+  "processing_error": null
 }

@@ -48,6 +48,15 @@ class ValidationResult:
     reason:  str
 
 
+def render_bounded(page, dpi, annots=True):
+    """Reject excessive dimensions before allocating a pixmap."""
+    scale = dpi / 72
+    width, height = page.rect.width * scale, page.rect.height * scale
+    if width <= 0 or height <= 0 or width > config.MAX_PAGE_WIDTH_PX or height > config.MAX_PAGE_HEIGHT_PX:
+        raise ValueError("Page exceeds safe rendering dimensions.")
+    return page.get_pixmap(matrix=fitz.Matrix(scale, scale), alpha=False, annots=annots)
+
+
 # ── Public API ─────────────────────────────────────────────────────────────
 
 def validate_pdf(raw: bytes, filename: str) -> ValidationResult:
@@ -101,6 +110,17 @@ def parse_pdf(raw: bytes, filename: str = "document.pdf") -> ParsedDocument:
             error=f"Document has {page_count} pages; limit is {config.MAX_PAGE_COUNT}."
         )
 
+    if page_count == 0:
+        doc.close()
+        return ParsedDocument(filename, len(raw), sha256, raw, 0, {}, False, False, 0, [], error="PDF has no pages.")
+    total_pixels = 0
+    for page in doc:
+        w, h = page.rect.width * config.RENDER_DPI / 72, page.rect.height * config.RENDER_DPI / 72
+        total_pixels += w * h
+        if w <= 0 or h <= 0 or w > config.MAX_PAGE_WIDTH_PX or h > config.MAX_PAGE_HEIGHT_PX or total_pixels > config.MAX_TOTAL_RENDER_PIXELS:
+            doc.close()
+            return ParsedDocument(filename, len(raw), sha256, raw, page_count, {}, False, False, 0, [], error="Document exceeds safe rendering budget.")
+
     # Metadata
     meta_raw = doc.metadata or {}
     metadata: Dict[str, Any] = {
@@ -129,7 +149,7 @@ def parse_pdf(raw: bytes, filename: str = "document.pdf") -> ParsedDocument:
 
     mat = fitz.Matrix(config.THUMBNAIL_DPI / 72, config.THUMBNAIL_DPI / 72)
     for page in doc:
-        pix = page.get_pixmap(matrix=mat, alpha=False)
+        pix = render_bounded(page, config.THUMBNAIL_DPI)
         img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
         page_images.append(img)
 

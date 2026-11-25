@@ -1,14 +1,11 @@
 {
-  "task": "Task E \u2014 Runtime Performance",
-  "total_s": 14.52,
-  "n_files": 30,
-  "mean_s": 0.466,
-  "median_s": 0.254,
-  "min_s": 0.141,
-  "max_s": 2.608,
-  "stdev_s": 0.488,
+  "n_files": 39,
+  "mean_s": 0.7971025641025641,
+  "median_s": 0.743,
+  "max_s": 1.296,
   "environment": {
-    "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
-    "platform": "win32"
-  }
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "linux"
+  },
+  "note": "Worker analysis time; total evaluation time also includes process startup and dataset generation."
 }

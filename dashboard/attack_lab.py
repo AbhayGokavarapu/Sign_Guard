@@ -121,21 +121,21 @@ def render() -> None:
     SCENARIO_NOTES = {
         "A": ("✅", "#F0FDF4", "#15803D", "#86EFAC",
               "Both sides are identical — this is a clean, unmodified document. "
-              "The detector should return CLEAN."),
+              "Signed-byte integrity should pass; the overall verdict remains INCONCLUSIVE."),
         "B": ("💥", "#FEF2F2", "#B91C1C", "#FCA5A5",
               "These documents look IDENTICAL visually — the attack is invisible to the eye. "
-              "Only ONE BYTE has been flipped deep in the file. "
+              "Signed metadata bytes were changed without changing the rendered page. "
               "SHA-256 detects it instantly. This is why cryptographic verification matters."),
         "C": ("👥", "#FFFBEB", "#92400E", "#FCD34D",
               "The original (left) was signed showing $1,000. "
-              "The shadow document (right) has a second revision overriding it to $9,000. "
-              "The signature stays VALID but the visible amount changed — this is a Shadow Attack."),
+              "The shadow document (right) has a valid incremental revision replacing it with $9,000. "
+              "The signature stays VALID but the visible amount changed — this demonstrates post-signing content replacement, not every shadow exploit."),
         "D": ("🔁", "#EFF6FF", "#1D4ED8", "#BFDBFE",
               "Both images contain near-identical handwriting marks. "
               "ORB feature matching and RANSAC will detect the geometric duplication."),
         "E": ("🖼️", "#FDF4FF", "#7C3AED", "#E9D5FF",
-              "The original has a clean gradient region. "
-              "The attack document has bytes altered in the image area — ELA residuals reveal this."),
+              "Both sides show the same gradient control. "
+              "ELA illustrates recompression residuals; it does not establish image manipulation."),
         "F": ("📄", "#F8FAFC", "#475569", "#CBD5E1",
               "An unsigned document. No signature exists to verify. "
               "The detector will return INCONCLUSIVE — absence of a signature is NOT evidence of forgery."),

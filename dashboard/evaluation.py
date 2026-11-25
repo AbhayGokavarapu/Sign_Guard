@@ -27,23 +27,24 @@ def render() -> None:
     # ── Run / load controls ────────────────────────────────────────────────
     col_run, col_info = st.columns([1, 2])
     with col_run:
-        if st.button("▶  Re-run Evaluation"):
+        if st.button("▶  Re-run Evaluation", disabled=config.PUBLIC_DEMO):
             with st.spinner("Generating dataset and running full pipeline on every fixture…"):
                 import subprocess, sys
                 ret = subprocess.run(
                     [sys.executable,
                      os.path.join(config.BASE_DIR, "benchmarks", "run_evaluation.py")],
-                    capture_output=True, text=True, timeout=600,
+                    capture_output=True, text=True, timeout=1200,
                     cwd=config.BASE_DIR,
                 )
                 if ret.returncode == 0:
+                    st.session_state.pop("eval_data", None)
                     st.success("Evaluation complete.")
                 else:
                     st.error(f"Evaluation script failed. Check console output.")
     with col_info:
         st.caption(
-            "Re-running regenerates the 30-fixture dataset and re-executes the "
-            "full pipeline on each. Takes ~15–60 s depending on hardware."
+            "Regenerates development and held-out controls and compares three analysis modes. "
+            "This may take several minutes."
         )
 
     # ── Load results ──────────────────────────────────────────────────────
@@ -56,6 +57,16 @@ def render() -> None:
     if data is None:
         empty_state("No benchmark results found. Click 'Re-run Evaluation' above.", "📊")
         return
+
+    st.caption(f"Evaluation split: {data.get('evaluation_split', 'legacy')} — {data.get('note', '')}")
+    if data.get('ablations'):
+        section_header("Method Comparison")
+        st.dataframe(pd.DataFrame(data['ablations']).T)
+    if data.get('per_category'):
+        section_header("Attack and Benign Controls")
+        st.dataframe(pd.DataFrame(data['per_category']).T)
+    st.caption(f"Confirmed byte integrity failures: {data.get('confirmed_integrity_failures', 'legacy')} | "
+               f"Review alerts: {data.get('review_alerts', 'legacy')}")
 
     # ── Section A: Classification ──────────────────────────────────────────
     cls_data = None
@@ -108,7 +119,7 @@ def render() -> None:
         st.info(
             f"**{data['FP']} false positives** — the conservative design raises "
             "REVIEW REQUIRED rather than missing potential tampering. "
-            "This trades precision for recall (recall = 100%)."
+            "Review alerts and confirmed integrity failures are evaluated separately; inspect false positives."
         )
     if data["FN"] > 0:
         st.error(f"**{data['FN']} false negatives** — positive cases were missed.")
@@ -125,10 +136,14 @@ def render() -> None:
         l2.metric("At least one candidate found", loc_data["at_least_one_found"])
         l3.metric("Detection rate", f"{loc_data['detection_rate']:.1%}")
         st.caption(loc_data.get("note", ""))
+        if "precision" in loc_data:
+            st.write(f"IoU >= 0.5: precision {loc_data['precision']:.1%}, recall {loc_data['recall']:.1%}")
 
     # ── Per-file table ─────────────────────────────────────────────────────
     section_header("Per-File Results", "📋")
     records = data.get("records", [])
+    if data.get("evaluation_split") == "held_out":
+        records = [r for r in records if r.get("split") == "held_out"]
     if records:
         df = pd.DataFrame(records)
         def _correct(r):

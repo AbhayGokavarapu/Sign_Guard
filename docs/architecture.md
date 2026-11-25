@@ -1,42 +1,11 @@
-# SignGuard — Architecture
+# Architecture
 
-## Pipeline
+Streamlit calls `core.pipeline.run`, which validates the file size/header and starts `core.worker`. The worker parses and renders within resource budgets, classifies the document, verifies CMS signatures with pyHanko and an explicit offline trust store, reconstructs revisions from the parsed xref chain, and analyses each page.
 
-```
-PDF Input (bytes)
-  │
-  ▼
-[1] pdf_parser.py        — validate, parse, render, hash, extract sigs
-  │
-  ▼
-[2] document_classifier.py — classify: crypto / visual / unsigned / unsupported
-  │
-  ├──[crypto]──► [3] crypto_verifier.py    — ByteRange, CMS, cert, coverage
-  │
-  ├──────────► [4] revision_analyzer.py    — revisions, diff, shadow suspect
-  │
-  ├──────────► [5] signature_localizer.py  — adaptive thresh, components, crops
-  │
-  ├──[image]──► [6] ela_detector.py        — JPEG recompress, residual stats
-  │
-  ├──[2 crops]─► [7] orb_matcher.py        — ORB keypoints + Hamming matching
-  │
-  ├──────────► [8] ransac_verifier.py      — RANSAC homography, inlier filter
-  │
-  ▼
-[9] evidence_fusion.py   — rule-based verdict: TAMPERING/REVIEW/INCONCLUSIVE
-  │
-  ├──► [10] audit_logger.py    — SHA-256 hash-chained tamper-evident log
-  ├──► reporting/json_report.py
-  └──► reporting/pdf_report.py
-```
+Each page produces revision/text differences, localisation candidates and raw ELA measurements. Candidate pairs, including cross-page pairs, pass through ORB/Hamming ratio and mutual matching, followed by RANSAC. Rule-based fusion merges findings with page numbers. Crypto-only and crypto-plus-revision modes support method comparison.
 
-## Key design decisions
+The parent process receives the result, appends the audit record under an interprocess lock, and reports any logging error. JSON/PDF reports include coverage and limitations. Representative images support the existing dashboard; per-page measurements and pair records retain the broader analysis results.
 
-| Decision | Rationale |
-|---|---|
-| No ML models | Reproducibility, no training data needed, explainable output |
-| pyHanko optional | Graceful fallback to raw ByteRange/CMS parsing |
-| Ground-truth kept separate | Prevents scenario labels from influencing detector |
-| Local only | No API keys, no cloud, no GPU required |
-| Hash-chained audit | Provides tamper evidence for the verification history |
+`simulation/security_fixtures.py` creates genuine signatures, byte modifications and valid incremental updates. `simulation/evaluation_dataset.py` generates annotated development/held-out controls; labels are never passed to `run` or `fuse`.
+
+See THREAT_MODEL.md for trust boundaries and limitations. The worker is not a complete exploit sandbox.

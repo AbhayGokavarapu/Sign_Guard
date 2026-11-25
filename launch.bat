@@ -1,23 +1,9 @@
 @echo off
-title SignGuard — Forensic Dashboard
+setlocal
 cd /d "%~dp0"
-
-echo.
-echo  ==========================================
-echo   SignGuard ^| Document Forensics Platform
-echo  ==========================================
-echo.
-
-REM Kill any old streamlit processes on port 8502
-for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":8502 " 2^>nul') do (
-    taskkill /F /PID %%a >nul 2>&1
+if exist "venv\Scripts\python.exe" (
+  venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1 --server.port 8502
+) else (
+  python -m streamlit run app.py --server.address 127.0.0.1 --server.port 8502
 )
-
-echo  Starting dashboard on http://localhost:8502
-echo  Press Ctrl+C in this window to stop.
-echo.
-
-call venv\Scripts\activate
-venv\Scripts\streamlit.exe run app.py
-
 pause

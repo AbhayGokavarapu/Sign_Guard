@@ -3,6 +3,7 @@
 from __future__ import annotations
 import streamlit as st
 import pandas as pd
+import config
 from dashboard.components import inject_css, page_header, section_header, empty_state, download_button
 from core.audit_logger import verify_chain, get_records
 
@@ -43,6 +44,10 @@ def render() -> None:
 
     st.markdown("---")
 
+    if config.PUBLIC_DEMO:
+        st.info("Shared audit history is disabled for the public demo. Download your reports before leaving; hosted storage is temporary.")
+        return
+
     # ── Audit chain ────────────────────────────────────────────────────────
     section_header("Tamper-Evident Audit Chain")
 
@@ -58,7 +63,16 @@ def render() -> None:
         "Independent custody of the chain head is required for stronger assurance."
     )
 
-    records = get_records()
+    if chain_ok:
+        from core.audit_logger import export_checkpoint
+        import json
+        st.download_button("Export audit checkpoint (store independently)",
+            json.dumps(export_checkpoint(), indent=2), "audit_checkpoint.json", "application/json")
+    try:
+        records = get_records()
+    except ValueError as exc:
+        st.error(str(exc))
+        return
     if records:
         df = pd.DataFrame(records)
         display_cols = ["event_id","timestamp","doc_hash","verdict","prev_hash","record_hash"]

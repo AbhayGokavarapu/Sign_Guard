@@ -1,6 +1,7 @@
 """Page 2 — Document Analysis (v2 — uses new crypto/fusion APIs)."""
 from __future__ import annotations
 import hashlib
+from html import escape
 import streamlit as st
 from dashboard.components import (
     page_header, section_header, verdict_badge,
@@ -20,7 +21,7 @@ def render() -> None:
     📂 Upload PDF Document
   </div>
   <div style="font-size:0.8rem;color:#64748B;">
-    PDF only · Max 50 MB · Max 200 pages · Processed locally on this machine
+    PDF only · Max 50 MB · Max 200 pages · Processed on the application server
   </div>
 </div>""", unsafe_allow_html=True)
 
@@ -48,7 +49,16 @@ def render() -> None:
         st.error(f"⛔ Validation failed: {val.reason}")
         return
 
-    parsed_preview = parse_pdf(raw, uploaded.name)
+    preview_key = "preview_" + doc_hash
+    if st.session_state.get("preview_hash") != doc_hash:
+        preview = run_pipeline(raw, uploaded.name, analysis_mode="crypto_only", record_audit=False)
+        st.session_state["preview_result"] = preview
+        st.session_state["preview_hash"] = doc_hash
+    preview = st.session_state["preview_result"]
+    parsed_preview = preview.parsed
+    if parsed_preview is None:
+        st.error(preview.processing_error or preview.validation.reason)
+        return
     if parsed_preview.error:
         st.error(f"⛔ Parse error: {parsed_preview.error}")
         return
@@ -59,7 +69,7 @@ def render() -> None:
   padding:0.6rem 1rem;margin-bottom:0.8rem;display:flex;gap:12px;align-items:center;">
   <span style="font-size:1.1rem;">📄</span>
   <div style="font-size:0.82rem;color:#334155;">
-    <strong>{uploaded.name}</strong> &nbsp;·&nbsp;
+    <strong>{escape(uploaded.name)}</strong> &nbsp;·&nbsp;
     SHA-256: <code>{doc_hash[:20]}…</code> &nbsp;·&nbsp;
     {parsed_preview.page_count} page(s) &nbsp;·&nbsp;
     {parsed_preview.file_size:,} bytes
@@ -76,7 +86,7 @@ def render() -> None:
     col_prev, col_meta = st.columns([3, 2], gap="large")
     with col_prev:
         try:
-            show_image(render_page(raw, page_idx),
+            show_image(parsed_preview.page_images[page_idx],
                        f"Page {page_idx+1} of {parsed_preview.page_count}")
         except Exception as e:
             st.warning(f"Preview error: {e}")
@@ -103,7 +113,7 @@ def render() -> None:
                 f'<span style="color:#64748B;font-size:0.79rem;font-weight:500;">{k}</span>'
                 f'<span style="font-size:0.79rem;color:#1E293B;font-weight:600;'
                 f'max-width:55%;text-align:right;overflow:hidden;text-overflow:ellipsis;'
-                f'white-space:nowrap;">{v}</span></div>'
+                f'white-space:nowrap;">{escape(str(v))}</span></div>'
             )
         html += '</div>'
         st.markdown(html, unsafe_allow_html=True)
@@ -159,7 +169,7 @@ def render() -> None:
             result = run_pipeline(raw, uploaded.name,
                                   ela_quality=ela_q, ela_amp=ela_amp)
         st.session_state["pipeline_result"] = result
-        st.success(
+        (st.error if result.processing_error else st.success)(
             f"Analysis complete in {result.elapsed_sec:.2f}s  |  "
             f"Document: {uploaded.name}  |  Timestamp: {result.analysis_ts}"
         )
@@ -185,6 +195,15 @@ def render() -> None:
     # ══════════════════════════════════════════════════════════════════════
     # RESULTS
     # ══════════════════════════════════════════════════════════════════════
+
+    if result.processing_error:
+        st.error(result.processing_error)
+    if result.audit_error:
+        st.error("Audit record was not saved: " + result.audit_error)
+    st.caption(f"Coverage: {result.coverage.get('pages_analysed', 0)} pages analysed; "
+               f"{result.coverage.get('pairs_analysed', 0)} candidate pairs compared.")
+    for limitation in result.coverage.get('limitations', []):
+        st.warning(limitation)
 
     # ── Verdict + integrity ────────────────────────────────────────────────
     if result.fusion:
@@ -250,6 +269,8 @@ def render() -> None:
                     st.caption(f"Trust: `{r.trust_status}`")
                     st.caption(f"Mod-policy: `{r.modpolicy_status}`")
                     st.caption(f"Identity: `{r.identity_status}`")
+                    st.caption(f"Revocation: {r.revocation_status}")
+                    st.caption(f"Trusted timestamp: {r.timestamp_status}")
                 with cc:
                     if r.byte_range:
                         br = r.byte_range

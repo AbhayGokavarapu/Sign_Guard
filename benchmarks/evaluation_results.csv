@@ -1,31 +1,53 @@
-file,category,label,pred,cls_pred,n_cands,elapsed
-genuine_01.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,2.608
-genuine_02.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,0.984
-genuine_03.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,0.962
-genuine_04.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,0.766
-genuine_05.pdf,genuine,CLEAN,REVIEW REQUIRED,Cryptographically Signed,2,0.526
-tampered_01.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.491
-tampered_02.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.6
-tampered_03.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.531
-tampered_04.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.499
-tampered_05.pdf,tampered,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,1,0.511
-shadow_01.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.252
-shadow_02.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.302
-shadow_03.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.256
-shadow_04.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.247
-shadow_05.pdf,shadow,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.301
-visual_01.pdf,visual_only,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,2,0.227
-visual_02.pdf,visual_only,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,4,0.223
-visual_03.pdf,visual_only,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,2,0.233
-visual_multi_01.pdf,visual_only,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,0,0.991
-visual_multi_02.pdf,visual_only,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,0,0.826
-unsigned_01.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.16
-unsigned_02.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.177
-unsigned_03.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.153
-unsigned_04.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.158
-unsigned_05.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.173
-duplicate_sig_01.pdf,visual_only,REVIEW_REQUIRED,REVIEW REQUIRED,Visual Signature Candidate,3,0.181
-ela_target_01.pdf,visual_only,REVIEW_REQUIRED,REVIEW REQUIRED,Unsigned,1,0.18
-faint_mark_01.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.141
-multi_rev_01.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.161
-minimal_01.pdf,unsigned,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,1,0.164
+file,category,split,label,pred,cls_pred,n_cands,elapsed,coverage_complete
+datasets/security_v3/development_genuine_101.pdf,genuine,development,INCONCLUSIVE,INCONCLUSIVE,Cryptographically Signed,0,1.519,True
+datasets/security_v3/development_tampered_101.pdf,tampered,development,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,0,0.999,True
+datasets/security_v3/development_content_change_101.pdf,content_change,development,REVIEW_REQUIRED,REVIEW REQUIRED,Cryptographically Signed,0,1.355,True
+datasets/security_v3/development_annotation_101.pdf,annotation,development,INCONCLUSIVE,REVIEW REQUIRED,Cryptographically Signed,0,1.467,True
+datasets/security_v3/development_additional_signature_101.pdf,additional_signature,development,INCONCLUSIVE,INCONCLUSIVE,Cryptographically Signed,0,1.336,True
+datasets/security_v3/development_visual_101.pdf,visual,development,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,1,0.503,True
+datasets/security_v3/development_last_page_101.pdf,last_page,development,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,1,1.136,True
+datasets/security_v3/development_duplicate_101.pdf,duplicate,development,REVIEW_REQUIRED,REVIEW REQUIRED,Visual Signature Candidate,2,0.689,True
+datasets/security_v3/development_repeated_logo_101.pdf,repeated_logo,development,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,2,0.496,True
+datasets/security_v3/development_scan_101.pdf,scan,development,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,15,0.765,False
+datasets/security_v3/development_image_edit_101.pdf,image_edit,development,REVIEW_REQUIRED,INCONCLUSIVE,Visual Signature Candidate,1,0.565,True
+datasets/security_v3/development_ela_101.pdf,ela,development,INCONCLUSIVE,INCONCLUSIVE,Unsigned,1,0.4,True
+datasets/security_v3/development_unsigned_101.pdf,unsigned,development,INCONCLUSIVE,INCONCLUSIVE,Unsigned,1,0.435,True
+datasets/security_v3/held_out_genuine_2001.pdf,genuine,held_out,INCONCLUSIVE,INCONCLUSIVE,Cryptographically Signed,0,0.997,True
+datasets/security_v3/held_out_tampered_2001.pdf,tampered,held_out,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,0,1.125,True
+datasets/security_v3/held_out_content_change_2001.pdf,content_change,held_out,REVIEW_REQUIRED,REVIEW REQUIRED,Cryptographically Signed,0,1.296,True
+datasets/security_v3/held_out_annotation_2001.pdf,annotation,held_out,INCONCLUSIVE,REVIEW REQUIRED,Cryptographically Signed,0,1.141,True
+datasets/security_v3/held_out_additional_signature_2001.pdf,additional_signature,held_out,INCONCLUSIVE,INCONCLUSIVE,Cryptographically Signed,0,1.076,True
+datasets/security_v3/held_out_visual_2001.pdf,visual,held_out,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,1,0.483,True
+datasets/security_v3/held_out_last_page_2001.pdf,last_page,held_out,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,1,1.04,True
+datasets/security_v3/held_out_duplicate_2001.pdf,duplicate,held_out,REVIEW_REQUIRED,REVIEW REQUIRED,Visual Signature Candidate,2,0.462,True
+datasets/security_v3/held_out_repeated_logo_2001.pdf,repeated_logo,held_out,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,2,0.492,True
+datasets/security_v3/held_out_scan_2001.pdf,scan,held_out,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,20,0.67,False
+datasets/security_v3/held_out_image_edit_2001.pdf,image_edit,held_out,REVIEW_REQUIRED,INCONCLUSIVE,Visual Signature Candidate,1,0.453,True
+datasets/security_v3/held_out_ela_2001.pdf,ela,held_out,INCONCLUSIVE,INCONCLUSIVE,Unsigned,1,0.554,True
+datasets/security_v3/held_out_unsigned_2001.pdf,unsigned,held_out,INCONCLUSIVE,INCONCLUSIVE,Unsigned,1,0.522,True
+datasets/security_v3/held_out_genuine_2002.pdf,genuine,held_out,INCONCLUSIVE,INCONCLUSIVE,Cryptographically Signed,0,0.983,True
+datasets/security_v3/held_out_tampered_2002.pdf,tampered,held_out,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,0,1.032,True
+datasets/security_v3/held_out_content_change_2002.pdf,content_change,held_out,REVIEW_REQUIRED,REVIEW REQUIRED,Cryptographically Signed,0,1.137,True
+datasets/security_v3/held_out_annotation_2002.pdf,annotation,held_out,INCONCLUSIVE,REVIEW REQUIRED,Cryptographically Signed,0,1.024,True
+datasets/security_v3/held_out_additional_signature_2002.pdf,additional_signature,held_out,INCONCLUSIVE,INCONCLUSIVE,Cryptographically Signed,0,1.085,True
+datasets/security_v3/held_out_visual_2002.pdf,visual,held_out,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,1,0.414,True
+datasets/security_v3/held_out_last_page_2002.pdf,last_page,held_out,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,1,1.16,True
+datasets/security_v3/held_out_duplicate_2002.pdf,duplicate,held_out,REVIEW_REQUIRED,REVIEW REQUIRED,Visual Signature Candidate,2,0.46,True
+datasets/security_v3/held_out_repeated_logo_2002.pdf,repeated_logo,held_out,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,2,0.502,True
+datasets/security_v3/held_out_scan_2002.pdf,scan,held_out,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,20,0.923,False
+datasets/security_v3/held_out_image_edit_2002.pdf,image_edit,held_out,REVIEW_REQUIRED,INCONCLUSIVE,Visual Signature Candidate,1,0.461,True
+datasets/security_v3/held_out_ela_2002.pdf,ela,held_out,INCONCLUSIVE,INCONCLUSIVE,Unsigned,1,0.405,True
+datasets/security_v3/held_out_unsigned_2002.pdf,unsigned,held_out,INCONCLUSIVE,INCONCLUSIVE,Unsigned,1,0.405,True
+datasets/security_v3/held_out_genuine_2003.pdf,genuine,held_out,INCONCLUSIVE,INCONCLUSIVE,Cryptographically Signed,0,1.166,True
+datasets/security_v3/held_out_tampered_2003.pdf,tampered,held_out,TAMPERING_DETECTED,TAMPERING DETECTED,Cryptographically Signed,0,1.268,True
+datasets/security_v3/held_out_content_change_2003.pdf,content_change,held_out,REVIEW_REQUIRED,REVIEW REQUIRED,Cryptographically Signed,0,1.159,True
+datasets/security_v3/held_out_annotation_2003.pdf,annotation,held_out,INCONCLUSIVE,REVIEW REQUIRED,Cryptographically Signed,0,1.079,True
+datasets/security_v3/held_out_additional_signature_2003.pdf,additional_signature,held_out,INCONCLUSIVE,INCONCLUSIVE,Cryptographically Signed,0,1.015,True
+datasets/security_v3/held_out_visual_2003.pdf,visual,held_out,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,1,0.418,True
+datasets/security_v3/held_out_last_page_2003.pdf,last_page,held_out,INCONCLUSIVE,INCONCLUSIVE,Visual Signature Candidate,1,1.052,True
+datasets/security_v3/held_out_duplicate_2003.pdf,duplicate,held_out,REVIEW_REQUIRED,REVIEW REQUIRED,Visual Signature Candidate,2,0.514,True
+datasets/security_v3/held_out_repeated_logo_2003.pdf,repeated_logo,held_out,INCONCLUSIVE,REVIEW REQUIRED,Visual Signature Candidate,2,0.549,True
+datasets/security_v3/held_out_scan_2003.pdf,scan,held_out,INCONCLUSIVE,REVIEW REQUIRED,Unsigned,20,0.743,False
+datasets/security_v3/held_out_image_edit_2003.pdf,image_edit,held_out,REVIEW_REQUIRED,INCONCLUSIVE,Visual Signature Candidate,1,0.652,True
+datasets/security_v3/held_out_ela_2003.pdf,ela,held_out,INCONCLUSIVE,INCONCLUSIVE,Unsigned,1,0.557,True
+datasets/security_v3/held_out_unsigned_2003.pdf,unsigned,held_out,INCONCLUSIVE,INCONCLUSIVE,Unsigned,1,0.613,True

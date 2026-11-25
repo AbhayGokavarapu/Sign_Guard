@@ -102,8 +102,7 @@ def test_classify_visual(visual_pdf):
     from core.document_classifier import classify, DocClass
     doc = parse_pdf(visual_pdf, "v.pdf")
     result = classify(doc)
-    assert result.doc_class in (DocClass.UNSIGNED, DocClass.VISUAL_CANDIDATE,
-                                DocClass.CRYPTOGRAPHICALLY_SIGNED)
+    assert result.doc_class == DocClass.VISUAL_CANDIDATE
 
 def test_classify_signed_pdf(signed_pdf):
     from core.pdf_parser import parse_pdf
@@ -111,8 +110,7 @@ def test_classify_signed_pdf(signed_pdf):
     doc = parse_pdf(signed_pdf, "s.pdf")
     result = classify(doc)
     # May be signed or visual depending on whether pyHanko signing succeeded
-    assert result.doc_class in (DocClass.CRYPTOGRAPHICALLY_SIGNED,
-                                DocClass.VISUAL_CANDIDATE, DocClass.UNSIGNED)
+    assert result.doc_class == DocClass.CRYPTOGRAPHICALLY_SIGNED
 
 
 # ── Module 3: Cryptographic verification ──────────────────────────────────
@@ -193,14 +191,15 @@ def test_shadow_pdf_revisions(shadow_pdf):
 def test_shadow_suspect_flag(shadow_pdf):
     from core.revision_analyzer import analyze
     result = analyze(shadow_pdf)
-    assert result.changed_area_pct >= 0
+    assert result.changed_area_pct > 0
+    assert result.shadow_suspect
     assert result.discovery_method != ""
 
 def test_revision_discovery_method(unsigned_pdf):
     from core.revision_analyzer import analyze
     result = analyze(unsigned_pdf)
     assert result.discovery_method in (
-        "pymupdf_startxref", "eof_fallback", "failed", ""
+        "pyhanko_xref_chain",
     )
 
 def test_revision_reports_limitations(unsigned_pdf):

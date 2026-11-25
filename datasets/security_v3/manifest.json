@@ -1,0 +1,735 @@
+{
+  "version": 3,
+  "total": 52,
+  "files": [
+    {
+      "file": "datasets/security_v3/development_genuine_101.pdf",
+      "category": "genuine",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_tampered_101.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "positive": true,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_content_change_101.pdf",
+      "category": "content_change",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_annotation_101.pdf",
+      "category": "annotation",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "Benign annotations may still be rejected by pyHanko policy."
+    },
+    {
+      "file": "datasets/security_v3/development_additional_signature_101.pdf",
+      "category": "additional_signature",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_visual_101.pdf",
+      "category": "visual",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_last_page_101.pdf",
+      "category": "last_page",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 2,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_duplicate_101.pdf",
+      "category": "duplicate",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        },
+        {
+          "page": 0,
+          "bbox": [
+            660,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_repeated_logo_101.pdf",
+      "category": "repeated_logo",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_scan_101.pdf",
+      "category": "scan",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_image_edit_101.pdf",
+      "category": "image_edit",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_ela_101.pdf",
+      "category": "ela",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/development_unsigned_101.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "development",
+      "seed": 101,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_genuine_2001.pdf",
+      "category": "genuine",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_tampered_2001.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_content_change_2001.pdf",
+      "category": "content_change",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_annotation_2001.pdf",
+      "category": "annotation",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "Benign annotations may still be rejected by pyHanko policy."
+    },
+    {
+      "file": "datasets/security_v3/held_out_additional_signature_2001.pdf",
+      "category": "additional_signature",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_visual_2001.pdf",
+      "category": "visual",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_last_page_2001.pdf",
+      "category": "last_page",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 2,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_duplicate_2001.pdf",
+      "category": "duplicate",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        },
+        {
+          "page": 0,
+          "bbox": [
+            660,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_repeated_logo_2001.pdf",
+      "category": "repeated_logo",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_scan_2001.pdf",
+      "category": "scan",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_image_edit_2001.pdf",
+      "category": "image_edit",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_ela_2001.pdf",
+      "category": "ela",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_unsigned_2001.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2001,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_genuine_2002.pdf",
+      "category": "genuine",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_tampered_2002.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_content_change_2002.pdf",
+      "category": "content_change",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_annotation_2002.pdf",
+      "category": "annotation",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "Benign annotations may still be rejected by pyHanko policy."
+    },
+    {
+      "file": "datasets/security_v3/held_out_additional_signature_2002.pdf",
+      "category": "additional_signature",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_visual_2002.pdf",
+      "category": "visual",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_last_page_2002.pdf",
+      "category": "last_page",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 2,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_duplicate_2002.pdf",
+      "category": "duplicate",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        },
+        {
+          "page": 0,
+          "bbox": [
+            660,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_repeated_logo_2002.pdf",
+      "category": "repeated_logo",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_scan_2002.pdf",
+      "category": "scan",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_image_edit_2002.pdf",
+      "category": "image_edit",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_ela_2002.pdf",
+      "category": "ela",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_unsigned_2002.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2002,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_genuine_2003.pdf",
+      "category": "genuine",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_tampered_2003.pdf",
+      "category": "tampered",
+      "label": "TAMPERING_DETECTED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_content_change_2003.pdf",
+      "category": "content_change",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_annotation_2003.pdf",
+      "category": "annotation",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": "Benign annotations may still be rejected by pyHanko policy."
+    },
+    {
+      "file": "datasets/security_v3/held_out_additional_signature_2003.pdf",
+      "category": "additional_signature",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Cryptographically Signed",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_visual_2003.pdf",
+      "category": "visual",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_last_page_2003.pdf",
+      "category": "last_page",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 2,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_duplicate_2003.pdf",
+      "category": "duplicate",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [
+        {
+          "page": 0,
+          "bbox": [
+            144,
+            1234,
+            360,
+            90
+          ]
+        },
+        {
+          "page": 0,
+          "bbox": [
+            660,
+            1234,
+            360,
+            90
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_repeated_logo_2003.pdf",
+      "category": "repeated_logo",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_scan_2003.pdf",
+      "category": "scan",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_image_edit_2003.pdf",
+      "category": "image_edit",
+      "label": "REVIEW_REQUIRED",
+      "positive": true,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Visual Signature Candidate",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_ela_2003.pdf",
+      "category": "ela",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    },
+    {
+      "file": "datasets/security_v3/held_out_unsigned_2003.pdf",
+      "category": "unsigned",
+      "label": "INCONCLUSIVE",
+      "positive": false,
+      "split": "held_out",
+      "seed": 2003,
+      "expected_class": "Unsigned",
+      "signature_boxes": [],
+      "notes": ""
+    }
+  ],
+  "note": "Synthetic controls only. Held-out seeds were not used to tune thresholds; shared generator limits independence."
+}

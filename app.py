@@ -13,8 +13,11 @@ st.set_page_config(
 )
 
 # ── Inject base CSS early ──────────────────────────────────────────────────
+import config
 from dashboard.components import inject_css
 inject_css()
+if config.PUBLIC_DEMO:
+    st.info("Public research demo: uploaded PDFs are processed on the hosting server. Use synthetic or non-sensitive documents. Download reports before leaving.")
 
 # ── Page map ───────────────────────────────────────────────────────────────
 PAGES = {
@@ -64,7 +67,7 @@ with st.sidebar:
   <div style="font-size:0.72rem;color:#475569;line-height:1.8;">
     <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
       <span style="color:#15803D;font-size:0.65rem;">●</span>
-      <span>Local — no internet required</span>
+      <span>No external verification APIs</span>
     </div>
     <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
       <span style="color:#2563EB;font-size:0.65rem;">●</span>
@@ -78,7 +81,7 @@ with st.sidebar:
   <div style="margin-top:1rem;font-size:0.68rem;color:#334155;
     background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);
     border-radius:6px;padding:6px 8px;">
-    v1.0 &nbsp;·&nbsp; Python + Streamlit
+    v3.0 &nbsp;·&nbsp; Python + Streamlit
   </div>
 </div>""", unsafe_allow_html=True)
 

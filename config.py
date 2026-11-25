@@ -61,3 +61,12 @@ COLOR_ERROR   = "#B91C1C"
 
 # ── Audit log ─────────────────────────────────────────────────────────────
 AUDIT_LOG_PATH = os.path.join(LOGS_DIR, "audit_chain.json")
+
+MAX_TOTAL_RENDER_PIXELS = 80_000_000
+WORKER_MEMORY_MB = int(os.environ.get("SIGNGUARD_WORKER_MEMORY_MB", "2048"))
+MAX_ANALYSIS_CANDIDATES = 60
+
+# Explicit offline trust store; the demo certificate is never trusted automatically.
+TRUST_ROOTS_FILE = os.environ.get("SIGNGUARD_TRUST_ROOTS", "")
+
+PUBLIC_DEMO = os.environ.get("SIGNGUARD_PUBLIC_DEMO", "0") == "1"

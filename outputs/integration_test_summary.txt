@@ -1,58 +1,56 @@
+.............................                                            [100%]
+29 passed in 40.29s
 
-=== SignGuard v2 Integration Tests ===
-
---- Unsigned ---
-  PASS  validation
-  PASS  parsed
-  PASS  verdict not CLEAN
-  PASS  integrity N/A
-
---- Visual Only ---
-  PASS  parsed
-  PASS  localization
-
---- Shadow ---
-  PASS  revision analyzed
-  PASS  incremental updates
-  PASS  discovery method recorded
-
---- Genuinely Signed (pyHanko) ---
-  PASS  signed PDF generated
-  PASS  pipeline completes
-  PASS  integrity verdict set
-  PASS  pyHanko used
-  PASS  integrity status: PASS
-
---- Byte Tampering ---
-  PASS  hashes differ
-  PASS  tampered pipeline runs
-
---- ELA multi-quality ---
-  PASS  ela produced
-  PASS  multi-quality sweep
-  PASS  sweep summary present
-
---- ORB / RANSAC ---
-  PASS  orb present
-  PASS  ransac computed
-
---- Reports ---
-  PASS  json has verdict
-  PASS  json schema 2.0
-  PASS  json disclaimer
-  PASS  json integrity_verdict
-  PASS  pdf generated
-
---- Audit chain ---
-  PASS  chain intact
-
---- Scenario evidence ---
-  PASS  Scenario A: evidence saved (verdict=REVIEW REQUIRED)
-  PASS  Scenario B: evidence saved (verdict=REVIEW REQUIRED)
-  PASS  Scenario C: evidence saved (verdict=REVIEW REQUIRED)
-  PASS  Scenario D: evidence saved (verdict=REVIEW REQUIRED)
-  PASS  Scenario E: evidence saved (verdict=REVIEW REQUIRED)
-  PASS  Scenario F: evidence saved (verdict=REVIEW REQUIRED)
-
-=== Results: 33 passed, 0 failed ===
-
+{
+  "timestamp": "2026-11-25T16:08:35Z",
+  "passed": 35,
+  "failed": 0,
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "scenarios": [
+    {
+      "scenario": "A",
+      "passed": true,
+      "verdict": "INCONCLUSIVE",
+      "findings": []
+    },
+    {
+      "scenario": "B",
+      "passed": true,
+      "verdict": "TAMPERING DETECTED",
+      "findings": [
+        "CRYPTO-001"
+      ]
+    },
+    {
+      "scenario": "C",
+      "passed": true,
+      "verdict": "REVIEW REQUIRED",
+      "findings": [
+        "CRYPTO-003",
+        "CRYPTO-004",
+        "SHADOW-001",
+        "SHADOW-002"
+      ]
+    },
+    {
+      "scenario": "D",
+      "passed": true,
+      "verdict": "REVIEW REQUIRED",
+      "findings": [
+        "ORB-001"
+      ]
+    },
+    {
+      "scenario": "E",
+      "passed": true,
+      "verdict": "INCONCLUSIVE",
+      "findings": []
+    },
+    {
+      "scenario": "F",
+      "passed": true,
+      "verdict": "INCONCLUSIVE",
+      "findings": []
+    }
+  ]
+}
