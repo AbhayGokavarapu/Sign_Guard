@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="864pt" viewBox="0 0 1152 864" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-26T17:23:59.484829</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 864 
+L 1152 864 
+L 1152 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 86.4 133.2 
+L 1065.6 133.2 
+Q 1134 133.2 1134 201.6 
+L 1134 734.4 
+Q 1134 802.8 1065.6 802.8 
+L 86.4 802.8 
+Q 18 802.8 18 734.4 
+L 18 201.6 
+Q 18 133.2 86.4 133.2 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #638eff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 46.8 169.2 
+L 363.6 169.2 
+Q 367.2 169.2 367.2 172.8 
+L 367.2 745.2 
+Q 367.2 748.8 363.6 748.8 
+L 46.8 748.8 
+Q 43.2 748.8 43.2 745.2 
+L 43.2 172.8 
+Q 43.2 169.2 46.8 169.2 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 406.8 169.2 
+L 745.2 169.2 
+Q 748.8 169.2 748.8 172.8 
+L 748.8 745.2 
+Q 748.8 748.8 745.2 748.8 
+L 406.8 748.8 
+Q 403.2 748.8 403.2 745.2 
+L 403.2 172.8 
+Q 403.2 169.2 406.8 169.2 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 788.4 169.2 
+L 1105.2 169.2 
+Q 1108.8 169.2 1108.8 172.8 
+L 1108.8 745.2 
+Q 1108.8 748.8 1105.2 748.8 
+L 788.4 748.8 
+Q 784.8 748.8 784.8 745.2 
+L 784.8 172.8 
+Q 784.8 169.2 788.4 169.2 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 79.2 248.4 
+L 331.2 248.4 
+Q 338.4 248.4 338.4 255.6 
+L 338.4 320.4 
+Q 338.4 327.6 331.2 327.6 
+L 79.2 327.6 
+Q 72 327.6 72 320.4 
+L 72 255.6 
+Q 72 248.4 79.2 248.4 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 79.2 385.2 
+L 331.2 385.2 
+Q 338.4 385.2 338.4 392.4 
+L 338.4 457.2 
+Q 338.4 464.4 331.2 464.4 
+L 79.2 464.4 
+Q 72 464.4 72 457.2 
+L 72 392.4 
+Q 72 385.2 79.2 385.2 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 79.2 529.2 
+L 331.2 529.2 
+Q 338.4 529.2 338.4 536.4 
+L 338.4 615.6 
+Q 338.4 622.8 331.2 622.8 
+L 79.2 622.8 
+Q 72 622.8 72 615.6 
+L 72 536.4 
+Q 72 529.2 79.2 529.2 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 439.2 237.6 
+L 712.8 237.6 
+Q 720 237.6 720 244.8 
+L 720 313.2 
+Q 720 320.4 712.8 320.4 
+L 439.2 320.4 
+Q 432 320.4 432 313.2 
+L 432 244.8 
+Q 432 237.6 439.2 237.6 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 439.2 345.6 
+L 712.8 345.6 
+Q 720 345.6 720 352.8 
+L 720 421.2 
+Q 720 428.4 712.8 428.4 
+L 439.2 428.4 
+Q 432 428.4 432 421.2 
+L 432 352.8 
+Q 432 345.6 439.2 345.6 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 439.2 453.6 
+L 712.8 453.6 
+Q 720 453.6 720 460.8 
+L 720 529.2 
+Q 720 536.4 712.8 536.4 
+L 439.2 536.4 
+Q 432 536.4 432 529.2 
+L 432 460.8 
+Q 432 453.6 439.2 453.6 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 439.2 561.6 
+L 712.8 561.6 
+Q 720 561.6 720 568.8 
+L 720 637.2 
+Q 720 644.4 712.8 644.4 
+L 439.2 644.4 
+Q 432 644.4 432 637.2 
+L 432 568.8 
+Q 432 561.6 439.2 561.6 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 820.8 248.4 
+L 1072.8 248.4 
+Q 1080 248.4 1080 255.6 
+L 1080 334.8 
+Q 1080 342 1072.8 342 
+L 820.8 342 
+Q 813.6 342 813.6 334.8 
+L 813.6 255.6 
+Q 813.6 248.4 820.8 248.4 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 820.8 396 
+L 1072.8 396 
+Q 1080 396 1080 403.2 
+L 1080 482.4 
+Q 1080 489.6 1072.8 489.6 
+L 820.8 489.6 
+Q 813.6 489.6 813.6 482.4 
+L 813.6 403.2 
+Q 813.6 396 820.8 396 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 820.8 543.6 
+L 1072.8 543.6 
+Q 1080 543.6 1080 550.8 
+L 1080 644.4 
+Q 1080 651.6 1072.8 651.6 
+L 820.8 651.6 
+Q 813.6 651.6 813.6 644.4 
+L 813.6 550.8 
+Q 813.6 543.6 820.8 543.6 
+z
+" clip-path="url(#pf0caba7a06)" style="fill: #ffffff; stroke: #000000; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 205.2 327.6 
+Q 205.2 356.4 205.2 383.634752 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 208.4 377.234752 
+L 205.2 383.634752 
+L 202 377.234752 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 205.2 464.4 
+Q 205.2 496.8 205.2 527.634752 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 208.4 521.234752 
+L 205.2 527.634752 
+L 202 521.234752 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 385.2 231.84 
+Q 401.4 231.84 416.034752 231.84 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 409.634752 228.64 
+L 416.034752 231.84 
+L 409.634752 235.04 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 417.6 279 
+Q 424.8 279 430.434752 279 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 424.034752 275.8 
+L 430.434752 279 
+L 424.034752 282.2 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 417.6 387 
+Q 424.8 387 430.434752 387 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 424.034752 383.8 
+L 430.434752 387 
+L 424.034752 390.2 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 417.6 495 
+Q 424.8 495 430.434752 495 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 424.034752 491.8 
+L 430.434752 495 
+L 424.034752 498.2 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 417.6 603 
+Q 424.8 603 430.434752 603 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 424.034752 599.8 
+L 430.434752 603 
+L 424.034752 606.2 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 766.8 295.2 
+Q 790.2 295.2 812.034752 295.2 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 805.634752 292 
+L 812.034752 295.2 
+L 805.634752 298.4 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 946.8 342 
+Q 946.8 369 946.8 394.434752 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 950 388.034752 
+L 946.8 394.434752 
+L 943.6 388.034752 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 946.8 489.6 
+Q 946.8 516.6 946.8 542.034752 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 950 535.634752 
+L 946.8 542.034752 
+L 943.6 535.634752 
+z
+" clip-path="url(#pf0caba7a06)" style="stroke: #000000; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 43.2 216 
+L 367.2 216 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 403.2 216 
+L 748.8 216 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 784.8 216 
+L 1108.8 216 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 338.4 576 
+L 385.2 576 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_5">
+    <path d="M 385.2 576 
+L 385.2 231.84 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_6">
+    <path d="M 417.6 231.84 
+L 417.6 666 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_7">
+    <path d="M 720 279 
+L 734.4 279 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_8">
+    <path d="M 720 387 
+L 734.4 387 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_9">
+    <path d="M 720 495 
+L 734.4 495 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_10">
+    <path d="M 720 603 
+L 734.4 603 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_11">
+    <path d="M 734.4 279 
+L 734.4 684 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_12">
+    <path d="M 734.4 684 
+L 766.8 684 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 766.8 684 
+L 766.8 295.2 
+" clip-path="url(#pf0caba7a06)" style="fill: none; stroke: #000000; stroke-width: 1.4; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 34px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="576" y="64.460781" transform="rotate(-0 576 64.460781)">Architecture of the Proposed System</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 20px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle; fill: #364152" x="576" y="99.82125" transform="rotate(-0 576 99.82125)">SignGuard — PDF Integrity and Tampering Investigation</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="205.2" y="197.288437" transform="rotate(-0 205.2 197.288437)">1. INPUT AND PROCESSING</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="576" y="197.288437" transform="rotate(-0 576 197.288437)">2. SECURITY ANALYSIS</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="946.8" y="197.288437" transform="rotate(-0 946.8 197.288437)">3. RESULTS AND EVIDENCE</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="205.2" y="273.848906" transform="rotate(-0 205.2 273.848906)">Document Input</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(94.979258 291.252744)">Single PDF / Original–Suspect Pair</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(134.605977 308.041787)">or Controlled Scenario</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="205.2" y="410.648906" transform="rotate(-0 205.2 410.648906)">Input Validation</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(127.939766 428.052744)">File and structure checks</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(128.364805 444.798193)">Page / rendering budgets</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="205.2" y="554.648906" transform="rotate(-0 205.2 554.648906)">Bounded Worker</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(119.30457 572.052744)">Job admission and timeouts</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(116.742227 588.798193)">Resource-limited processing</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="576" y="262.974688" transform="rotate(-0 576 262.974688)">Digital Signature Checks</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(463.743672 280.354355)">Integrity, mathematics and coverage</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(475.504297 297.340176)">Certificate / timestamp evidence</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="576" y="371.022188" transform="rotate(-0 576 371.022188)">Revision and Text Analysis</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(487.315781 388.332559)">Consecutive revision history</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(480.170039 405.318379)">Ordered text / page differences</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="576" y="479.022188" transform="rotate(-0 576 479.022188)">Visual Evidence Analysis</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(507.343477 496.452744)">Signature-like regions</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(492.467109 513.241787)">ORB / RANSAC and ELA</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="576" y="587.048906" transform="rotate(-0 576 587.048906)">Static and Optional Checks</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(494.851445 604.40915)">Scripts / actions inventory</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(470.54793 621.198193)">Optional second-engine rendering</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="946.8" y="273.774688" transform="rotate(-0 946.8 273.774688)">Findings and Verdict</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(838.011797 291.132559)">Tampering / Review / Inconclusive</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(849.726406 308.118379)">Unsupported if processing fails</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="946.8" y="421.448906" transform="rotate(-0 946.8 421.448906)">Dashboard and Human Review</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(851.910937 438.852744)">Inspect evidence and coverage</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(855.337891 455.641787)">Record a separate assessment</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="946.8" y="569.048906" transform="rotate(-0 946.8 569.048906)">Reports and Evidence Export</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(828.411484 585.28002)">PDF / JSON reports and evidence ZIP</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(846.29582 602.025469)">Provenance and manifest hashes</text>
+    <text style="font-size: 15.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(867.161484 618.770918)">Optional operator signing</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 16px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle; fill: #364152" x="205.2" y="684.30625" transform="rotate(-0 205.2 684.30625)">Validate → process safely</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 16px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle; fill: #364152" x="576" y="716.625" transform="rotate(-0 576 716.625)">Enabled checks; bounded coverage</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 16px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle; fill: #364152" x="946.8" y="702.2475" transform="rotate(-0 946.8 702.2475)">Evidence supports human decisions</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 15px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle; fill: #364152" x="576" y="782.702109" transform="rotate(-0 576 782.702109)">Conceptual module flow; checks are not necessarily parallel.</text>
+   </g>
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle; fill: #17324d" x="576" y="832.349531" transform="rotate(-0 576 832.349531)">Integrity ≠ trusted identity ≠ proof of fraud.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pf0caba7a06">
+   <rect x="0" y="0" width="1152" height="864"/>
+  </clipPath>
+ </defs>
+</svg>
