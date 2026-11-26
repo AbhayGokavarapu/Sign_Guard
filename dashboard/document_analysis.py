@@ -45,22 +45,12 @@ def render_results(result,prefix='analysis'):
                         st.caption(f'ByteRange structural validity: {sig.byte_range.structurally_valid} · Covers current file: {sig.byte_range.covers_full_file}')
         else:st.info('No embedded digital signatures are available for verification.')
     with tabs[2]:
-        if result.revision:
-            rv=result.revision
-            metric_row(('Revisions',len(rv.revisions),'Parsed PDF history'),('Visible change',f'{rv.changed_area_pct:.2f}%','Representative comparison page'))
-            st.write(rv.summary)
-            with st.expander('Consecutive revision timeline'):
-                st.json(result.timeline)
-            if rv.signed_rev_image and rv.current_image:
-                a,b=st.columns(2)
-                with a:show_image(rv.signed_rev_image,'Signed revision')
-                with b:show_image(rv.current_image,'Current revision')
-            if rv.diff_image:
-                with st.expander('Inspect the pixel difference'):show_image(rv.diff_image,'Changed pixels')
-        else:st.info('Revision comparison is not available for this result.')
+        from dashboard.revision_evidence import render_revision_evidence
+        render_revision_evidence(result)
     with tabs[3]:
         st.caption(result.active_content.get('note','Static inspection not available.'))
-        if result.active_content.get('entries'):st.dataframe(result.active_content['entries'],hide_index=True,width='stretch')
+        if not result.active_content:st.info('Static-content inspection is unavailable; no clean result can be inferred.')
+        elif result.active_content.get('entries'):st.dataframe(result.active_content['entries'],hide_index=True,width='stretch')
         else:st.info('No listed action, embedded-file or external-link structures were found within the inspected objects.')
     with tabs[4]:
         if result.renderer_comparison:

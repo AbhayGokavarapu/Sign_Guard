@@ -73,7 +73,7 @@ def _scenario_f() -> Tuple[bytes, bytes, str]:
 
 ALL_SCENARIOS = [
     Scenario("A", "Scenario A — Original Signed",
-             "An unchanged synthetic signed PDF. All checks should pass.",
+             "An unchanged synthetic signed PDF. Signature mathematics should pass; the self-signed test certificate is not a trusted identity.",
              "baseline", _scenario_a, "INCONCLUSIVE"),
     Scenario("B", "Scenario B — Signed-Byte Tampering",
              "A signed PDF with one byte flipped — SHA-256 digest breaks.",

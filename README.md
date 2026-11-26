@@ -61,7 +61,7 @@ python run_tests_quick.py
 python benchmarks/run_evaluation.py
 ```
 
-The full suite passed 119 tests. The quick script passed 29 security tests and six scenario checks (35 total). It asserts security outcomes and regenerates scenario JSON/PDF/PNG evidence. The benchmark generates 52 synthetic controls: 13 development and 39 held-out, across 13 categories. It compares three modes, separates byte failures from review alerts, reports per-category outcomes and measures annotated localisation at IoU >= 0.5. See `docs/FINAL_VERIFICATION.md` for the latest executed checks.
+The full suite passed 143 tests, including dashboard workflow checks across all nine pages. The quick script passed 29 security tests and six scenario checks (35 total). It asserts security outcomes and regenerates scenario JSON/PDF/PNG evidence. The benchmark generates 52 synthetic controls: 13 development and 39 held-out, across 13 categories. It compares three modes, separates byte failures from review alerts, reports per-category outcomes and measures annotated localisation at IoU >= 0.5. See `docs/FINAL_VERIFICATION.md` for the latest executed checks.
 
 ### Measured held-out results
 

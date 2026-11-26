@@ -2,6 +2,10 @@
 
 Executed 25 November 2026 with Python 3.12, on Linux.
 
+## Dashboard follow-up — 26 November 2026
+
+The dashboard follow-up adds 24 AppTest and display regression cases. The full suite passed **143 tests**, zero failures, in 152.94 seconds. See `DASHBOARD_AUDIT.md` for the reproduced revision-image issue, fixes, exact interaction coverage and production-access limits. The checks below describe the earlier 25 November run.
+
 ## Automated checks
 
 - Full current suite: **119 passed**, zero failures, 93.54 seconds, including signature coverage, CRL/OCSP freshness and revocation, RFC3161 timestamp integrity/trust, ordered differences, revision history, evidence archive tampering, human review chains, queue saturation and process-group timeout cleanup.

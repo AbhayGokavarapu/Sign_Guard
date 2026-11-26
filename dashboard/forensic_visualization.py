@@ -33,7 +33,7 @@ def render():
         else:empty_state('Signature localisation is not available for this analysis.')
     with tabs[1]:
         ela=result.ela
-        if ela and not ela.error:
+        if ela and not ela.error and ela.multi_quality:
             selected_q=st.selectbox('JPEG quality',sorted(ela.multi_quality),key='viewer_ela_quality')
             sample=ela.multi_quality[selected_q]
             metric_row(('Mean residual',f'{sample.mean_residual:.2f}','Unamplified measurement'),('High-energy pixels',f'{sample.high_pct:.2f}%','Raw residual threshold'))
@@ -53,16 +53,8 @@ def render():
             st.caption('Repeated legitimate artwork can match. This evidence does not establish unauthorised signature reuse.')
         else:empty_state('Feature matching needs at least two suitable candidate regions.')
     with tabs[3]:
-        rv=result.revision
-        if rv:
-            st.write(rv.summary)
-            if rv.signed_rev_image:
-                a,b=st.columns(2)
-                with a:show_image(rv.signed_rev_image,'Earliest signed revision')
-                with b:show_image(rv.current_image,'Current revision')
-            if rv.diff_image:show_image(rv.diff_image,'Pixel difference')
-            st.dataframe([{'Revision':r.index+1,'Signed':r.is_signed,'End offset':r.end_offset,'Pages':r.page_count} for r in rv.revisions],hide_index=True,width='stretch')
-        else:empty_state('No revision comparison is available.')
+        from dashboard.revision_evidence import render_revision_evidence
+        render_revision_evidence(result)
     with tabs[4]:
         st.markdown('**Analysis coverage**');st.json(result.coverage)
         with st.expander('Reproducibility and software configuration'):st.json(result.provenance)
