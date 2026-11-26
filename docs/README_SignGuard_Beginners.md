@@ -1,9 +1,11 @@
 # SignGuard — A Beginner’s Guide to the Project and Dashboard
 
-**Version:** 3.2 · **Guide prepared:** 26 November 2026  
+**Version:** 3.2 · **Guide prepared:** 27 November 2026
+**Current dashboard:** Document analysis, Document comparison, Attack lab and Evidence viewer only.
+
 **Read this if:** You are new to this project, cybersecurity, PDF signatures or the dashboard.
 
-**Dashboard address:** https://signguard-phjtwb7iuwmmiwvvjszrdj.streamlit.app/  
+**Dashboard address:** https://signguard-phjtwb7iuwmmiwvvjszrdj.streamlit.app/
 **Repository:** https://github.com/AbhayGokavarapu/Sign_Guard
 
 The dashboard address was supplied for the deployed project. Live availability could not be verified from the development workspace because its network blocked access. This guide describes the current source implementation, including the revision-display fix.
@@ -41,7 +43,7 @@ Imagine receiving an invoice that originally said **$1,000**, but now says **$9,
 
 ### What has been built?
 
-A nine-page Streamlit dashboard, PDF signature checks, consecutive revision analysis, original–suspect comparison, visual inspection, static-content inventory, separate human review, PDF/JSON reports and verifiable evidence packages. Optional features include a second rendering engine, offline certificate revocation checks and timestamp validation.
+A four-page Streamlit dashboard, PDF signature checks, consecutive revision analysis, original–suspect comparison, visual inspection, static-content inventory, manual evidence interpretation, PDF/JSON reports and verifiable evidence packages. Optional features include a second rendering engine, offline certificate revocation checks and timestamp validation.
 
 There is **no trained machine-learning model** in this implementation. The analysis uses cryptographic verification, parsing, comparisons and classical computer vision. A GPU or AI API key is not required.
 
@@ -91,7 +93,7 @@ Collect findings, measurements, coverage and limitations
                   ↓
 Present a verdict with supporting evidence
                   ↓
-Human assessment and report/evidence export
+Manual interpretation and report/evidence export
 ```
 
 The system checks digital signatures, reconstructs parsed revisions, compares ordered text and rendered pages, examines image candidates, and inventories significant PDF structures. Optional independent rendering compares two engines.
@@ -104,14 +106,16 @@ Rendering means turning a PDF page into a picture. An isolated worker is a separ
 
 Use synthetic samples first. You do not need your own documents.
 
-1. Open **Presentation**.
-2. In **Choose a document**, click **Load signed demo document**.
-3. Click **Next**, then **Verify baseline**. Inspect integrity and certificate trust separately.
-4. Continue to **Demonstrate a change**. Select Scenario B and click **Generate and analyse scenario**.
-5. Observe the integrity failure. Its page may look unchanged.
-6. Return to the scenario step and select Scenario C. Generate its result.
-7. In **Inspect the evidence**, compare the signed/current pages, red highlight and zoomed region. The **Load post-signing revision example** button also loads C directly.
-8. In **Export the conclusion**, download the report and JSON evidence.
+1. Open **Attack lab** and select Scenario A.
+2. Click **Generate scenario**, then **Analyse scenario**. Inspect integrity and certificate trust separately.
+3. Select Scenario B and repeat generation/analysis. Observe the integrity failure even though pages may look identical.
+4. Select Scenario C and repeat. The later revision changes the displayed amount.
+5. Click **Explore the visual evidence** and select the latest lab scenario.
+6. In **Revision changes**, inspect the signed/current pages, highlight, zoom and raw difference evidence.
+7. Return to Attack lab to download its PDF report and JSON evidence.
+8. Optionally open **Document comparison** and use the supplied original/modified sample-pair button.
+
+The application opens directly on Document analysis. There is no separate Presentation page in the current four-page dashboard.
 
 ### What the six scenarios teach
 
@@ -157,13 +161,7 @@ Read results in this order: **verdict → finding → supporting evidence → co
 
 ## 6. Every dashboard page explained
 
-### 6.1 Overview
-
-The starting page provides navigation, the investigation workflow, latest uploaded-document activity and a research snapshot.
-
-The displayed precision/recall values describe saved synthetic benchmark results, not confidence in your current upload.
-
-### 6.2 Document analysis
+### 6.1 Document analysis
 
 **Purpose:** Examine one PDF.
 
@@ -194,7 +192,7 @@ Settings include ELA recompression quality, heatmap brightness and optional inde
 - **Revocation:** Whether sufficient valid evidence establishes a lifecycle state. **UNKNOWN is not revoked and is not proof of non-revocation.**
 - **Timestamp:** Integrity and trust of timestamp evidence. A signer-entered date is not a trusted timestamp.
 
-### 6.3 Document comparison
+### 6.2 Document comparison
 
 **Purpose:** Compare a known original with a suspect copy, including unsigned PDFs.
 
@@ -207,7 +205,7 @@ Upload both documents and click **Compare documents**, or use the supplied sampl
 
 Pages are aligned by position. Page reordering can therefore produce several differences. Different hashes prove different bytes; a metadata difference alone does not prove fraud. The original’s reliability must come from its source.
 
-### 6.4 Attack lab
+### 6.3 Attack lab
 
 **Purpose:** Learn using controlled scenarios A–F.
 
@@ -215,7 +213,7 @@ Choose a scenario → **Generate scenario** → compare documents → **Analyse 
 
 The ground-truth label is for evaluation and is not passed into the detector. Original and scenario files may render identically. Use **Explore the visual evidence** to open the latest lab result in Evidence viewer.
 
-### 6.5 Evidence viewer
+### 6.4 Evidence viewer
 
 **Purpose:** Inspect images and measurements behind an uploaded-document or latest-lab result. Select the correct evidence source first.
 
@@ -229,61 +227,20 @@ The ground-truth label is for evaluation and is not passed into the detector. Or
 
 Images may be representative rather than a separate displayed result for every page. Use the ledger/report to inspect all-page measurements and omitted work.
 
-### 6.6 Evaluation
+### Downloads within the four retained pages
 
-**Purpose:** Understand the detector’s measured strengths and weaknesses.
+- **Document analysis:** PDF report and JSON evidence after analysis.
+- **Attack lab:** PDF report and JSON evidence for the selected analysed scenario.
+- **Document comparison:** Comparison PDF, JSON and prepared comparison evidence ZIP.
+- **Evidence viewer:** Inspect underlying images, per-page measurements and coverage; use the source analysis/lab workflow for its report downloads.
 
-- **Method comparison:** Cryptography alone versus added revision and visual layers.
-- **Failure cases:** True/false positives, misses and per-category outcomes.
-- **Localisation & runtime:** Box matching on annotated pages and measured processing times.
-- **Per-document results:** Individual evaluated files and coverage.
-- **External checks:** Fixture cross-checks, dependency audit and inventory.
+The dedicated Overview, Evaluation, Reports & audit, Case review and Presentation pages have been removed. This does not change detection algorithms. Saved benchmark data, graphs and research scripts remain in the repository for the PPT.
 
-Adding methods raises recall in this benchmark but also increases false alerts. A displayed localization result of 100% applies only to the narrow annotated synthetic signature-page subset—not all documents or fraud detection.
-
-Benchmark regeneration is disabled in the public demo. Saved evaluation results remain viewable/downloadable.
-
-### 6.7 Reports & audit
-
-**Purpose:** Export the current uploaded-document result and preserve its investigation record. Lab and presentation results also have report downloads in their own workflows.
-
-- **PDF report:** Human-readable findings and limitations.
-- **JSON evidence:** Structured measurements for software or detailed examination.
-- **Evidence ZIP:** Reports, provenance, representative images, applicable review history and a manifest.
-- **Include source PDF:** Optional; off by default because it puts the complete document in the package.
-- **Package verifier:** Upload a ZIP and optionally enter an independently retained manifest SHA-256.
-
-A manifest lists archive members, sizes and hashes. Verification checks consistency without executing package contents. Checksums alone do not defeat replacement of both files and manifest. Independently retain the manifest hash, or use an independently trusted operator public key for optional signing.
-
-Local audit history is hash-linked. Detecting a full rewrite/truncation needs an independent checkpoint. Shared audit persistence/history is disabled in the public demo.
-
-### 6.8 Case review
-
-**Purpose:** Record a human assessment of an automated finding.
-
-Choose the source and finding, select an assessment, enter a reason and save.
-
-- **Confirmed:** You consider the finding supported after review.
-- **Benign:** You identified a legitimate explanation.
-- **Unresolved:** Available evidence is insufficient.
-
-Assessments do not overwrite the machine verdict. Reviewer names are self-asserted, not authenticated identities. Review history is session-based until exported; include it in the corresponding evidence package when needed.
-
-### 6.9 Presentation
-
-A five-step teaching workflow:
-
-1. **Choose a document:** Upload one or load the signed demo.
-2. **Verify the baseline:** Examine the starting result.
-3. **Demonstrate a change:** Generate a controlled scenario.
-4. **Inspect the evidence:** Revisions, signature regions, residuals and geometric matches.
-5. **Export the conclusion:** Download PDF/JSON and explain limitations.
-
-Changing the scenario clears its previous result to avoid showing an old verdict under a new selection. **Restart walkthrough** returns to the first step; it is not the full session-clear function.
+There is no current UI for saving human assessments, viewing shared audit history or verifying uploaded evidence ZIPs. Backend verification remains available through `python tools/verify_evidence.py package.zip`. A valid checksum manifest demonstrates consistency, not document authenticity; use an independent reference for stronger assurance.
 
 ### Sidebar: Clear session
 
-Removes retained uploads, results and review references and returns to Overview. Export first. It does not delete your downloaded files or guarantee forensic erasure.
+Removes retained uploads, results and review references and returns to Document analysis. Export first. It does not delete your downloaded files or guarantee forensic erasure.
 
 ## 7. Understanding images, measurements and findings
 
@@ -352,7 +309,7 @@ These use the benchmark’s alert definitions, not legal fraud judgments. Pasted
 
 **Why does adding methods reduce accuracy?** It detects more positive cases but also flags more benign cases. More checks do not automatically mean a better result on every metric.
 
-**Software tests are different:** The latest recorded suite passed **143 tests**. That verifies tested behavior, not 100% detection accuracy. Eight external fixture expectations matched and the two validators agreed on mathematical validity for eleven signatures; these are separate checks, not real-world accuracy claims.
+**Software tests are different:** The earlier nine-page suite passed **143 tests**; the current four-page suite passed **142 tests**. See `docs/FOUR_PAGE_WORKSPACE.md` for scope. That verifies tested behavior, not 100% detection accuracy. Eight external fixture expectations matched and the two validators agreed on mathematical validity for eleven signatures; these are separate checks, not real-world accuracy claims.
 
 A saved Python dependency audit checked 69 components with zero known vulnerabilities and none skipped. This is time-specific database evidence, not proof of safety or complete OS/native coverage.
 
@@ -360,7 +317,7 @@ A saved Python dependency audit checked 69 components with zero known vulnerabil
 
 | Technology | Role |
 |---|---|
-| Streamlit | Interactive dashboard and session state. |
+| Streamlit | Four-page interactive dashboard and session state. |
 | pyHanko / Certvalidator | PDF signatures, certificate paths, lifecycle evidence and timestamps. |
 | PyMuPDF | Parsing, text extraction and bounded rendering. |
 | OpenCV / NumPy / SciPy | Image processing, feature matching and geometry. |
@@ -374,7 +331,7 @@ app.py                  Main dashboard
 streamlit_app.py        Public Cloud entry point
 config.py               Settings and limits
 core/                   Parsing, verification, comparisons, workers and evidence logic
-dashboard/              Nine pages and shared presentation components
+dashboard/              Four pages and shared navigation/evidence components
 simulation/             Signed fixtures, scenarios and sample generation
 samples/                Ready-to-upload demonstration kit
 reporting/              PDF/JSON reports and evidence ZIPs
@@ -469,7 +426,7 @@ Priority future work: a licensed representative real-world corpus, independent e
 
 ## 13. How to describe the project in a presentation
 
-> SignGuard is an explainable PDF security investigation system. It combines digital-signature verification, revision analysis, original–suspect comparison and visual evidence, then supports human review and reproducible export. It separates content integrity, certificate trust and suspicious visual similarity. Its measured limitations are disclosed rather than treating every alert as proof of fraud.
+> SignGuard is an explainable PDF security investigation system. It combines digital-signature verification, revision analysis, original–suspect comparison and visual evidence, then supports manual interpretation and reproducible export. It separates content integrity, certificate trust and suspicious visual similarity. Its measured limitations are disclosed rather than treating every alert as proof of fraud.
 
 Before explaining any result, answer:
 

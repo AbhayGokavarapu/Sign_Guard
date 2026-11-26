@@ -1,5 +1,7 @@
 # SignGuard 3.2 investigation and evidence upgrade
 
+**Navigation update (27 November 2026):** This document records the original investigation extension. The current dashboard exposes only Document analysis, Document comparison, Attack lab and Evidence viewer. Case review, Reports & audit, Evaluation, Presentation and Overview pages were removed. CLI/back-end verification and saved research results remain; see FOUR_PAGE_WORKSPACE.md.
+
 ## Implemented capabilities
 
 | Capability | Entry point | What it establishes |

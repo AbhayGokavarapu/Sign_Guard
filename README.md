@@ -27,7 +27,14 @@ The launchers bind to http://localhost:8502. A bare Streamlit command uses its d
 - Locked, fsynced, atomic hash-chain appends; corrupt logs fail visibly. Export a checkpoint and store it independently.
 - Reports with coverage, per-page candidate boxes, pair evidence, unsupported/incomplete status, and audit-write failures.
 
-The nine workspace pages cover overview, document analysis, original-versus-suspect comparison, attack lab, evidence, evaluation, reports/audit, human case review and a guided presentation.
+The dashboard now has exactly four pages, in this order:
+
+1. **Document analysis** — the opening page; upload a PDF, inspect findings and download PDF/JSON reports.
+2. **Document comparison** — compare an original with a suspect and export comparison evidence.
+3. **Attack lab** — generate and analyse controlled scenarios; download scenario reports.
+4. **Evidence viewer** — inspect uploaded-document or lab images, measurements and coverage.
+
+Overview, Evaluation, Reports & audit, Case review and Presentation have been removed from the dashboard. Saved benchmarks and research scripts remain in the repository for the PPT/evaluation discussion. Report generation and detection algorithms are unchanged. Clear session returns to Document analysis; old sessions pointing to removed pages are reset safely.
 
 ## Verdicts
 
@@ -61,7 +68,7 @@ python run_tests_quick.py
 python benchmarks/run_evaluation.py
 ```
 
-The full suite passed 143 tests, including dashboard workflow checks across all nine pages. The quick script passed 29 security tests and six scenario checks (35 total). It asserts security outcomes and regenerates scenario JSON/PDF/PNG evidence. The benchmark generates 52 synthetic controls: 13 development and 39 held-out, across 13 categories. It compares three modes, separates byte failures from review alerts, reports per-category outcomes and measures annotated localisation at IoU >= 0.5. See `docs/FINAL_VERIFICATION.md` for the latest executed checks.
+The current full regression suite passed **142 tests**, covering the four-page workflow, legacy navigation resets, scenario outputs and report exports. The earlier nine-page version passed 143 tests; see the latest verification record for the current run. The quick script passed 29 security tests and six scenario checks (35 total). It asserts security outcomes and regenerates scenario JSON/PDF/PNG evidence. The benchmark generates 52 synthetic controls: 13 development and 39 held-out, across 13 categories. It compares three modes, separates byte failures from review alerts, reports per-category outcomes and measures annotated localisation at IoU >= 0.5. See `docs/FINAL_VERIFICATION.md` for the latest executed checks.
 
 ### Measured held-out results
 
@@ -79,7 +86,7 @@ Annotated localisation matched 12 of 12 signature boxes on nine held-out signatu
 
 `core/`: bounded parsing, verification, revision analysis, CV, fusion, worker and audit.
 `simulation/`: genuine signed controls, attack scenarios and annotated evaluation generation.
-`dashboard/`: nine Streamlit workspace pages.
+`dashboard/`: four Streamlit pages and shared UI/navigation helpers.
 `reporting/`: JSON and ReportLab exports.
 `tests/`: regression and security outcome assertions.
 `benchmarks/`: executable benchmark and measured outputs.
@@ -107,8 +114,9 @@ Regenerate and verify with `python -m simulation.build_upload_kit`. The generato
 
 ## Investigation workspace (3.2)
 
-The current workspace also includes **Document comparison** and **Case review**. Compare an original with a suspect PDF, inspect consecutive revisions and static PDF actions, optionally compare MuPDF/Poppler rendering, and export a verifiable evidence ZIP with reproducibility metadata and separate human assessments. Clear session removes current session inputs/results; a bounded worker queue protects shared-host capacity.
+The focused workspace includes **Document analysis**, **Document comparison**, **Attack lab** and **Evidence viewer**. Inspect consecutive revisions and static PDF actions, optionally compare MuPDF/Poppler rendering, and download PDF/JSON reports from analysis/lab results. Document comparison retains its comparison evidence ZIP export. Clear session removes session inputs/results; a bounded queue protects host capacity.
 
+Dedicated human case review, shared audit viewing and the guided presentation are no longer exposed as pages. Backend report/verification utilities and historical evaluation outputs remain available to scripts.
 Operators can provision offline CRL/OCSP evidence, trusted TSA roots and an optional evidence-package signing key. No PDF-selected certificate URL is fetched. See `docs/INVESTIGATION_UPGRADE.md` for configuration, verifier commands and limits.
 
 External upstream fixtures, cross-validator outcomes, a CycloneDX dependency inventory and a known-vulnerability audit are included in `datasets/external-pyhanko/` and `benchmarks/`. These do not replace independent human adjudication or a real-world forged-document corpus.

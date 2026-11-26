@@ -7,8 +7,8 @@ Use Python 3.12 and the pinned dependencies. Start with `python -m streamlit run
 1. **Problem and threat model (3 minutes).** Explain the difference between signed bytes, current visible content, certificate trust and signer identity. State that a valid signature does not establish the truth of a contract. Show `THREAT_MODEL.md`.
 2. **Upload and analysis (3 minutes).** Show filename/hash, classification, verification states, findings and coverage. Analysis runs in a disposable worker. A timeout or unsupported result is not an authenticity verdict.
 3. **Attack lab (7 minutes).** Generate and detect scenarios A–F. Reveal ground truth afterwards; labels are not detector inputs.
-4. **Method comparison (3 minutes).** Show held-out results, false positives and missed image edits. Explain what the combined method adds and what it costs.
-5. **Reports, audit and limitations (2 minutes).** Export reports and an independent audit checkpoint.
+4. **Document comparison and evidence (3 minutes).** Compare the supplied pair, then inspect Evidence viewer. Show saved benchmark graphs from the PPT; there is no Evaluation dashboard page.
+5. **Downloads and limitations (2 minutes).** Download PDF/JSON from Document analysis or Attack lab. Dedicated report/audit and case-review pages are removed.
 6. **Questions (2 minutes).** Use the honest answers below.
 
 ## Expected scenario observations
@@ -61,6 +61,6 @@ python benchmarks/run_evaluation.py
 
 The benchmark can take several minutes. Use saved measured outputs during the presentation. Never quote historical 100% alert recall as the current result.
 
-## Investigation extensions
+## Current four-page workspace
 
-Show Document comparison using the supplied original/modified pair, then Case review to add a reason without changing the machine verdict. In Reports & audit, prepare an evidence ZIP and retain its manifest hash independently. Show the revision timeline and optional MuPDF/Poppler measurements. Use Clear session after exporting. See INVESTIGATION_UPGRADE.md for certificate evidence and operator key configuration.
+The only pages are Document analysis (default), Document comparison, Attack lab and Evidence viewer. In Evidence viewer select the uploaded document or latest lab scenario before inspecting revision changes. Clear session returns to Document analysis. Comparison retains PDF/JSON and comparison ZIP export. There is no Overview, Evaluation, Reports & audit, Case review or Presentation page. Use saved benchmark figures in the PPT. See FOUR_PAGE_WORKSPACE.md for verification scope.

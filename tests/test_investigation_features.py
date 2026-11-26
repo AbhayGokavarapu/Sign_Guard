@@ -199,7 +199,7 @@ def test_session_clear_removes_inputs_results_and_review_notes():
     from dashboard.session_controls import clear_mapping
     state={'pipeline_result':object(),'comparison_result':object(),'human_reviews':{'doc':['note']},'_upload_epoch':3,'nav_page':'Case review','document_upload_3':b'private'}
     clear_mapping(state)
-    assert state=={'_upload_epoch':4,'nav_page':'Overview'}
+    assert state=={'_upload_epoch':4,'nav_page':'Document analysis'}
 
 
 def test_external_nonstandard_coverage_is_not_called_complete():

@@ -1,6 +1,10 @@
 # SignGuard 3.2 verification
 
-Executed 25 November 2026 with Python 3.12, on Linux.
+Historical checks below were executed on 25–26 November 2026 with Python 3.12, on Linux. The current four-page workspace verification is recorded in `FOUR_PAGE_WORKSPACE.md`.
+
+## Current four-page workspace — 27 November 2026
+
+The dashboard now contains Document analysis (default), Document comparison, Attack lab and Evidence viewer only. The full current suite passed **142 tests**, zero failures, in 111.44 seconds. Targeted checks passed 27 tests. Obsolete page tests were replaced/removed; this changes the test count without changing detector thresholds. See `FOUR_PAGE_WORKSPACE.md` for scope and retained exports. Remaining sections below are historical runs.
 
 ## Dashboard follow-up — 26 November 2026
 
@@ -8,7 +12,7 @@ The dashboard follow-up adds 24 AppTest and display regression cases. The full s
 
 ## Automated checks
 
-- Full current suite: **119 passed**, zero failures, 93.54 seconds, including signature coverage, CRL/OCSP freshness and revocation, RFC3161 timestamp integrity/trust, ordered differences, revision history, evidence archive tampering, human review chains, queue saturation and process-group timeout cleanup.
+- Earlier suite: **119 passed**, zero failures, 93.54 seconds, including signature coverage, CRL/OCSP freshness and revocation, RFC3161 timestamp integrity/trust, ordered differences, revision history, evidence archive tampering, human review chains, queue saturation and process-group timeout cleanup.
 - Quick checks: 29 security tests plus six scenario checks, all passed.
 - Upload kit: all seven expected outcomes verified; reports and ZIP regenerated.
 - Streamlit AppTest: all nine pages rendered; comparison, review saving, evidence package verification, stale-package invalidation and session clearing passed.

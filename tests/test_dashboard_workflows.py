@@ -11,7 +11,7 @@ from simulation.controlled_scenarios import ALL_SCENARIOS
 from dashboard.revision_evidence import change_overlay
 
 ROOT=Path(config.BASE_DIR)
-PAGES=['Overview','Document analysis','Document comparison','Attack lab','Evidence viewer','Evaluation','Reports & audit','Case review','Presentation']
+PAGES=['Document analysis','Document comparison','Attack lab','Evidence viewer']
 
 @pytest.fixture(autouse=True)
 def public(monkeypatch):
@@ -43,10 +43,8 @@ def test_all_pages_with_scenario_results(scenarios,scenario_id):
     result=scenarios[scenario_id]
     app.session_state['pipeline_result']=result
     app.session_state['evidence_result']=result
-    app.session_state['pres_sc_result']=result
     for page in PAGES:
         app.session_state['nav_page']=page
-        if page=='Presentation':app.session_state['pres_step']=3
         check(app.run())
     assert len(app.get('image'))>0
     if scenario_id in ('A','B'):
@@ -56,9 +54,6 @@ def test_all_pages_with_scenario_results(scenarios,scenario_id):
         assert any('Raw pixel difference' in e.label for e in app.expander)
     else:
         assert any('No signed revision' in i.value for i in app.info)
-    app.session_state['pres_step']=4
-    check(app.run())
-    assert len(app.get('download_button'))==2
 
 
 def test_highlight_does_not_mutate_analysis(scenarios):
@@ -71,37 +66,13 @@ def test_highlight_does_not_mutate_analysis(scenarios):
     assert rv.diff_image.getbbox()
 
 
-def test_presentation_controls_and_scenario_invalidation():
-    app=check(app_for('Presentation').run())
-    assert next(b for b in app.button if b.label=='← Previous').disabled
-    click(app,'Load signed demo document')
-    raw=app.session_state['pres_raw']
-    assert app.session_state['pres_hash']==hashlib.sha256(raw).hexdigest()
-    click(app,'Next →');click(app,'Verify baseline →');click(app,'Next →')
-    click(app,'Generate and analyse scenario →')
-    assert app.session_state['pres_sc_id']=='A'
-    # Changing the selection must not leave the previous verdict under a new label.
-    app.selectbox(key='pres_scenario').select_index(2).run();check(app)
-    assert 'pres_sc_result' not in app.session_state
-    click(app,'Generate and analyse scenario →')
-    assert app.session_state['pres_sc_id']=='C'
-    click(app,'Next →')
-    assert any('Zoomed changed region' in str(i.proto) for i in app.get('image'))
-    click(app,'Next →')
-    assert next(b for b in app.button if b.label=='Next →').disabled
-    click(app,'Restart walkthrough')
-    assert app.session_state['pres_step']==0
-
-
 def test_failed_and_partial_results_do_not_crash():
     app=app_for()
     failed=_failure('Test worker timeout')
     app.session_state['pipeline_result']=failed
     app.session_state['evidence_result']=failed
-    app.session_state['pres_sc_result']=failed
     for page in PAGES:
         app.session_state['nav_page']=page
-        app.session_state['pres_step']=3
         check(app.run())
 
 
@@ -109,10 +80,11 @@ def test_optional_evidence_empty_states(scenarios):
     from copy import copy
     result=copy(scenarios['C'])
     result.revision=None;result.localization=None;result.ela=None;result.ransac=None;result.orb=None
-    app=app_for('Presentation')
-    app.session_state['pres_step']=3;app.session_state['pres_result']=result
+    app=app_for('Evidence viewer')
+    app.session_state['pipeline_result']=result
     check(app.run())
-    assert len(app.info)>=4
+    assert any('Revision comparison' in i.value for i in app.info)
+    assert any('not available' in m.value for m in app.markdown)
 
 
 def test_document_upload_settings_preview_and_malformed_input(scenarios):
@@ -160,7 +132,7 @@ def test_attack_lab_generate_analyse_every_scenario():
     assert app.session_state['nav_page']=='Evidence viewer'
 
 
-def test_comparison_and_review_exports(scenarios):
+def test_comparison_exports_and_clear_session(scenarios):
     from reporting.evidence_bundle import verify_bundle
     app=check(app_for('Document comparison').run())
     app.button(key='comparison_demo').click().run();check(app)
@@ -169,57 +141,30 @@ def test_comparison_and_review_exports(scenarios):
     bundle=app.session_state['comparison_bundle']
     assert verify_bundle(bundle[0],bundle[1])['valid']
     app.session_state['pipeline_result']=scenarios['B']
-    app.session_state['nav_page']='Case review';check(app.run())
-    click(app,'Save assessment')
-    assert app.error  # Missing reason must be rejected rather than silently saved.
-    next(s for s in app.selectbox if s.label=='Assessment').set_value('Benign')
-    app.text_area[0].set_value('Known controlled demonstration; source bytes reviewed.')
-    click(app,'Save assessment')
-    assert app.session_state['human_reviews'][scenarios['B'].parsed.sha256]
-    assert scenarios['B'].fusion.verdict.value=='TAMPERING DETECTED'
-    app.session_state['nav_page']='Reports & audit';check(app.run())
-    app.button(key='reports_package_prepare').click().run();check(app)
-    bundle=app.session_state['reports_package_bundle']
-    assert verify_bundle(bundle[0],bundle[1])['valid']
-    app.checkbox(key='reports_package_source').check().run();check(app)
-    assert not any(b.key=='reports_package_download' for b in app.get('download_button'))
+    app.session_state['evidence_result']=scenarios['C']
+    app.session_state['human_reviews']={'legacy':['old note']}
     app.button(key='clear_workspace').click().run();check(app)
-    for key in ('pipeline_result','human_reviews','comparison_result','pres_result'):
+    for key in ('pipeline_result','human_reviews','comparison_result','evidence_result'):
         assert key not in app.session_state
-    assert app.session_state['nav_page']=='Overview'
+    assert app.session_state['nav_page']=='Document analysis'
+    assert app.radio[0].options==PAGES
 
 
-def test_report_package_verification_control(scenarios):
-    from reporting.evidence_bundle import build_bundle
-    bundle,reference=build_bundle(result=scenarios['C'])
-    source='''
-import io
-import streamlit as st
-class Uploaded(io.BytesIO):
-    name='evidence.zip'
-from unittest.mock import patch
-from dashboard.reports import render
-with patch('streamlit.file_uploader',side_effect=lambda *a,**k: Uploaded(st.session_state['test_zip'])):
-    render()
-'''
-    app=AppTest.from_string(source,default_timeout=60)
-    app.session_state['test_zip']=bundle
-    check(app.run())
-    app.text_input[0].set_value(reference)
-    click(app,'Verify package integrity')
-    assert any('Package is consistent' in s.value for s in app.success)
-    app.session_state['test_zip']=b'invalid zip'
-    check(app.run());click(app,'Verify package integrity')
-    assert app.error
+@pytest.mark.parametrize('legacy_page',['Overview','Evaluation','Reports & audit','Case review','Presentation','Unknown page'])
+def test_removed_or_unknown_page_returns_to_document_analysis(legacy_page):
+    app=check(app_for(legacy_page).run())
+    assert app.radio[0].options==PAGES
+    assert app.radio[0].value=='Document analysis'
+    assert app.session_state['nav_page']=='Document analysis'
 
 
-def test_presentation_revision_example_keeps_scenario_label_consistent(scenarios):
-    app=app_for('Presentation')
-    app.session_state['pres_step']=3
-    app.session_state['pres_result']=scenarios['A']
-    check(app.run())
-    app.button(key='pres_revision_example').click().run();check(app)
-    assert app.session_state['pres_sc_id']=='C'
-    assert app.session_state['pres_sc_result'].revision.changed_area_pct>0
-    click(app,'← Previous')
-    assert app.selectbox(key='pres_scenario').value.id=='C'
+def test_default_page_and_empty_evidence_navigation():
+    app=check(app_for().run())
+    assert app.radio[0].value=='Document analysis'
+    assert app.radio[0].options==PAGES
+    app.radio[0].set_value('Evidence viewer').run();check(app)
+    app.button(key='evidence_lab').click().run();check(app)
+    assert app.radio[0].value=='Attack lab'
+    app.radio[0].set_value('Evidence viewer').run();check(app)
+    app.button(key='evidence_analyse').click().run();check(app)
+    assert app.radio[0].value=='Document analysis'

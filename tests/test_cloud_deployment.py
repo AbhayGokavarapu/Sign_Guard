@@ -15,21 +15,26 @@ def test_public_demo_does_not_write_shared_audit(monkeypatch):
     assert result.coverage['audit_persistence'].startswith('Disabled')
 
 
-def test_public_reports_hide_shared_history(monkeypatch):
-    import dashboard.reports
+def test_public_dashboard_does_not_read_shared_history(monkeypatch):
+    import core.audit_logger
     from streamlit.testing.v1 import AppTest
+    from pathlib import Path
+    from dashboard.navigation import PAGES
     monkeypatch.setattr(config, 'PUBLIC_DEMO', True)
-    def forbidden():
+    def forbidden(*args, **kwargs):
         raise AssertionError('Shared history must not be read')
-    monkeypatch.setattr(dashboard.reports, 'get_records', forbidden)
-    app = AppTest.from_string('from dashboard.reports import render\nrender()').run()
-    assert not app.exception
-    assert any('Shared audit history is disabled' in x.value for x in app.info)
+    monkeypatch.setattr(core.audit_logger, 'get_records', forbidden)
+    app=AppTest.from_file(str(Path(config.BASE_DIR)/'streamlit_app.py')).run()
+    for page in PAGES:
+        app.radio[0].set_value(page).run()
+        assert not app.exception
 
 
-def test_public_benchmark_regeneration_disabled(monkeypatch):
+def test_public_navigation_has_only_four_pages_and_no_benchmark_control(monkeypatch):
     from streamlit.testing.v1 import AppTest
+    from pathlib import Path
     monkeypatch.setattr(config, 'PUBLIC_DEMO', True)
-    app = AppTest.from_string('from dashboard.evaluation import render\nrender()').run()
+    app=AppTest.from_file(str(Path(config.BASE_DIR)/'streamlit_app.py')).run()
     assert not app.exception
-    assert app.button[0].disabled
+    assert app.radio[0].options==['Document analysis','Document comparison','Attack lab','Evidence viewer']
+    assert not any('Re-run evaluation' in b.label for b in app.button)
